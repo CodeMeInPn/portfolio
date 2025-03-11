@@ -1,14 +1,30 @@
 {
-  "name": "Portfolio",
+  "name": "portfolio",
+  "license": "MIT",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "npx lefthook run pre-commit",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "dependencies": {
-    "astro": "^5.2.5"
+    "astro": "^5.2.5",
+    "typescript": "^5.8.2"
+  },
+  "devDependencies": {
+    "@evilmartians/lefthook": "^1.11.3",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "prettier": "^3.5.3"
   }
 }
