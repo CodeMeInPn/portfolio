@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      run: yarn run eslint . --fix
+    prettier:
+      run: yarn run prettier --write .
+    typecheck:
+      run: yarn run tsc --noEmit
+
+pre-push:
+  commands:
+    test:
+      run: yarn run test
