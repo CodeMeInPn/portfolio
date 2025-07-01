@@ -23,7 +23,7 @@ const {
 } = Astro.props;
 ---
 
-<section class={cn('relative bg-white px-4 w-full', sectionClassName)}>
+<section class={cn('relative bg-transparent px-4 w-full', sectionClassName)}>
   <div class="flex">
     {
       activeConnectors?.includes('bottom-right') && (
@@ -65,22 +65,19 @@ const {
     {
       activeBars?.includes('left') && (
         <div class="w-12 absolute top-0 left-0">
-          <Bar position="vertical" className="" />
+          <Bar position="vertical" />
         </div>
       )
     }
     <div
-      class={cn(
-        'mx-auto w-full max-w-content-xxl bg-red-100',
-        contentContainerClassName
-      )}
+      class={cn('mx-auto w-full max-w-content-xxl', contentContainerClassName)}
     >
       <slot />
     </div>
     {
       activeBars?.includes('right') && (
         <div class="w-12 absolute right-0 top-0">
-          <Bar position="vertical" className="" />
+          <Bar position="vertical" />
         </div>
       )
     }
