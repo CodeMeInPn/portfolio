@@ -1,0 +1,88 @@
+---
+import type { ConnectorPosition } from 'src/types';
+import type { BarPosition } from 'src/types/bar.types';
+
+import Bar from './svg/Bar.astro';
+import Connector from './svg/Connector.astro';
+import { cn } from 'utils/cn';
+
+interface Props {
+  activeConnectors?: ConnectorPosition[];
+  activeBars?: BarPosition[];
+  contentContainerClassName?: string;
+  sectionClassName?: string;
+  flipBar?: boolean;
+}
+
+const {
+  contentContainerClassName,
+  activeBars,
+  activeConnectors,
+  sectionClassName,
+  flipBar,
+} = Astro.props;
+---
+
+<section class={cn('relative bg-white px-4 w-full', sectionClassName)}>
+  <div class="flex">
+    {
+      activeConnectors?.includes('bottom-right') && (
+        <div class="w-fit">
+          <Connector position="bottom-right" />
+        </div>
+      )
+    }
+    {
+      activeConnectors?.includes('top-right') && (
+        <div class="w-fit">
+          <Connector position="bottom-left" />
+        </div>
+      )
+    }
+    {
+      activeBars?.includes('top') && (
+        <div class="w-full">
+          <Bar position="horizontal" isFlipped={flipBar} className="w-full" />
+        </div>
+      )
+    }
+    {
+      activeConnectors?.includes('bottom-left') && (
+        <div class="w-fit">
+          <Connector position="top-right" inverted />
+        </div>
+      )
+    }
+    {
+      activeConnectors?.includes('top-left') && (
+        <div class="w-fit">
+          <Connector position="top-left" inverted />
+        </div>
+      )
+    }
+  </div>
+  <div class="flex relative justify-between overflow-hidden">
+    {
+      activeBars?.includes('left') && (
+        <div class="w-12 absolute top-0 left-0">
+          <Bar position="vertical" className="" />
+        </div>
+      )
+    }
+    <div
+      class={cn(
+        'mx-auto w-full max-w-content-xxl bg-red-100',
+        contentContainerClassName
+      )}
+    >
+      <slot />
+    </div>
+    {
+      activeBars?.includes('right') && (
+        <div class="w-12 absolute right-0 top-0">
+          <Bar position="vertical" className="" />
+        </div>
+      )
+    }
+  </div>
+</section>

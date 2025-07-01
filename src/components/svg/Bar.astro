@@ -1,0 +1,48 @@
+---
+import type { PropsWithClassName } from 'src/types';
+import { cva, cx } from 'class-variance-authority';
+import { cn } from 'utils/cn';
+
+type Props = PropsWithClassName<{
+  width?: number | string;
+  height?: number | string;
+  position?: 'horizontal' | 'vertical';
+  isFlipped?: boolean;
+}>;
+
+const {
+  className = '',
+  width,
+  height,
+  position = 'horizontal',
+  isFlipped,
+} = Astro.props;
+
+const barVariants = cva(['block h-12'], {
+  variants: {
+    position: {
+      vertical: '-rotate-90 -translate-x-[15px]',
+      horizontal: cx('', { 'rotate-180': isFlipped }),
+    },
+  },
+  defaultVariants: {
+    position: 'horizontal',
+  },
+});
+
+const mergedClassnames = cn(barVariants({ position }), className);
+---
+
+<svg
+  width={width}
+  height={height}
+  viewBox="0 0 97 60"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class={mergedClassnames}
+  preserveAspectRatio="none"
+>
+  <path d="M0 40H97V60H0V40Z" fill="#48FF00"></path>
+  <path d="M0 0H97V20H0V0Z" fill="#FF0000"></path>
+  <path d="M0 20H97V40H0V20Z" fill="#3C00FF"></path>
+</svg>
