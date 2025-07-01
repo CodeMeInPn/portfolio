@@ -1,0 +1,58 @@
+---
+import { cva } from 'class-variance-authority';
+import type { ConnectorPosition, PropsWithClassName } from 'src/types';
+import { cn } from 'utils/cn';
+
+type Props = PropsWithClassName<{
+  width?: number | string;
+  height?: number | string;
+  position?: ConnectorPosition;
+  inverted?: boolean;
+}>;
+
+const {
+  className = '',
+  width = 48,
+  height = 48,
+  position = 'top-left',
+  inverted,
+} = Astro.props;
+
+const connectorVariants = cva(['block'], {
+  variants: {
+    position: {
+      'bottom-right': 'rotate-0',
+      'top-right': 'rotate-90',
+      'top-left': 'rotate-180',
+      'bottom-left': 'rotate-270',
+    },
+    defaultVariants: {
+      position: 'top-left',
+    },
+  },
+});
+
+const mergedClassnames = cn(connectorVariants({ position }), className);
+---
+
+<svg
+  width={width}
+  height={height}
+  viewBox="0 0 60 60"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class={mergedClassnames}
+  preserveAspectRatio="none"
+>
+  <path
+    d="M0 60C1.39116e-06 44.087 6.32141 28.8258 17.5736 17.5736C28.8258 6.32141 44.087 -1.8976e-07 60 0V60L0 60Z"
+    fill={inverted ? '#FF0000' : '#48FF00'}></path>
+
+  <path
+    d="M0 60C1.39116e-06 44.087 6.32141 28.8258 17.5736 17.5736C28.8258 6.32141 44.087 -1.8976e-07 60 0V40.02C54.701 40.02 49.619 42.125 45.872 45.872C42.125 49.619 40.02 54.701 40.02 60L0 60Z"
+    fill="#3C00FF"></path>
+
+  <path
+    d="M0 60C1.39116e-06 44.087 6.32141 28.8258 17.5736 17.5736C28.8258 6.32141 44.087 -1.8976e-07 60 0V20.04C49.4019 20.04 39.238 24.2501 31.744 31.744C24.2501 39.238 20.04 49.4019 20.04 60H0Z"
+    fill={inverted ? '#48FF00' : '#FF0000'}></path>
+</svg>

@@ -59,4 +59,6 @@
   --color-surface-container: #f6ece1;
   --color-surface-container-high: #f0e7db;
   --color-surface-container-highest: #eae1d6;
+
+  --spacing-content-xxl: 75rem;
 }

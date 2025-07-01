@@ -10,7 +10,7 @@ export default defineConfig([
   js.configs.recommended, // JavaScript defaults
   astro.configs.recommended, // Astro recommended settings
   {
-    ignores: ['node_modules', 'dist'],
+    ignores: ['node_modules', 'dist', '.astro'],
   },
   {
     files: ['**/*.astro'],
