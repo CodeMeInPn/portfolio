@@ -1,17 +1,15 @@
 ---
-import type { ConnectorPosition } from 'src/types';
-import type { BarPosition } from 'src/types/bar.types';
-
-import Bar from './svg/Bar.astro';
-import Connector from './svg/Connector.astro';
+import type { ActiveConnectors } from 'src/types';
+import Bar from './svg/bar.astro';
+import Connector from './svg/connector.astro';
 import { cn } from 'utils/cn';
+import type { ActiveBars } from 'src/types/bar.types';
 
 interface Props {
-  activeConnectors?: ConnectorPosition[];
-  activeBars?: BarPosition[];
+  activeConnectors?: ActiveConnectors;
+  activeBars?: ActiveBars;
   contentContainerClassName?: string;
   sectionClassName?: string;
-  flipBar?: boolean;
 }
 
 const {
@@ -19,65 +17,128 @@ const {
   activeBars,
   activeConnectors,
   sectionClassName,
-  flipBar,
 } = Astro.props;
 ---
 
 <section class={cn('relative bg-transparent px-4 w-full', sectionClassName)}>
-  <div class="flex">
+  <div class="flex h-32">
     {
-      activeConnectors?.includes('bottom-right') && (
-        <div class="w-fit">
-          <Connector position="bottom-right" />
+      activeConnectors?.position?.includes('top-left') && (
+        <div class="hidden md:block w-fit">
+          <Connector
+            position="top-left"
+            offset={activeConnectors?.offset?.includes('top-left')}
+          />
         </div>
       )
     }
     {
-      activeConnectors?.includes('top-right') && (
-        <div class="w-fit">
-          <Connector position="bottom-left" />
+      activeConnectors?.position?.includes('bottom-left') && (
+        <div class="hidden md:block w-fit">
+          <Connector
+            position="bottom-left"
+            offset={activeConnectors?.offset?.includes('bottom-left')}
+          />
         </div>
       )
     }
     {
-      activeBars?.includes('top') && (
-        <div class="w-full">
-          <Bar position="horizontal" isFlipped={flipBar} className="w-full" />
+      activeConnectors?.position?.includes('bottom-left-inverted') && (
+        <div class="hidden md:block w-fit">
+          <Connector
+            position="bottom-left-inverted"
+            offset={activeConnectors?.offset?.includes('bottom-left-inverted')}
+          />
         </div>
       )
     }
     {
-      activeConnectors?.includes('bottom-left') && (
-        <div class="w-fit">
-          <Connector position="top-right" inverted />
+      activeBars?.position?.includes('horizontal') && (
+        <div class="w-full relative">
+          <Bar
+            position="horizontal"
+            className="w-full"
+            inverted={
+              activeBars?.options?.invertColor?.includes('top') ||
+              activeBars?.options?.invertColor?.includes('bottom')
+            }
+            offset={
+              activeBars?.options?.offset?.includes('top')
+                ? 'top'
+                : activeBars?.options?.offset?.includes('bottom')
+                  ? 'bottom'
+                  : undefined
+            }
+          />
         </div>
       )
     }
     {
-      activeConnectors?.includes('top-left') && (
-        <div class="w-fit">
-          <Connector position="top-left" inverted />
+      activeConnectors?.position?.includes('top-right') && (
+        <div class="hidden md:block w-fit">
+          <Connector
+            position="top-right"
+            offset={activeConnectors?.offset?.includes('top-right')}
+          />
+        </div>
+      )
+    }
+    {
+      activeConnectors?.position?.includes('bottom-right') && (
+        <div class="hidden md:block w-fit">
+          <Connector
+            position="bottom-right"
+            offset={activeConnectors?.offset?.includes('bottom-right')}
+          />
         </div>
       )
     }
   </div>
   <div class="flex relative justify-between overflow-hidden">
     {
-      activeBars?.includes('left') && (
-        <div class="w-12 absolute top-0 left-0">
-          <Bar position="vertical" />
+      activeBars && activeBars.position.includes('vertical-left') && (
+        <div
+          class={cn('w-32 hidden md:block bottom-0 md:absolute left-0 top-0', {
+            'pt-8': activeBars?.options?.offset?.includes('top'),
+          })}
+        >
+          <Bar
+            position="vertical"
+            offset={
+              activeBars?.options?.offset?.includes('right')
+                ? 'right'
+                : undefined
+            }
+            inverted={activeBars?.options?.invertColor?.includes('left')}
+          />
         </div>
       )
     }
     <div
-      class={cn('mx-auto w-full max-w-content-xxl', contentContainerClassName)}
+      class={cn(
+        'mx-auto w-full md:w-3/4 max-w-content-xxl',
+        contentContainerClassName,
+        {
+          'pt-8': activeBars?.options?.offset?.includes('top'),
+        }
+      )}
     >
       <slot />
     </div>
     {
-      activeBars?.includes('right') && (
-        <div class="w-12 absolute right-0 top-0">
-          <Bar position="vertical" />
+      activeBars && activeBars.position.includes('vertical-right') && (
+        <div
+          class={cn('w-32 bottom-0 hidden md:block md:absolute right-0 top-0', {
+            'pt-8': activeBars?.options?.offset?.includes('top'),
+          })}
+        >
+          <Bar
+            position="vertical"
+            offset={
+              activeBars?.options?.offset?.includes('left') ? 'left' : undefined
+            }
+            inverted={activeBars?.options?.invertColor?.includes('right')}
+          />
         </div>
       )
     }
