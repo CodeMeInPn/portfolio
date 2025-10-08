@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
+  --color-section-snake-inner: #fec830;
+  --color-section-snake-middle: #fe5c1e;
+  --color-section-snake-outer: #ea171d;
   --color-primary: #7b5900;
   --color-on-primary: #ffffff;
   --color-primary-container: #d9ab4c;
@@ -61,4 +64,21 @@
   --color-surface-container-highest: #eae1d6;
 
   --spacing-content-xxl: 75rem;
+  --spacing-content-hero: 90rem;
+
+  --animate-fade-in: fade-in 1s ease-out;
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(2.5rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+* {
+  font-family: 'Markazi Text', serif;
 }

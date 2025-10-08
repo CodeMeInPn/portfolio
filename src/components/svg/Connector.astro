@@ -1,30 +1,29 @@
 ---
 import { cva } from 'class-variance-authority';
-import type { ConnectorPosition, PropsWithClassName } from 'src/types';
+import type { Position, PropsWithClassName } from 'src/types';
 import { cn } from 'utils/cn';
 
 type Props = PropsWithClassName<{
-  width?: number | string;
-  height?: number | string;
-  position?: ConnectorPosition;
-  inverted?: boolean;
+  size?: number | string;
+  position?: Position;
+  offset?: boolean;
 }>;
 
 const {
   className = '',
-  width = 48,
-  height = 48,
+  size = '128',
   position = 'top-left',
-  inverted,
+  offset,
 } = Astro.props;
 
 const connectorVariants = cva(['block'], {
   variants: {
     position: {
-      'bottom-right': 'rotate-0',
-      'top-right': 'rotate-90',
-      'top-left': 'rotate-180',
+      'bottom-right': '-rotate-270',
+      'top-right': 'rotate-0',
+      'top-left': '-rotate-90',
       'bottom-left': 'rotate-270',
+      'bottom-left-inverted': '-rotate-180',
     },
     defaultVariants: {
       position: 'top-left',
@@ -35,24 +34,25 @@ const connectorVariants = cva(['block'], {
 const mergedClassnames = cn(connectorVariants({ position }), className);
 ---
 
+{offset && <div class="size-8" />}
 <svg
-  width={width}
-  height={height}
-  viewBox="0 0 60 60"
+  width={size}
+  height={size}
+  viewBox="0 0 128 128"
   fill="none"
-  xmlns="http://www.w3.org/2000/svg"
   class={mergedClassnames}
-  preserveAspectRatio="none"
 >
   <path
-    d="M0 60C1.39116e-06 44.087 6.32141 28.8258 17.5736 17.5736C28.8258 6.32141 44.087 -1.8976e-07 60 0V60L0 60Z"
-    fill={inverted ? '#FF0000' : '#48FF00'}></path>
-
+    d="M0 64C8.4046 64 16.7273 65.6558 24.4922 68.8721C32.2568 72.0884 39.3121 76.8023 45.2549 82.7451C51.1977 88.6879 55.9116 95.7432 59.1279 103.508C62.3442 111.273 64 119.595 64 128H32C32 110.327 17.6731 96 0 96V64Z"
+    fill={position === 'bottom-left' || position === 'bottom-left-inverted'
+      ? '#EA171D'
+      : '#FEC830'}></path>
   <path
-    d="M0 60C1.39116e-06 44.087 6.32141 28.8258 17.5736 17.5736C28.8258 6.32141 44.087 -1.8976e-07 60 0V40.02C54.701 40.02 49.619 42.125 45.872 45.872C42.125 49.619 40.02 54.701 40.02 60L0 60Z"
-    fill="#3C00FF"></path>
-
+    d="M0 32C12.6068 32 25.0901 34.4832 36.7373 39.3076C48.3846 44.1321 58.9674 51.2037 67.8818 60.1182C76.7963 69.0326 83.8679 79.6154 88.6924 91.2627C93.5168 102.91 96 115.393 96 128H64C64 119.595 62.3442 111.273 59.1279 103.508C55.9116 95.7432 51.1977 88.6879 45.2549 82.7451C39.3121 76.8023 32.2568 72.0884 24.4922 68.8721C16.7273 65.6558 8.4046 64 0 64V32Z"
+    fill="#FE5C1E"></path>
   <path
-    d="M0 60C1.39116e-06 44.087 6.32141 28.8258 17.5736 17.5736C28.8258 6.32141 44.087 -1.8976e-07 60 0V20.04C49.4019 20.04 39.238 24.2501 31.744 31.744C24.2501 39.238 20.04 49.4019 20.04 60H0Z"
-    fill={inverted ? '#48FF00' : '#FF0000'}></path>
+    d="M0 0C16.8091 0 33.4538 3.31061 48.9834 9.74316C64.5131 16.1758 78.6239 25.6043 90.5098 37.4902C102.396 49.3761 111.824 63.4869 118.257 79.0166C124.689 94.5462 128 111.191 128 128H96C96 115.393 93.5168 102.91 88.6924 91.2627C83.8679 79.6154 76.7963 69.0326 67.8818 60.1182C58.9674 51.2037 48.3846 44.1321 36.7373 39.3076C25.0901 34.4832 12.6068 32 0 32V0Z"
+    fill={position === 'bottom-left' || position === 'bottom-left-inverted'
+      ? '#FEC830'
+      : '#EA171D'}></path>
 </svg>

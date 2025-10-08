@@ -1,28 +1,29 @@
 ---
 import type { PropsWithClassName } from 'src/types';
-import { cva, cx } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { cn } from 'utils/cn';
+import type { OptionPosition } from 'src/types/bar.types';
 
 type Props = PropsWithClassName<{
   width?: number | string;
   height?: number | string;
   position?: 'horizontal' | 'vertical';
-  isFlipped?: boolean;
+  inverted?: boolean;
+  offset?: OptionPosition;
 }>;
 
 const {
   className = '',
-  width,
-  height,
   position = 'horizontal',
-  isFlipped,
+  inverted = false,
+  offset,
 } = Astro.props;
 
-const barVariants = cva(['block h-12'], {
+const barVariants = cva(['block'], {
   variants: {
     position: {
-      vertical: '-rotate-90 -translate-x-[15px]',
-      horizontal: cx('', { 'rotate-180': isFlipped }),
+      vertical: 'h-full flex',
+      horizontal: 'h-8',
     },
   },
   defaultVariants: {
@@ -33,16 +34,38 @@ const barVariants = cva(['block h-12'], {
 const mergedClassnames = cn(barVariants({ position }), className);
 ---
 
-<svg
-  width={width}
-  height={height}
-  viewBox="0 0 97 60"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  class={mergedClassnames}
-  preserveAspectRatio="none"
->
-  <path d="M0 40H97V60H0V40Z" fill="#48FF00"></path>
-  <path d="M0 0H97V20H0V0Z" fill="#FF0000"></path>
-  <path d="M0 20H97V40H0V20Z" fill="#3C00FF"></path>
-</svg>
+{
+  position === 'vertical' ? (
+    <div class={mergedClassnames}>
+      {offset === 'left' && <div class="bg-transparent size-full" />}
+      <div
+        class={cn('bg-section-snake-outer size-full', {
+          'bg-section-snake-inner': inverted,
+        })}
+      />
+      <div class="bg-section-snake-middle size-full" />
+      <div
+        class={cn('bg-section-snake-inner size-full', {
+          'bg-section-snake-outer': inverted,
+        })}
+      />
+      {offset === 'right' && <div class="bg-transparent size-full" />}
+    </div>
+  ) : (
+    <div class={mergedClassnames}>
+      {offset === 'top' && <div class="bg-transparent size-full" />}
+      <div
+        class={cn('bg-section-snake-outer size-full', {
+          'md:not-odd:bg-section-snake-inner': inverted,
+        })}
+      />
+      <div class="bg-section-snake-middle size-full" />
+      <div
+        class={cn('bg-section-snake-inner size-full', {
+          'md:bg-section-snake-outer': inverted,
+        })}
+      />
+      {offset === 'bottom' && <div class="bg-transparent size-full" />}
+    </div>
+  )
+}
