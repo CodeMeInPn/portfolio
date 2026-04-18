@@ -1,0 +1,57 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { commercialProjects, sideProjects } from '../../data/projects';
+import type { Project } from '../../types/project';
+
+export function getStaticPaths() {
+  return [...commercialProjects, ...sideProjects].map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<Layout
+  title={`${project.title} — CodeMeIn`}
+  description={project.shortDescription}
+>
+  <main class="max-w-content-xxl mx-auto px-6 md:px-12 py-16">
+    <a
+      href="/#projects"
+      class="inline-block text-on-surface-variant hover:text-primary transition-colors mb-8 text-sm"
+    >
+      ← Back to projects
+    </a>
+
+    <article>
+      <h1 class="text-5xl md:text-7xl text-primary font-bold mb-3">
+        {project.title}
+      </h1>
+      <div class="flex h-1 w-20 mb-8">
+        <div class="flex-1 bg-section-snake-outer"></div>
+        <div class="flex-1 bg-section-snake-middle"></div>
+        <div class="flex-1 bg-section-snake-inner"></div>
+      </div>
+
+      <p class="text-xl text-on-background mb-8 max-w-2xl">
+        {project.fullDescription}
+      </p>
+
+      <ul class="flex flex-wrap gap-2" aria-label="Technologies">
+        {
+          project.technologies.map((tech) => (
+            <li class="px-3 py-1 text-sm rounded-md bg-surface-container-high text-on-surface-variant border border-outline-variant">
+              {tech}
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+  </main>
+</Layout>

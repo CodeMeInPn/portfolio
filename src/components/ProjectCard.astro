@@ -1,0 +1,89 @@
+---
+import type { Project } from '../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, shortDescription, technologies, imageUrl, imageAlt } = project;
+---
+
+<article class="project-card">
+  <button
+    class="project-card__trigger"
+    data-project={JSON.stringify(project)}
+    aria-haspopup="dialog"
+  >
+    {
+      imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          class="w-full aspect-[4/3] object-cover rounded-t-xl"
+        />
+      ) : (
+        <div
+          role="img"
+          aria-label={imageAlt}
+          class="w-full aspect-[4/3] bg-surface-container-high rounded-t-xl flex items-center justify-center"
+        >
+          <span class="text-on-surface-variant text-sm">Image coming soon</span>
+        </div>
+      )
+    }
+
+    <div class="project-card__body">
+      <h3 class="text-xl font-bold text-primary mb-2">{title}</h3>
+      <p class="text-sm text-on-surface-variant mb-4 line-clamp-2">
+        {shortDescription}
+      </p>
+      <ul class="flex flex-wrap gap-2" aria-label="Technologies">
+        {
+          technologies.map((tech) => (
+            <li class="px-2 py-1 text-xs rounded-md bg-surface-container-high text-on-surface-variant">
+              {tech}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </button>
+</article>
+
+<style>
+  .project-card {
+    border: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface-container);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card {
+      transition: none;
+    }
+  }
+
+  .project-card__trigger {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .project-card__body {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+</style>
