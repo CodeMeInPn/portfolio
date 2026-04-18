@@ -1,11 +1,14 @@
-export type Position = 'horizontal' | 'vertical-left' | 'vertical-right';
+export type BarPosition = 'horizontal' | 'vertical-left' | 'vertical-right';
 
-export type OptionPosition = Omit<Position, 'horizontal'> | 'top' | 'bottom';
+export type BarOptionPosition =
+  | Omit<BarPosition, 'horizontal'>
+  | 'top'
+  | 'bottom';
 
 export type ActiveBars = {
-  position: Position[];
+  position: BarPosition[];
   options?: {
-    invertColor?: OptionPosition[];
-    offset?: OptionPosition[];
+    invertColor?: BarOptionPosition[];
+    offset?: BarOptionPosition[];
   };
 };

@@ -2,14 +2,14 @@
 import type { PropsWithClassName } from 'src/types';
 import { cva } from 'class-variance-authority';
 import { cn } from 'utils/cn';
-import type { OptionPosition } from 'src/types/bar.types';
+import type { BarOptionPosition } from 'src/types/bar.types';
 
 type Props = PropsWithClassName<{
   width?: number | string;
   height?: number | string;
   position?: 'horizontal' | 'vertical';
   inverted?: boolean;
-  offset?: OptionPosition;
+  offset?: BarOptionPosition;
 }>;
 
 const {
@@ -56,7 +56,7 @@ const mergedClassnames = cn(barVariants({ position }), className);
       {offset === 'top' && <div class="bg-transparent size-full" />}
       <div
         class={cn('bg-section-snake-outer size-full', {
-          'md:not-odd:bg-section-snake-inner': inverted,
+          'bg-section-snake-inner': inverted,
         })}
       />
       <div class="bg-section-snake-middle size-full" />

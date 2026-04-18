@@ -1,11 +1,11 @@
 ---
 import { cva } from 'class-variance-authority';
-import type { Position, PropsWithClassName } from 'src/types';
+import type { ConnectorPosition, PropsWithClassName } from 'src/types';
 import { cn } from 'utils/cn';
 
 type Props = PropsWithClassName<{
   size?: number | string;
-  position?: Position;
+  position?: ConnectorPosition;
   offset?: boolean;
 }>;
 

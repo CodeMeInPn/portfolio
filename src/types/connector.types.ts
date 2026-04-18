@@ -1,4 +1,4 @@
-export type Position =
+export type ConnectorPosition =
   | 'top-left'
   | 'top-right'
   | 'bottom-left'
@@ -6,6 +6,6 @@ export type Position =
   | 'bottom-left-inverted';
 
 export type ActiveConnectors = {
-  position: Position[];
-  offset?: Position[];
+  position: ConnectorPosition[];
+  offset?: ConnectorPosition[];
 };

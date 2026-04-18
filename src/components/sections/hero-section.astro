@@ -1,12 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import cmiLogo from '../../assets/images/cmi-logo.png';
+---
+
 <section class="max-w-content-hero mx-auto h-screen p-8">
   <div class="flex items-center justify-center size-full">
     <div class="flex flex-col-reverse justify-center">
       <div class="mx-auto">
         <div class="size-[20rem] md:size-[25rem] relative animate-fade-in">
-          <img
+          <Image
             tabindex={-1}
             class="pointer-events-none object-cover"
-            src="/src/assets/images/cmi-logo.png"
+            src={cmiLogo}
             alt="CodeMeIn Logo"
             draggable="false"
           />

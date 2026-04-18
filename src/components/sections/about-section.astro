@@ -1,0 +1,13 @@
+---
+import Section from '@components/Section.astro';
+---
+
+<Section
+  activeBars={{
+    position: ['horizontal', 'vertical-right'],
+    options: { offset: ['left'], invertColor: ['right'] },
+  }}
+  activeConnectors={{ position: ['top-right'] }}
+>
+  <slot />
+</Section>

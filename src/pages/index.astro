@@ -1,18 +1,15 @@
 ---
+import AboutSection from '@components/sections/about-section.astro';
+import FooterSection from '@components/sections/footer-section.astro';
 import HeroSection from '@components/sections/hero-section.astro';
-import Layout from '../layouts/layout.astro';
-import Section from '@components/section.astro';
+import ProjectsSection from '@components/sections/projects-section.astro';
+import SkillsSection from '@components/sections/skills-section.astro';
+import Layout from '@layouts/Layout.astro';
 ---
 
 <Layout>
   <HeroSection />
-  <Section
-    activeBars={{
-      position: ['horizontal', 'vertical-right'],
-      options: { offset: ['left'], invertColor: ['right'] },
-    }}
-    activeConnectors={{ position: ['top-right'] }}
-  >
+  <AboutSection>
     <div>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugit
@@ -27,17 +24,8 @@ import Section from '@components/section.astro';
         earum.
       </p>
     </div>
-  </Section>
-  <Section
-    activeBars={{
-      position: ['horizontal', 'vertical-left'],
-      options: { offset: ['top', 'right'], invertColor: ['top', 'left'] },
-    }}
-    activeConnectors={{
-      position: ['bottom-left', 'bottom-right'],
-      offset: ['bottom-left'],
-    }}
-  >
+  </AboutSection>
+  <ProjectsSection>
     <div>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugit
@@ -58,17 +46,8 @@ import Section from '@components/section.astro';
         earum.
       </p>
     </div>
-  </Section>
-  <Section
-    activeBars={{
-      position: ['horizontal', 'vertical-right'],
-      options: { offset: ['top', 'left'], invertColor: ['right'] },
-    }}
-    activeConnectors={{
-      position: ['bottom-left-inverted', 'top-right'],
-      offset: ['top-right'],
-    }}
-  >
+  </ProjectsSection>
+  <SkillsSection>
     <div>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugit
@@ -95,5 +74,6 @@ import Section from '@components/section.astro';
         earum.
       </p>
     </div>
-  </Section>
+  </SkillsSection>
+  <FooterSection />
 </Layout>
