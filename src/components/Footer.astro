@@ -1,0 +1,76 @@
+---
+const siteLinks = [
+  { href: '#home', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+];
+
+const contactLinks = [
+  { href: 'mailto:codemeinpn@gmail.com', label: 'codemeinpn@gmail.com' },
+  { href: 'tel:+48531518260', label: '+48 531 518 260' },
+  { href: 'https://github.com/CodeMeInPn', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/codemein', label: 'LinkedIn' },
+];
+---
+
+<footer class="bg-inverse-surface text-inverse-on-surface">
+  <div class="max-w-content-hero mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-10">
+      <div class="col-span-2 md:col-span-1">
+        <span class="text-xl font-semibold">CodeMeIn</span>
+        <p class="mt-2 text-sm text-inverse-on-surface/60">
+          Fullstack Developer - Piotr Nowak
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-inverse-on-surface/50 mb-3">
+          Sitemap
+        </h3>
+        <ul class="space-y-2">
+          {
+            siteLinks.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  class="text-sm text-inverse-on-surface/80 hover:text-inverse-on-surface transition-colors duration-200"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-inverse-on-surface/50 mb-3">
+          Contact
+        </h3>
+        <ul class="space-y-2">
+          {
+            contactLinks.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  class="text-sm text-inverse-on-surface/80 hover:text-inverse-on-surface transition-colors duration-200"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-inverse-on-surface/10 pt-6 flex justify-center">
+      <p class="text-sm text-inverse-on-surface/50">
+        Copyright &copy; 2024 CodeMeIn. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

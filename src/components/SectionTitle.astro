@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  id?: string;
+  tag?: 'h1' | 'h2';
+}
+
+const { title, id, tag = 'h2' } = Astro.props;
+const Tag = tag;
+---
+
+<Tag id={id} class="text-5xl md:text-7xl text-primary font-bold mb-3">
+  {title}
+</Tag>
+<div class="flex h-1 w-20 mb-10">
+  <div class="flex-1 bg-section-snake-outer"></div>
+  <div class="flex-1 bg-section-snake-middle"></div>
+  <div class="flex-1 bg-section-snake-inner"></div>
+</div>

@@ -1,4 +1,5 @@
 ---
+import SectionTitle from '@components/SectionTitle.astro';
 import Layout from '@layouts/Layout.astro';
 import { commercialProjects, sideProjects } from '../../data/projects';
 import type { Project } from '../../types/project';
@@ -30,14 +31,7 @@ const { project } = Astro.props;
     </a>
 
     <article>
-      <h1 class="text-5xl md:text-7xl text-primary font-bold mb-3">
-        {project.title}
-      </h1>
-      <div class="flex h-1 w-20 mb-8">
-        <div class="flex-1 bg-section-snake-outer"></div>
-        <div class="flex-1 bg-section-snake-middle"></div>
-        <div class="flex-1 bg-section-snake-inner"></div>
-      </div>
+      <SectionTitle title={project.title} tag="h1" />
 
       <p class="text-xl text-on-background mb-8 max-w-2xl">
         {project.fullDescription}

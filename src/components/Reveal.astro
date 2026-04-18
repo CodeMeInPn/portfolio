@@ -14,7 +14,7 @@ const { delay = 0, class: className } = Astro.props;
   <slot />
 </div>
 
-<style>
+<style is:global>
   [data-reveal] {
     opacity: 0;
     transform: translateY(1.5rem);

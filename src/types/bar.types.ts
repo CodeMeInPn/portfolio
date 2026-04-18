@@ -1,9 +1,10 @@
-export type BarPosition = 'horizontal' | 'vertical-left' | 'vertical-right';
+export type BarPosition = 'horizontal' | 'left' | 'right';
 
 export type BarOptionPosition =
-  | Omit<BarPosition, 'horizontal'>
+  | Exclude<BarPosition, 'horizontal'>
   | 'top'
-  | 'bottom';
+  | 'bottom'
+  | 'top-vertical';
 
 export type ActiveBars = {
   position: BarPosition[];

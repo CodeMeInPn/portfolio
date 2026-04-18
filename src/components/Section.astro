@@ -96,9 +96,9 @@ const {
       )
     }
   </div>
-  <div class="flex relative justify-between overflow-hidden">
+  <div class="flex relative justify-between overflow-clip">
     {
-      activeBars && activeBars.position.includes('vertical-left') && (
+      activeBars && activeBars.position.includes('left') && (
         <div
           class={cn('w-32 hidden md:block bottom-0 md:absolute left-0 top-0', {
             'pt-8': activeBars?.options?.offset?.includes('top'),
@@ -128,16 +128,16 @@ const {
       <slot />
     </div>
     {
-      activeBars && activeBars.position.includes('vertical-right') && (
+      activeBars && activeBars.position.includes('right') && (
         <div
           class={cn('w-32 bottom-0 hidden md:block md:absolute right-0 top-0', {
-            'pt-8': activeBars?.options?.offset?.includes('top'),
+            'pt-8': activeBars?.options?.offset?.includes('top-vertical'),
           })}
         >
           <Bar
             position="vertical"
             offset={
-              activeBars?.options?.offset?.includes('left') ? 'left' : undefined
+              activeBars?.options?.offset?.includes('left') ? 'left' : "right"
             }
             inverted={activeBars?.options?.invertColor?.includes('right')}
           />

@@ -7,6 +7,7 @@
   aria-describedby="modal-desc"
 >
   <div class="modal-inner">
+    <div class="modal-accent" aria-hidden="true"></div>
     <button id="modal-close" aria-label="Close modal" class="modal-close">
       ✕
     </button>
@@ -78,7 +79,6 @@
 
 <style>
   #project-modal {
-    border: 1px solid var(--color-outline-variant);
     background-color: var(--color-surface-container);
     border-radius: 0.75rem;
     padding: 0;
@@ -88,19 +88,20 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    translate: -50% -50%;
     margin: 0;
+    transform: translate(-50%, -50%);
     opacity: 1;
-    transform: translateY(0);
     transition:
-      opacity 0.5s ease,
-      transform 0.5s ease;
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      display 0.3s allow-discrete,
+      overlay 0.3s allow-discrete;
   }
 
   @starting-style {
     #project-modal[open] {
       opacity: 0;
-      transform: translateY(1.5rem);
+      transform: translate(-50%, calc(-50% + 1.5rem));
     }
   }
 
@@ -117,6 +118,16 @@
   .modal-inner {
     position: relative;
     padding: 1.5rem;
+  }
+
+  .modal-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #fe5c1e;
+    border-radius: 9999px;
   }
 
   .modal-close {
