@@ -79,6 +79,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   font-family: 'Markazi Text', serif;
 }

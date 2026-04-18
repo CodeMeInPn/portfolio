@@ -1,5 +1,6 @@
 ---
 import Background from '@components/background.astro';
+import Nav from '@components/Nav.astro';
 import '../styles/global.css';
 ---
 
@@ -18,8 +19,9 @@ import '../styles/global.css';
     <meta name="generator" content={Astro.generator} />
     <title>CodeMeIn Piotr Nowak</title>
   </head>
-  <body>
+  <body class="pt-16">
     <Background />
+    <Nav />
     <slot />
   </body>
 </html>

@@ -10,6 +10,7 @@ interface Props {
   activeBars?: ActiveBars;
   contentContainerClassName?: string;
   sectionClassName?: string;
+  id?: string;
 }
 
 const {
@@ -17,10 +18,11 @@ const {
   activeBars,
   activeConnectors,
   sectionClassName,
+  id,
 } = Astro.props;
 ---
 
-<section class={cn('relative bg-transparent px-4 w-full', sectionClassName)}>
+<section id={id} class={cn('relative bg-transparent px-4 w-full', sectionClassName)}>
   <div class="flex h-32">
     {
       activeConnectors?.position?.includes('top-left') && (
