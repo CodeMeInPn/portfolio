@@ -28,6 +28,13 @@ export default defineConfig([
     languageOptions: {
       parser: tsParser,
       parserOptions: { project: './tsconfig.json' },
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        performance: 'readonly',
+        requestAnimationFrame: 'readonly',
+        IntersectionObserver: 'readonly',
+      },
     },
     plugins: { '@typescript-eslint': tseslint },
     rules: {

@@ -28,7 +28,9 @@ const { stats } = project;
           {stats.map((stat) => (
             <swiper-slide>
               <div class="stat-card">
-                <span class="stat-card__value">{stat.value}</span>
+                <span class="stat-card__value" data-count-value={stat.value}>
+                  {stat.value}
+                </span>
                 <span class="stat-card__label">{stat.label}</span>
               </div>
             </swiper-slide>
@@ -80,6 +82,7 @@ const { stats } = project;
 
 <script>
   import { register } from 'swiper/element/bundle';
+  import { observeCountUp } from 'utils/count';
 
   type SwiperContainerElement = HTMLElement & {
     speed: number;
@@ -98,4 +101,6 @@ const { stats } = project;
       swiperEl.speed = prefersReducedMotion ? 0 : 300;
       swiperEl.initialize();
     });
+
+  observeCountUp('.stat-card__value');
 </script>
