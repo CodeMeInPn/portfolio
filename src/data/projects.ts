@@ -13,6 +13,50 @@ export const commercialProjects: Project[] = [
     imageUrl: '',
     imageAlt: 'ERP Dashboard project placeholder',
     category: 'commercial',
+    eyebrow: 'Multi-Tenant B2B SaaS',
+    meta: [
+      { label: 'Role', value: 'Lead Frontend Engineer' },
+      { label: 'Type', value: 'Commercial' },
+      { label: 'Deployment', value: 'Cloud (multi-tenant)' },
+    ],
+    techStack: [
+      {
+        category: 'Frontend',
+        items: [{ name: 'React' }, { name: 'TypeScript' }, { name: 'Tailwind CSS' }],
+      },
+      {
+        category: 'Backend',
+        items: [{ name: 'Node.js' }, { name: 'Prisma' }],
+      },
+      {
+        category: 'Infrastructure',
+        items: [{ name: 'PostgreSQL' }, { name: 'Docker' }],
+      },
+    ],
+    architecture: [
+      'Modular monolith split into inventory, HR, and finance domains, each with its own Prisma schema namespace.',
+      'Role-based access control enforced at the API layer and mirrored in the UI via a shared permissions hook.',
+      'Real-time data sync across departments implemented with WebSocket-based cache invalidation.',
+    ],
+    keyFeatures: [
+      'Advanced multi-column filtering with saved filter presets per user.',
+      'Role-based access control covering module-level and record-level permissions.',
+      'Real-time dashboards that update across sessions without a manual refresh.',
+      'Bulk import/export tooling for inventory and finance records.',
+    ],
+    highlights: [
+      'Led the migration of the legacy dashboard to a component-driven architecture, cutting duplicate UI code significantly.',
+      'Introduced a shared design system consumed across all three modules, reducing new-feature UI time.',
+      'Owned performance profiling that reduced initial dashboard load time.',
+    ],
+    stats: [
+      { value: '3', label: 'Core Modules' },
+      { value: '40+', label: 'Tenants Onboarded' },
+      { value: '99.9%', label: 'Uptime' },
+      { value: '12', label: 'Months in Production' },
+    ],
+    heroImage: '',
+    heroImageAlt: 'ERP Dashboard hero placeholder',
   },
   {
     id: 'proj-2',
