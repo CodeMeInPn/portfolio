@@ -1,0 +1,25 @@
+---
+interface Props {
+  name: string;
+  icon?: string;
+}
+
+const { name, icon } = Astro.props;
+---
+
+<div
+  class="flex items-center gap-2 px-3 py-2 rounded-md bg-surface-container-high border border-outline-variant"
+>
+  {
+    icon ? (
+      <img src={icon} alt="" class="size-5 object-contain shrink-0" />
+    ) : (
+      <div
+        role="img"
+        aria-label={`${name} icon coming soon`}
+        class="size-5 bg-surface-container-highest rounded shrink-0"
+      />
+    )
+  }
+  <span class="text-sm text-on-surface-variant whitespace-nowrap">{name}</span>
+</div>

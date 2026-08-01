@@ -1,0 +1,101 @@
+---
+import Section from '@components/Section.astro';
+import SectionTitle from '@components/SectionTitle.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { stats } = project;
+---
+
+{
+  stats && stats.length > 0 && (
+    <Section id="facts">
+      <div class="py-12">
+        <SectionTitle title="Featured Facts" id="facts-heading" />
+
+        <swiper-container
+          class="facts-swiper block md:hidden"
+          init="false"
+          slides-per-view="1.5"
+          space-between="16"
+          pagination="true"
+          grab-cursor="true"
+        >
+          {stats.map((stat) => (
+            <swiper-slide>
+              <div class="stat-card">
+                <span class="stat-card__value">{stat.value}</span>
+                <span class="stat-card__label">{stat.label}</span>
+              </div>
+            </swiper-slide>
+          ))}
+        </swiper-container>
+
+        <div class="hidden md:grid facts-grid gap-4">
+          {stats.map((stat) => (
+            <div class="stat-card">
+              <span class="stat-card__value">{stat.value}</span>
+              <span class="stat-card__label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  )
+}
+
+<style>
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1.5rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface-container-high);
+    text-align: center;
+  }
+
+  .stat-card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .stat-card__label {
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+</style>
+
+<script>
+  import { register } from 'swiper/element/bundle';
+
+  type SwiperContainerElement = HTMLElement & {
+    speed: number;
+    initialize: () => void;
+  };
+
+  register();
+
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+
+  document
+    .querySelectorAll<SwiperContainerElement>('.facts-swiper')
+    .forEach((swiperEl) => {
+      swiperEl.speed = prefersReducedMotion ? 0 : 300;
+      swiperEl.initialize();
+    });
+</script>

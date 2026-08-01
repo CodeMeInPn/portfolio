@@ -1,4 +1,5 @@
 ---
+import Button from '@components/Button.astro';
 ---
 
 <dialog
@@ -18,13 +19,16 @@
       <h2 id="modal-title" class="text-3xl font-bold text-primary mb-3"></h2>
       <p id="modal-desc" class="text-on-surface-variant mb-5"></p>
       <ul id="modal-tech" class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"></ul>
-      <a
+      <Button
         id="modal-link"
         href="#"
-        class="modal-cta"
+        variant="naked"
+        icon="→"
+        iconPosition="right"
+        className="modal-cta"
       >
-        Read more →
-      </a>
+        Read more
+      </Button>
     </div>
   </div>
 </dialog>
@@ -160,14 +164,6 @@
   }
 
   .modal-cta {
-    display: inline-block;
     color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-    transition: opacity 0.15s ease;
-  }
-
-  .modal-cta:hover {
-    opacity: 0.75;
   }
 </style>

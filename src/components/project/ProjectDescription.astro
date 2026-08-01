@@ -1,0 +1,104 @@
+---
+import Section from '@components/Section.astro';
+import SectionTitle from '@components/SectionTitle.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { fullDescription, architecture, keyFeatures, highlights } = project;
+---
+
+<Section id="overview">
+  <div class="py-12 flex flex-col gap-10">
+    <div>
+      <SectionTitle title="Overview" id="overview-heading" />
+      <p class="text-lg text-on-background max-w-3xl">{fullDescription}</p>
+    </div>
+
+    {
+      architecture && architecture.length > 0 && (
+        <div>
+          <h3 class="text-2xl font-bold text-primary mb-4">Architecture</h3>
+          <ul class="flex flex-col gap-2 list-disc list-inside text-on-surface-variant max-w-3xl">
+            {architecture.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    {
+      keyFeatures && keyFeatures.length > 0 && (
+        <div>
+          <h3 class="text-2xl font-bold text-primary mb-4">Key Features</h3>
+
+          <swiper-container
+            class="features-swiper block md:hidden"
+            init="false"
+            slides-per-view="1.15"
+            space-between="16"
+            pagination="true"
+            grab-cursor="true"
+          >
+            {keyFeatures.map((feature) => (
+              <swiper-slide>
+                <div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant h-full">
+                  <p class="text-on-surface-variant">{feature}</p>
+                </div>
+              </swiper-slide>
+            ))}
+          </swiper-container>
+
+          <div class="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {keyFeatures.map((feature) => (
+              <div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant">
+                <p class="text-on-surface-variant">{feature}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    {
+      highlights && highlights.length > 0 && (
+        <div>
+          <h3 class="text-2xl font-bold text-primary mb-4">
+            Notable Highlights
+          </h3>
+          <ul class="flex flex-col gap-2 list-disc list-inside text-on-surface-variant max-w-3xl">
+            {highlights.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</Section>
+
+<script>
+  import { register } from 'swiper/element/bundle';
+
+  type SwiperContainerElement = HTMLElement & {
+    speed: number;
+    initialize: () => void;
+  };
+
+  register();
+
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+
+  document
+    .querySelectorAll<SwiperContainerElement>('.features-swiper')
+    .forEach((swiperEl) => {
+      swiperEl.speed = prefersReducedMotion ? 0 : 300;
+      swiperEl.initialize();
+    });
+</script>

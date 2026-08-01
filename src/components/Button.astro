@@ -1,0 +1,98 @@
+---
+import { cva } from 'class-variance-authority';
+import { cn } from 'utils/cn';
+import type { PropsWithClassName } from 'src/types';
+
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'naked' | 'disabled';
+
+type Props = PropsWithClassName<{
+  href?: string;
+  variant?: ButtonVariant;
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  target?: string;
+  rel?: string;
+  type?: 'button' | 'submit';
+  ariaLabel?: string;
+  ariaHaspopup?: 'dialog' | 'menu' | 'listbox' | 'tree' | 'grid' | 'true' | 'false';
+  dataProject?: string;
+  id?: string;
+}>;
+
+const {
+  href,
+  variant = 'primary',
+  icon,
+  iconPosition = 'left',
+  target,
+  rel,
+  type = 'button',
+  ariaLabel,
+  ariaHaspopup,
+  dataProject,
+  id,
+  className,
+} = Astro.props;
+
+const isDisabled = variant === 'disabled';
+const renderAsAnchor = Boolean(href) && !isDisabled;
+const resolvedRel = target === '_blank' ? (rel ?? 'noopener noreferrer') : rel;
+
+const buttonVariants = cva(
+  [
+    'inline-flex items-center gap-2 rounded-md font-semibold transition-[opacity,background-color,border-color] duration-200 ease-in-out',
+  ],
+  {
+    variants: {
+      variant: {
+        primary: 'px-4 py-2 bg-primary text-on-primary hover:opacity-90',
+        secondary:
+          'px-4 py-2 bg-secondary-container text-on-secondary-container hover:opacity-90',
+        tertiary:
+          'px-4 py-2 border border-primary text-primary bg-transparent hover:bg-primary/10',
+        naked: 'p-0 bg-transparent text-on-background hover:opacity-75',
+        disabled:
+          'px-4 py-2 bg-surface-container-high text-on-surface-variant opacity-60 cursor-not-allowed',
+      },
+    },
+    defaultVariants: {
+      variant: 'primary',
+    },
+  },
+);
+
+const mergedClassnames = cn(buttonVariants({ variant }), className);
+---
+
+{
+  renderAsAnchor ? (
+    <a
+      href={href}
+      id={id}
+      class={mergedClassnames}
+      target={target}
+      rel={resolvedRel}
+      aria-label={ariaLabel}
+      aria-haspopup={ariaHaspopup}
+      data-project={dataProject}
+    >
+      {icon && iconPosition === 'left' && <span aria-hidden="true">{icon}</span>}
+      <slot />
+      {icon && iconPosition === 'right' && <span aria-hidden="true">{icon}</span>}
+    </a>
+  ) : (
+    <button
+      type={type}
+      id={id}
+      class={mergedClassnames}
+      disabled={isDisabled}
+      aria-label={ariaLabel}
+      aria-haspopup={ariaHaspopup}
+      data-project={dataProject}
+    >
+      {icon && iconPosition === 'left' && <span aria-hidden="true">{icon}</span>}
+      <slot />
+      {icon && iconPosition === 'right' && <span aria-hidden="true">{icon}</span>}
+    </button>
+  )
+}

@@ -1,0 +1,84 @@
+---
+import Section from '@components/Section.astro';
+import SectionTitle from '@components/SectionTitle.astro';
+import TechItem from './TechItem.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { techStack, technologies } = project;
+---
+
+<Section id="tech-stack">
+  <div class="py-12">
+    <SectionTitle title="Technologies" id="tech-stack-heading" />
+
+    {
+      techStack && techStack.length > 0 ? (
+        <div class="flex flex-col gap-8">
+          {techStack.map((group) => (
+            <div>
+              <h3 class="text-lg font-bold text-primary mb-3">
+                {group.category}
+              </h3>
+
+              <swiper-container
+                class="tech-swiper block md:hidden"
+                init="false"
+                slides-per-view="auto"
+                space-between="12"
+                free-mode="true"
+                grab-cursor="true"
+              >
+                {group.items.map((item) => (
+                  <swiper-slide style="width: auto;">
+                    <TechItem name={item.name} icon={item.icon} />
+                  </swiper-slide>
+                ))}
+              </swiper-container>
+
+              <div class="hidden md:flex flex-wrap gap-3">
+                {group.items.map((item) => (
+                  <TechItem name={item.name} icon={item.icon} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ul class="flex flex-wrap gap-2" aria-label="Technologies">
+          {technologies.map((tech) => (
+            <li class="px-3 py-1 text-sm rounded-md bg-surface-container-high text-on-surface-variant border border-outline-variant">
+              {tech}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Section>
+
+<script>
+  import { register } from 'swiper/element/bundle';
+
+  type SwiperContainerElement = HTMLElement & {
+    speed: number;
+    initialize: () => void;
+  };
+
+  register();
+
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+
+  document
+    .querySelectorAll<SwiperContainerElement>('.tech-swiper')
+    .forEach((swiperEl) => {
+      swiperEl.speed = prefersReducedMotion ? 0 : 300;
+      swiperEl.initialize();
+    });
+</script>

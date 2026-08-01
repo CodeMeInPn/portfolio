@@ -22,7 +22,11 @@ export const commercialProjects: Project[] = [
     techStack: [
       {
         category: 'Frontend',
-        items: [{ name: 'React' }, { name: 'TypeScript' }, { name: 'Tailwind CSS' }],
+        items: [
+          { name: 'React' },
+          { name: 'TypeScript' },
+          { name: 'Tailwind CSS' },
+        ],
       },
       {
         category: 'Backend',
