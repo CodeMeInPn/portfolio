@@ -39,10 +39,10 @@ interface ObserveCountUpOptions {
 // No-ops under prefers-reduced-motion: reduce, leaving the statically rendered value.
 export function observeCountUp(
   selector: string,
-  { threshold = 0.4, durationMs = 1200 }: ObserveCountUpOptions = {},
+  { threshold = 0.4, durationMs = 1200 }: ObserveCountUpOptions = {}
 ): void {
   const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
+    '(prefers-reduced-motion: reduce)'
   ).matches;
 
   if (prefersReducedMotion) return;
@@ -56,7 +56,7 @@ export function observeCountUp(
         }
       });
     },
-    { threshold },
+    { threshold }
   );
 
   document

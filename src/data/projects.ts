@@ -8,7 +8,7 @@ export const commercialProjects: Project[] = [
     shortDescription:
       'An internal AI workspace extending an open-source chatbot template into a multi-provider LLM platform with retrieval-augmented search, a task-management integration, and AI-editable content artifacts.',
     fullDescription:
-      "Built out from an open-source Next.js AI chatbot template into a full internal AI workspace for an internal team: a chat interface that talks to 8+ LLM providers through one unified abstraction, retrieves answers from a private knowledge base via a Retrieval-Augmented Generation pipeline, reads and creates tasks in an external project-management tool through natural language, and lets the AI generate and iteratively edit structured documents (\"blocks\") — code, rich text, spreadsheets, and images — alongside the conversation.",
+      'Built out from an open-source Next.js AI chatbot template into a full internal AI workspace for an internal team: a chat interface that talks to 8+ LLM providers through one unified abstraction, retrieves answers from a private knowledge base via a Retrieval-Augmented Generation pipeline, reads and creates tasks in an external project-management tool through natural language, and lets the AI generate and iteratively edit structured documents ("blocks") — code, rich text, spreadsheets, and images — alongside the conversation.',
     technologies: [
       'Next.js 15',
       'React 19',
@@ -111,7 +111,8 @@ export const commercialProjects: Project[] = [
       'Docker',
     ],
     imageUrl: '',
-    imageAlt: 'Software Consultancy Marketing Site & Headless CMS project placeholder',
+    imageAlt:
+      'Software Consultancy Marketing Site & Headless CMS project placeholder',
     category: 'commercial',
     eyebrow: 'Corporate Marketing Site + Headless CMS',
     meta: [
@@ -181,7 +182,8 @@ export const commercialProjects: Project[] = [
       { value: '69', label: 'Reusable Components' },
     ],
     heroImage: '',
-    heroImageAlt: 'Software Consultancy Marketing Site & Headless CMS hero placeholder',
+    heroImageAlt:
+      'Software Consultancy Marketing Site & Headless CMS hero placeholder',
   },
   {
     id: 'proj-3',
@@ -259,7 +261,7 @@ export const commercialProjects: Project[] = [
     highlights: [
       'Clear separation between public funnels, an internal admin surface, and a CMS — all sharing one data layer.',
       'Decoupled notification worker so unreliable third-party email delivery never blocks user-facing requests.',
-      "Production observability (Sentry + OpenTelemetry) in place from day one, not bolted on later.",
+      'Production observability (Sentry + OpenTelemetry) in place from day one, not bolted on later.',
       'Maintained 31+ incremental database migrations without disruptive schema rewrites.',
     ],
     stats: [
@@ -288,7 +290,8 @@ export const commercialProjects: Project[] = [
       'Vitest',
     ],
     imageUrl: '',
-    imageAlt: 'Deepfake Detection & Video Analysis Platform project placeholder',
+    imageAlt:
+      'Deepfake Detection & Video Analysis Platform project placeholder',
     category: 'commercial',
     eyebrow: 'AI / Video Analysis',
     meta: [
@@ -352,7 +355,8 @@ export const commercialProjects: Project[] = [
       { value: '3', label: 'Smoothing Algorithms Built' },
     ],
     heroImage: '',
-    heroImageAlt: 'Deepfake Detection & Video Analysis Platform hero placeholder',
+    heroImageAlt:
+      'Deepfake Detection & Video Analysis Platform hero placeholder',
   },
   {
     id: 'proj-5',
@@ -372,7 +376,8 @@ export const commercialProjects: Project[] = [
       'Tailwind CSS',
     ],
     imageUrl: '',
-    imageAlt: 'Venture Studio Marketing Site & Headless CMS project placeholder',
+    imageAlt:
+      'Venture Studio Marketing Site & Headless CMS project placeholder',
     category: 'commercial',
     eyebrow: 'Corporate Site / Headless CMS',
     meta: [
@@ -439,7 +444,8 @@ export const commercialProjects: Project[] = [
       { value: '6', label: 'Custom CMS Field Types' },
     ],
     heroImage: '',
-    heroImageAlt: 'Venture Studio Marketing Site & Headless CMS hero placeholder',
+    heroImageAlt:
+      'Venture Studio Marketing Site & Headless CMS hero placeholder',
   },
   {
     id: 'proj-6',
@@ -538,7 +544,7 @@ export const commercialProjects: Project[] = [
     slug: 'ai-coaching-subscription-platform',
     title: 'AI-Powered Coaching Subscription Platform',
     shortDescription:
-      "A personal-development coaching product built around a persistent, threaded AI coach, with subscription payments and a lightweight, low-ops backend built on tools the team already used daily.",
+      'A personal-development coaching product built around a persistent, threaded AI coach, with subscription payments and a lightweight, low-ops backend built on tools the team already used daily.',
     fullDescription:
       "Combines a marketing/sign-up site with a subscription product built around an AI coach. Rather than a conventional SQL database and transactional email service, the backend deliberately runs on a spreadsheet-style database (as the user store, via a custom auth adapter) and a workflow-automation tool (for email and form handling) — a lightweight, low-ops stack matched to a small product team's existing tools.",
     technologies: [
@@ -581,7 +587,9 @@ export const commercialProjects: Project[] = [
       {
         category: 'Backend',
         items: [
-          { name: 'Custom auth adapter & email provider (non-standard infrastructure)' },
+          {
+            name: 'Custom auth adapter & email provider (non-standard infrastructure)',
+          },
           { name: 'Stripe (checkout + webhooks)' },
         ],
       },
@@ -651,7 +659,9 @@ export const commercialProjects: Project[] = [
       {
         category: 'UI / Design System',
         items: [
-          { name: 'React Aria / React Stately (custom component library, built from scratch)' },
+          {
+            name: 'React Aria / React Stately (custom component library, built from scratch)',
+          },
           { name: 'class-variance-authority' },
         ],
       },
@@ -723,7 +733,10 @@ export const commercialProjects: Project[] = [
     meta: [
       { label: 'Role', value: 'Contributor (backend + mobile)' },
       { label: 'Type', value: 'NestJS backend + React Native mobile app' },
-      { label: 'Deployment', value: 'Google Cloud (backend), EAS Build (mobile)' },
+      {
+        label: 'Deployment',
+        value: 'Google Cloud (backend), EAS Build (mobile)',
+      },
     ],
     techStack: [
       {
@@ -755,7 +768,9 @@ export const commercialProjects: Project[] = [
       },
       {
         category: 'CI/CD',
-        items: [{ name: 'EAS Build + GitHub Actions (TestFlight / Play Store)' }],
+        items: [
+          { name: 'EAS Build + GitHub Actions (TestFlight / Play Store)' },
+        ],
       },
     ],
     architecture: [
@@ -842,10 +857,7 @@ export const commercialProjects: Project[] = [
       },
       {
         category: 'Infrastructure',
-        items: [
-          { name: 'Docker (multi-stage)' },
-          { name: 'Self-hosted PaaS' },
-        ],
+        items: [{ name: 'Docker (multi-stage)' }, { name: 'Self-hosted PaaS' }],
       },
     ],
     architecture: [
@@ -919,7 +931,9 @@ export const commercialProjects: Project[] = [
       {
         category: 'Build & Publishing',
         items: [
-          { name: 'Vite (library mode: ESM + UMD + generated type declarations)' },
+          {
+            name: 'Vite (library mode: ESM + UMD + generated type declarations)',
+          },
           { name: 'npm' },
         ],
       },
@@ -1267,6 +1281,89 @@ export const commercialProjects: Project[] = [
     ],
     heroImage: '',
     heroImageAlt: 'Financial SaaS Backend hero placeholder',
+  },
+  {
+    id: 'proj-16',
+    slug: 'orion-configurator',
+    title: 'Orion — B2B Linear Rail Configurator & Technical Calculator',
+    shortDescription:
+      'A B2B web configurator and technical calculator for SBC linear guide rail/carriage hardware, combining multi-step product configuration, engineering load/safety calculations, and a Three.js/JSCAD 3D preview.',
+    fullDescription:
+      'Contributions to Orion (orionht.pl), a B2B web configurator and technical calculator for SBC linear guide rail/carriage hardware. Work spanned the multi-step configurator flow and form validation, the underlying engineering calculations (load capacity, durability, safety factor, rail-length/hole-spacing), parametric SVG technical drawings and a Three.js/JSCAD 3D preview, PDF quotation and configuration-spec generation, product catalogue search, and the quotation/order/cart flow.',
+    technologies: [
+      'Next.js',
+      'React',
+      'Prisma',
+      'PostgreSQL',
+      'Three.js',
+      'JSCAD',
+    ],
+    imageUrl: '',
+    imageAlt:
+      'Orion — B2B Linear Rail Configurator & Technical Calculator project placeholder',
+    category: 'commercial',
+    eyebrow: 'B2B Configurator / Technical Calculator',
+    meta: [
+      { label: 'Role', value: 'Full-stack contributor' },
+      { label: 'Type', value: 'Web application (Next.js)' },
+    ],
+    techStack: [
+      {
+        category: 'Frontend',
+        items: [{ name: 'Next.js' }, { name: 'React' }],
+      },
+      {
+        category: 'Engineering / Calculations',
+        items: [
+          {
+            name: 'Load capacity, durability & safety-factor calculation engine',
+          },
+          { name: 'Rail-length / hole-spacing math' },
+        ],
+      },
+      {
+        category: '3D / Visualization',
+        items: [
+          { name: 'Three.js' },
+          { name: 'JSCAD' },
+          { name: 'Parametric SVG rail & carriage diagrams' },
+        ],
+      },
+      {
+        category: 'Backend / Data',
+        items: [{ name: 'Prisma ORM' }, { name: 'PostgreSQL' }],
+      },
+    ],
+    architecture: [
+      'Multi-step configurator flow with a dedicated state/context layer for rail-only, block-only, and combined hardware selection.',
+      'Engineering calculation module handling load capacity, durability, safety-factor, and rail-length/hole-spacing math.',
+      'Parametric SVG diagram generation paired with a Three.js/JSCAD 3D CAD preview and custom viewport controls.',
+      'PDF generation pipeline extended from calculation-only reports to full configuration/spec documents.',
+      'Product catalogue search over a large SBC hardware dataset in PostgreSQL, using virtual scrolling for large result sets.',
+    ],
+    keyFeatures: [
+      'Multi-step rail/block configurator supporting rail-only, block-only, and combined hardware selection.',
+      'Engineering calculator for load capacity, durability, safety factor, and rail-length/hole-spacing.',
+      'Parametric SVG rail & carriage drawings alongside a rotate/zoom Three.js/JSCAD 3D preview.',
+      'PDF generation for both calculation results and full configuration/spec documents.',
+      'Virtual-scrolled product catalogue search across a large SBC hardware dataset.',
+      'Quotation, order, and cart flow with required NIP/phone validation and links back to saved configurations.',
+    ],
+    highlights: [
+      'Rebuilt configurator state/context, removing localStorage persistence and fixing back-navigation from the quotation step.',
+      'Fixed multiple core engineering-calculation bugs: durability cap, safety-margin math, rail-length, and first-hole distance.',
+      'Built rotate/zoom 3D CAD preview controls, including a new useCadViewControls hook.',
+      'Extended calculation-only PDF generation into full configuration/spec PDF output.',
+      'Introduced canonical product naming and virtual-scrolled search results for catalogue performance.',
+      'Delivered a steady stream of QA-driven hotfixes during the Dec 2024–Feb 2025 release stabilization cycle.',
+    ],
+    stats: [
+      { value: '64', label: 'Tickets Closed' },
+      { value: '9', label: 'Months Active' },
+    ],
+    heroImage: '',
+    heroImageAlt:
+      'Orion — B2B Linear Rail Configurator & Technical Calculator hero placeholder',
   },
 ];
 

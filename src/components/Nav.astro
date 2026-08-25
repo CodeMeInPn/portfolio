@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#home', label: 'Home' },
+  { href: '/#about', label: 'About' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#contact', label: 'Contact' },
 ];
 ---
 
@@ -106,7 +106,7 @@ const links = [
 
   function setActiveLink(sectionId: string) {
     allNavLinks.forEach((link) => {
-      const isActive = link.getAttribute('href') === `#${sectionId}`;
+      const isActive = link.getAttribute('href') === `/#${sectionId}`;
       link.classList.toggle('text-primary', isActive);
       link.classList.toggle('text-on-background', !isActive);
     });
