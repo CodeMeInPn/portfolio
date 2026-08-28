@@ -1,4 +1,34 @@
 import type { Project } from '../types/project';
+import aiIcon from '../assets/icons/ai-icon.svg';
+import codeIcon from '../assets/icons/code-icon.svg';
+import dockerIcon from '../assets/icons/docker-icon.svg';
+import drizzleIcon from '../assets/icons/drizzle-icon.svg';
+import expoIcon from '../assets/icons/expo-icon.svg';
+import googleIcon from '../assets/icons/google-icon.svg';
+import googleMapsIcon from '../assets/icons/google-maps-icon.svg';
+import jotaiIcon from '../assets/icons/jotai-icon.svg';
+import motionIcon from '../assets/icons/motion-icon.svg';
+import muiIcon from '../assets/icons/mui-icon.svg';
+import nextjsIcon from '../assets/icons/nextjs-icon.svg';
+import nodejsIcon from '../assets/icons/nodejs-icon.svg';
+import payloadIcon from '../assets/icons/payload-icon.svg';
+import pineconeIcon from '../assets/icons/pinecone-icon.svg';
+import postgresqlIcon from '../assets/icons/postgresql-icon.svg';
+import prismaIcon from '../assets/icons/prisma-icon.svg';
+import radixUiIcon from '../assets/icons/radix-ui-icon.svg';
+import reactIcon from '../assets/icons/react-icon.svg';
+import reactNativeIcon from '../assets/icons/reactnative-icon.svg';
+import reactQueryIcon from '../assets/icons/react-query-icon.svg';
+import sassIcon from '../assets/icons/sass-icon.svg';
+import sentryIcon from '../assets/icons/sentry-icon.svg';
+import shadcnUiIcon from '../assets/icons/shadcn-ui-icon.svg';
+import strapiIcon from '../assets/icons/strapi-icon.svg';
+import tailwindcssIcon from '../assets/icons/tailwindcss-icon.svg';
+import tanstackIcon from '../assets/icons/tanstack-icon.svg';
+import threejsIcon from '../assets/icons/threejs-icon.svg';
+import typescriptIcon from '../assets/icons/typescript-icon.svg';
+import vercelIcon from '../assets/icons/vercel-icon.svg';
+import vitestIcon from '../assets/icons/vitest-icon.svg';
 
 export const commercialProjects: Project[] = [
   {
@@ -32,38 +62,38 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js 15 (App Router)' },
-          { name: 'React 19 / RSC' },
-          { name: 'Tailwind CSS' },
-          { name: 'shadcn/ui' },
-          { name: 'Radix UI' },
-          { name: 'Framer Motion' },
+          { name: 'Next.js 15 (App Router)', icon: nextjsIcon.src },
+          { name: 'React 19 / RSC', icon: reactIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'shadcn/ui', icon: shadcnUiIcon.src },
+          { name: 'Radix UI', icon: radixUiIcon.src },
+          { name: 'Framer Motion', icon: motionIcon.src },
         ],
       },
       {
         category: 'AI / LLM',
         items: [
-          { name: 'Vercel AI SDK' },
-          { name: '8+ LLM providers behind one abstraction' },
-          { name: 'LangChain' },
-          { name: 'Pinecone (RAG vector store)' },
+          { name: 'Vercel AI SDK', icon: vercelIcon.src },
+          { name: '8+ LLM providers behind one abstraction', icon: aiIcon.src },
+          { name: 'LangChain', icon: aiIcon.src },
+          { name: 'Pinecone (RAG vector store)', icon: pineconeIcon.src },
         ],
       },
       {
         category: 'Backend',
         items: [
-          { name: 'Next.js API Routes & Server Actions' },
-          { name: 'Drizzle ORM' },
-          { name: 'PostgreSQL' },
-          { name: 'NextAuth.js' },
+          { name: 'Next.js API Routes & Server Actions', icon: codeIcon.src },
+          { name: 'Drizzle ORM', icon: drizzleIcon.src },
+          { name: 'PostgreSQL', icon: postgresqlIcon.src },
+          { name: 'NextAuth.js', icon: codeIcon.src },
         ],
       },
       {
         category: 'Editing / Content',
         items: [
-          { name: 'ProseMirror' },
-          { name: 'CodeMirror' },
-          { name: 'react-data-grid' },
+          { name: 'ProseMirror', icon: codeIcon.src },
+          { name: 'CodeMirror', icon: codeIcon.src },
+          { name: 'react-data-grid', icon: codeIcon.src },
         ],
       },
     ],
@@ -124,37 +154,40 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (Pages Router)' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS' },
-          { name: 'Sass' },
-          { name: 'Framer Motion' },
-          { name: 'three.js (raw)' },
+          { name: 'Next.js (Pages Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'Sass', icon: sassIcon.src },
+          { name: 'Framer Motion', icon: motionIcon.src },
+          { name: 'three.js (raw)', icon: threejsIcon.src },
         ],
       },
       {
         category: 'CMS / Backend',
         items: [
-          { name: 'Strapi (38 content types, 69 components)' },
-          { name: 'Node.js' },
-          { name: 'PostgreSQL' },
+          {
+            name: 'Strapi (38 content types, 69 components)',
+            icon: strapiIcon.src,
+          },
+          { name: 'Node.js', icon: nodejsIcon.src },
+          { name: 'PostgreSQL', icon: postgresqlIcon.src },
         ],
       },
       {
         category: 'Integrations',
         items: [
-          { name: 'External applicant-tracking system' },
-          { name: 'Transactional email' },
-          { name: 'Google Maps' },
-          { name: 'Google Tag Manager' },
+          { name: 'External applicant-tracking system', icon: codeIcon.src },
+          { name: 'Transactional email', icon: codeIcon.src },
+          { name: 'Google Maps', icon: googleMapsIcon.src },
+          { name: 'Google Tag Manager', icon: googleIcon.src },
         ],
       },
       {
         category: 'Infrastructure',
         items: [
-          { name: 'Docker (multi-stage builds)' },
-          { name: 'Self-hosted PaaS' },
+          { name: 'Docker (multi-stage builds)', icon: dockerIcon.src },
+          { name: 'Self-hosted PaaS', icon: codeIcon.src },
         ],
       },
     ],
@@ -214,34 +247,40 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js 15 (App Router, Turbopack)' },
-          { name: 'React 19' },
-          { name: 'Tailwind CSS' },
-          { name: 'MUI' },
-          { name: 'Radix UI' },
-          { name: 'React Hook Form + Zod' },
+          { name: 'Next.js 15 (App Router, Turbopack)', icon: nextjsIcon.src },
+          { name: 'React 19', icon: reactIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'MUI', icon: muiIcon.src },
+          { name: 'Radix UI', icon: radixUiIcon.src },
+          { name: 'React Hook Form + Zod', icon: codeIcon.src },
         ],
       },
       {
         category: 'Backend / Data',
         items: [
-          { name: 'PostgreSQL (serverless)' },
-          { name: 'Drizzle ORM (31+ migrations)' },
-          { name: 'Server Actions as the primary mutation path' },
+          { name: 'PostgreSQL (serverless)', icon: postgresqlIcon.src },
+          { name: 'Drizzle ORM (31+ migrations)', icon: drizzleIcon.src },
+          {
+            name: 'Server Actions as the primary mutation path',
+            icon: codeIcon.src,
+          },
         ],
       },
       {
         category: 'Integrations',
         items: [
-          { name: 'External CRM (OAuth2 lead sync)' },
-          { name: 'Transactional email' },
-          { name: 'Google Maps autocomplete' },
-          { name: 'Headless CMS for marketing pages' },
+          { name: 'External CRM (OAuth2 lead sync)', icon: codeIcon.src },
+          { name: 'Transactional email', icon: codeIcon.src },
+          { name: 'Google Maps autocomplete', icon: googleMapsIcon.src },
+          { name: 'Headless CMS for marketing pages', icon: codeIcon.src },
         ],
       },
       {
         category: 'Observability',
-        items: [{ name: 'Sentry' }, { name: 'OpenTelemetry' }],
+        items: [
+          { name: 'Sentry', icon: sentryIcon.src },
+          { name: 'OpenTelemetry', icon: codeIcon.src },
+        ],
       },
     ],
     architecture: [
@@ -303,33 +342,33 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (Pages Router)' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS' },
-          { name: 'Jotai' },
-          { name: 'React Query' },
+          { name: 'Next.js (Pages Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'Jotai', icon: jotaiIcon.src },
+          { name: 'React Query', icon: reactQueryIcon.src },
         ],
       },
       {
         category: 'Backend',
         items: [
-          { name: 'Next.js API Routes' },
-          { name: 'Prisma ORM' },
-          { name: 'PostgreSQL' },
+          { name: 'Next.js API Routes', icon: codeIcon.src },
+          { name: 'Prisma ORM', icon: prismaIcon.src },
+          { name: 'PostgreSQL', icon: postgresqlIcon.src },
         ],
       },
       {
         category: 'Media',
         items: [
-          { name: 'Puppeteer (PDF generation)' },
-          { name: 'Fluent-ffmpeg' },
-          { name: 'Sharp' },
+          { name: 'Puppeteer (PDF generation)', icon: codeIcon.src },
+          { name: 'Fluent-ffmpeg', icon: codeIcon.src },
+          { name: 'Sharp', icon: codeIcon.src },
         ],
       },
       {
         category: 'Testing',
-        items: [{ name: 'Vitest' }],
+        items: [{ name: 'Vitest', icon: vitestIcon.src }],
       },
     ],
     architecture: [
@@ -392,31 +431,37 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (Pages Router)' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS + Sass' },
-          { name: 'GSAP' },
-          { name: 'Swiper' },
-          { name: 'Radix Themes' },
+          { name: 'Next.js (Pages Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS + Sass', icon: tailwindcssIcon.src },
+          { name: 'GSAP', icon: codeIcon.src },
+          { name: 'Swiper', icon: codeIcon.src },
+          { name: 'Radix Themes', icon: radixUiIcon.src },
         ],
       },
       {
         category: 'CMS',
         items: [
-          { name: 'Payload CMS (self-hosted, Dockerized)' },
-          { name: 'MongoDB' },
-          { name: 'Custom rich-text elements & 6 custom field types' },
+          {
+            name: 'Payload CMS (self-hosted, Dockerized)',
+            icon: payloadIcon.src,
+          },
+          { name: 'MongoDB', icon: codeIcon.src },
+          {
+            name: 'Custom rich-text elements & 6 custom field types',
+            icon: codeIcon.src,
+          },
         ],
       },
       {
         category: 'Integrations',
         items: [
-          { name: 'Newsletter platform' },
-          { name: 'Meeting scheduling' },
-          { name: 'Job-board ATS' },
-          { name: 'Workflow automation' },
-          { name: 'RSS newsletter feed' },
+          { name: 'Newsletter platform', icon: codeIcon.src },
+          { name: 'Meeting scheduling', icon: codeIcon.src },
+          { name: 'Job-board ATS', icon: codeIcon.src },
+          { name: 'Workflow automation', icon: codeIcon.src },
+          { name: 'RSS newsletter feed', icon: codeIcon.src },
         ],
       },
     ],
@@ -477,37 +522,40 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (App Router)' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS' },
-          { name: 'Leaflet (map clustering)' },
-          { name: 'Custom 60+ component library' },
+          { name: 'Next.js (App Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'Leaflet (map clustering)', icon: codeIcon.src },
+          { name: 'Custom 60+ component library', icon: codeIcon.src },
         ],
       },
       {
         category: 'Backend',
         items: [
-          { name: 'Prisma ORM (multi-schema, database-per-tenant)' },
-          { name: 'Custom JWT auth' },
-          { name: 'PBKDF2 password hashing' },
+          {
+            name: 'Prisma ORM (multi-schema, database-per-tenant)',
+            icon: prismaIcon.src,
+          },
+          { name: 'Custom JWT auth', icon: codeIcon.src },
+          { name: 'PBKDF2 password hashing', icon: codeIcon.src },
         ],
       },
       {
         category: 'Documents & Email',
         items: [
-          { name: 'Playwright (server-side PDF)' },
-          { name: 'Handlebars email templates' },
-          { name: 'Nodemailer' },
-          { name: 'QR code + iCal generation' },
+          { name: 'Playwright (server-side PDF)', icon: codeIcon.src },
+          { name: 'Handlebars email templates', icon: codeIcon.src },
+          { name: 'Nodemailer', icon: codeIcon.src },
+          { name: 'QR code + iCal generation', icon: codeIcon.src },
         ],
       },
       {
         category: 'Infrastructure',
         items: [
-          { name: 'Docker' },
-          { name: 'Self-hosted PaaS' },
-          { name: 'Scheduled cron jobs' },
+          { name: 'Docker', icon: dockerIcon.src },
+          { name: 'Self-hosted PaaS', icon: codeIcon.src },
+          { name: 'Scheduled cron jobs', icon: codeIcon.src },
         ],
       },
     ],
@@ -568,20 +616,23 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS' },
-          { name: 'Radix Themes' },
-          { name: 'GSAP' },
-          { name: 'React Hook Form + Zod' },
+          { name: 'Next.js', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'Radix Themes', icon: radixUiIcon.src },
+          { name: 'GSAP', icon: codeIcon.src },
+          { name: 'React Hook Form + Zod', icon: codeIcon.src },
         ],
       },
       {
         category: 'AI',
         items: [
-          { name: 'OpenAI Assistants API (persistent per-user thread)' },
-          { name: 'Vercel AI SDK streaming' },
+          {
+            name: 'OpenAI Assistants API (persistent per-user thread)',
+            icon: aiIcon.src,
+          },
+          { name: 'Vercel AI SDK streaming', icon: vercelIcon.src },
         ],
       },
       {
@@ -589,13 +640,19 @@ export const commercialProjects: Project[] = [
         items: [
           {
             name: 'Custom auth adapter & email provider (non-standard infrastructure)',
+            icon: codeIcon.src,
           },
-          { name: 'Stripe (checkout + webhooks)' },
+          { name: 'Stripe (checkout + webhooks)', icon: codeIcon.src },
         ],
       },
       {
         category: 'Email',
-        items: [{ name: 'MJML + Handlebars (custom build-time loader)' }],
+        items: [
+          {
+            name: 'MJML + Handlebars (custom build-time loader)',
+            icon: codeIcon.src,
+          },
+        ],
       },
     ],
     architecture: [
@@ -650,10 +707,13 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (App Router)' },
-          { name: 'React' },
-          { name: 'TypeScript (strict)' },
-          { name: 'Tailwind CSS (custom design tokens)' },
+          { name: 'Next.js (App Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript (strict)', icon: typescriptIcon.src },
+          {
+            name: 'Tailwind CSS (custom design tokens)',
+            icon: tailwindcssIcon.src,
+          },
         ],
       },
       {
@@ -661,24 +721,25 @@ export const commercialProjects: Project[] = [
         items: [
           {
             name: 'React Aria / React Stately (custom component library, built from scratch)',
+            icon: codeIcon.src,
           },
-          { name: 'class-variance-authority' },
+          { name: 'class-variance-authority', icon: codeIcon.src },
         ],
       },
       {
         category: 'Data & State',
         items: [
-          { name: 'TanStack Query' },
-          { name: 'TanStack Table' },
-          { name: 'React Hook Form + Zod' },
+          { name: 'TanStack Query', icon: tanstackIcon.src },
+          { name: 'TanStack Table', icon: tanstackIcon.src },
+          { name: 'React Hook Form + Zod', icon: codeIcon.src },
         ],
       },
       {
         category: 'Auth & Security',
         items: [
-          { name: 'Custom JWT auth' },
-          { name: 'Edge Middleware route protection' },
-          { name: '3-layer RBAC system across 6 roles' },
+          { name: 'Custom JWT auth', icon: codeIcon.src },
+          { name: 'Edge Middleware route protection', icon: codeIcon.src },
+          { name: '3-layer RBAC system across 6 roles', icon: codeIcon.src },
         ],
       },
     ],
@@ -742,34 +803,43 @@ export const commercialProjects: Project[] = [
       {
         category: 'Backend',
         items: [
-          { name: 'NestJS' },
-          { name: 'Firebase / Firestore' },
-          { name: 'Google Cloud Storage / Run' },
-          { name: 'Trigger.dev (background jobs)' },
-          { name: 'Swagger / OpenAPI' },
+          { name: 'NestJS', icon: codeIcon.src },
+          { name: 'Firebase / Firestore', icon: codeIcon.src },
+          { name: 'Google Cloud Storage / Run', icon: googleIcon.src },
+          { name: 'Trigger.dev (background jobs)', icon: codeIcon.src },
+          { name: 'Swagger / OpenAPI', icon: codeIcon.src },
         ],
       },
       {
         category: 'Mobile',
         items: [
-          { name: 'React Native (New Architecture)' },
-          { name: 'Expo Router' },
-          { name: 'TanStack Query' },
-          { name: 'Jotai' },
-          { name: 'MMKV' },
+          {
+            name: 'React Native (New Architecture)',
+            icon: reactNativeIcon.src,
+          },
+          { name: 'Expo Router', icon: expoIcon.src },
+          { name: 'TanStack Query', icon: tanstackIcon.src },
+          { name: 'Jotai', icon: jotaiIcon.src },
+          { name: 'MMKV', icon: codeIcon.src },
         ],
       },
       {
         category: 'Auth',
         items: [
-          { name: 'Webhook-driven user lifecycle sync' },
-          { name: 'Biometric sign-in (Face ID / Touch ID)' },
+          { name: 'Webhook-driven user lifecycle sync', icon: codeIcon.src },
+          {
+            name: 'Biometric sign-in (Face ID / Touch ID)',
+            icon: codeIcon.src,
+          },
         ],
       },
       {
         category: 'CI/CD',
         items: [
-          { name: 'EAS Build + GitHub Actions (TestFlight / Play Store)' },
+          {
+            name: 'EAS Build + GitHub Actions (TestFlight / Play Store)',
+            icon: codeIcon.src,
+          },
         ],
       },
     ],
@@ -832,32 +902,47 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (App Router)' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS + Sass' },
-          { name: 'GSAP' },
-          { name: 'Swiper' },
+          { name: 'Next.js (App Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS + Sass', icon: tailwindcssIcon.src },
+          { name: 'GSAP', icon: codeIcon.src },
+          { name: 'Swiper', icon: codeIcon.src },
         ],
       },
       {
         category: 'CMS',
         items: [
-          { name: 'Payload CMS (embedded in the frontend app)' },
-          { name: 'MongoDB' },
-          { name: 'Rich-text editor migration (legacy → modern editor)' },
+          {
+            name: 'Payload CMS (embedded in the frontend app)',
+            icon: payloadIcon.src,
+          },
+          { name: 'MongoDB', icon: codeIcon.src },
+          {
+            name: 'Rich-text editor migration (legacy → modern editor)',
+            icon: codeIcon.src,
+          },
         ],
       },
       {
         category: 'Media & Auth',
         items: [
-          { name: 'Cloud object storage with automatic image optimization' },
-          { name: 'OAuth-gated admin access with an approval workflow' },
+          {
+            name: 'Cloud object storage with automatic image optimization',
+            icon: codeIcon.src,
+          },
+          {
+            name: 'OAuth-gated admin access with an approval workflow',
+            icon: codeIcon.src,
+          },
         ],
       },
       {
         category: 'Infrastructure',
-        items: [{ name: 'Docker (multi-stage)' }, { name: 'Self-hosted PaaS' }],
+        items: [
+          { name: 'Docker (multi-stage)', icon: dockerIcon.src },
+          { name: 'Self-hosted PaaS', icon: codeIcon.src },
+        ],
       },
     ],
     architecture: [
@@ -916,16 +1001,17 @@ export const commercialProjects: Project[] = [
         items: [
           {
             name: 'HTML5 Canvas API (grid/header drawing across hour/day/week/month/year zoom levels)',
+            icon: codeIcon.src,
           },
         ],
       },
       {
         category: 'Frontend',
         items: [
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'styled-components' },
-          { name: 'dayjs' },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'styled-components', icon: codeIcon.src },
+          { name: 'dayjs', icon: codeIcon.src },
         ],
       },
       {
@@ -933,8 +1019,9 @@ export const commercialProjects: Project[] = [
         items: [
           {
             name: 'Vite (library mode: ESM + UMD + generated type declarations)',
+            icon: codeIcon.src,
           },
-          { name: 'npm' },
+          { name: 'npm', icon: codeIcon.src },
         ],
       },
     ],
@@ -992,13 +1079,16 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Vite' },
-          { name: 'TanStack Router' },
-          { name: 'TanStack Query' },
-          { name: 'Tailwind CSS (design-token based)' },
-          { name: 'Motion' },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Vite', icon: codeIcon.src },
+          { name: 'TanStack Router', icon: tanstackIcon.src },
+          { name: 'TanStack Query', icon: tanstackIcon.src },
+          {
+            name: 'Tailwind CSS (design-token based)',
+            icon: tailwindcssIcon.src,
+          },
+          { name: 'Motion', icon: motionIcon.src },
         ],
       },
       {
@@ -1006,17 +1096,19 @@ export const commercialProjects: Project[] = [
         items: [
           {
             name: 'A lightweight server framework handling one validated, rate-limited contact-form endpoint with email delivery',
+            icon: codeIcon.src,
           },
         ],
       },
       {
         category: 'i18n & SEO',
         items: [
-          { name: 'i18next (EN/PL)' },
+          { name: 'i18next (EN/PL)', icon: codeIcon.src },
           {
             name: 'A reusable page-meta hook (title/description/canonical/OG/hreflang)',
+            icon: codeIcon.src,
           },
-          { name: 'Structured data' },
+          { name: 'Structured data', icon: codeIcon.src },
         ],
       },
     ],
@@ -1072,26 +1164,29 @@ export const commercialProjects: Project[] = [
       {
         category: 'Mobile',
         items: [
-          { name: 'React Native (New Architecture)' },
-          { name: 'Expo Router (typed, file-based)' },
-          { name: 'TanStack Query' },
-          { name: 'Jotai' },
+          {
+            name: 'React Native (New Architecture)',
+            icon: reactNativeIcon.src,
+          },
+          { name: 'Expo Router (typed, file-based)', icon: expoIcon.src },
+          { name: 'TanStack Query', icon: tanstackIcon.src },
+          { name: 'Jotai', icon: jotaiIcon.src },
         ],
       },
       {
         category: 'Native Integrations',
         items: [
-          { name: 'Background geolocation / geofencing' },
-          { name: 'Push notifications' },
-          { name: 'Secure storage' },
-          { name: 'Document signing' },
+          { name: 'Background geolocation / geofencing', icon: codeIcon.src },
+          { name: 'Push notifications', icon: codeIcon.src },
+          { name: 'Secure storage', icon: codeIcon.src },
+          { name: 'Document signing', icon: codeIcon.src },
         ],
       },
       {
         category: 'i18n & Real-time',
         items: [
-          { name: 'i18next (EN/PL)' },
-          { name: 'A real-time client for live updates' },
+          { name: 'i18next (EN/PL)', icon: codeIcon.src },
+          { name: 'A real-time client for live updates', icon: codeIcon.src },
         ],
       },
     ],
@@ -1149,35 +1244,42 @@ export const commercialProjects: Project[] = [
       {
         category: 'Frontend',
         items: [
-          { name: 'Next.js (App Router)' },
-          { name: 'React' },
-          { name: 'TypeScript' },
-          { name: 'Tailwind CSS' },
-          { name: 'React Aria Components' },
-          { name: 'Jotai' },
+          { name: 'Next.js (App Router)', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+          { name: 'TypeScript', icon: typescriptIcon.src },
+          { name: 'Tailwind CSS', icon: tailwindcssIcon.src },
+          { name: 'React Aria Components', icon: codeIcon.src },
+          { name: 'Jotai', icon: jotaiIcon.src },
         ],
       },
       {
         category: 'Backend',
         items: [
-          { name: 'NestJS (domain-driven, layered architecture)' },
-          { name: 'Prisma ORM' },
-          { name: 'Database-per-tenant PostgreSQL' },
-          { name: 'Redis' },
+          {
+            name: 'NestJS (domain-driven, layered architecture)',
+            icon: codeIcon.src,
+          },
+          { name: 'Prisma ORM', icon: prismaIcon.src },
+          { name: 'Database-per-tenant PostgreSQL', icon: postgresqlIcon.src },
+          { name: 'Redis', icon: codeIcon.src },
         ],
       },
       {
         category: 'Real-time & Notifications',
         items: [
-          { name: 'Socket.IO' },
+          { name: 'Socket.IO', icon: codeIcon.src },
           {
             name: 'Resilient notification system with retry/backoff and per-recipient failure isolation',
+            icon: codeIcon.src,
           },
         ],
       },
       {
         category: 'Monitoring',
-        items: [{ name: 'Sentry' }, { name: 'PostHog' }],
+        items: [
+          { name: 'Sentry', icon: sentryIcon.src },
+          { name: 'PostHog', icon: codeIcon.src },
+        ],
       },
     ],
     architecture: [
@@ -1238,24 +1340,29 @@ export const commercialProjects: Project[] = [
       {
         category: 'Backend',
         items: [
-          { name: 'NestJS' },
-          { name: 'Drizzle ORM' },
-          { name: 'PostgreSQL (per-tenant)' },
-          { name: 'Redis' },
+          { name: 'NestJS', icon: codeIcon.src },
+          { name: 'Drizzle ORM', icon: drizzleIcon.src },
+          { name: 'PostgreSQL (per-tenant)', icon: postgresqlIcon.src },
+          { name: 'Redis', icon: codeIcon.src },
         ],
       },
       {
         category: 'Cloud',
         items: [
-          { name: 'AWS Lambda (serverless-express)' },
-          { name: 'S3' },
-          { name: 'Cognito' },
-          { name: 'SES' },
+          { name: 'AWS Lambda (serverless-express)', icon: codeIcon.src },
+          { name: 'S3', icon: codeIcon.src },
+          { name: 'Cognito', icon: codeIcon.src },
+          { name: 'SES', icon: codeIcon.src },
         ],
       },
       {
         category: 'Real-time',
-        items: [{ name: 'Server-Sent Events for live status streaming' }],
+        items: [
+          {
+            name: 'Server-Sent Events for live status streaming',
+            icon: codeIcon.src,
+          },
+        ],
       },
     ],
     architecture: [
@@ -1310,28 +1417,38 @@ export const commercialProjects: Project[] = [
     techStack: [
       {
         category: 'Frontend',
-        items: [{ name: 'Next.js' }, { name: 'React' }],
+        items: [
+          { name: 'Next.js', icon: nextjsIcon.src },
+          { name: 'React', icon: reactIcon.src },
+        ],
       },
       {
         category: 'Engineering / Calculations',
         items: [
           {
             name: 'Load capacity, durability & safety-factor calculation engine',
+            icon: codeIcon.src,
           },
-          { name: 'Rail-length / hole-spacing math' },
+          { name: 'Rail-length / hole-spacing math', icon: codeIcon.src },
         ],
       },
       {
         category: '3D / Visualization',
         items: [
-          { name: 'Three.js' },
-          { name: 'JSCAD' },
-          { name: 'Parametric SVG rail & carriage diagrams' },
+          { name: 'Three.js', icon: threejsIcon.src },
+          { name: 'JSCAD', icon: codeIcon.src },
+          {
+            name: 'Parametric SVG rail & carriage diagrams',
+            icon: codeIcon.src,
+          },
         ],
       },
       {
         category: 'Backend / Data',
-        items: [{ name: 'Prisma ORM' }, { name: 'PostgreSQL' }],
+        items: [
+          { name: 'Prisma ORM', icon: prismaIcon.src },
+          { name: 'PostgreSQL', icon: postgresqlIcon.src },
+        ],
       },
     ],
     architecture: [

@@ -2,20 +2,32 @@
 import Reveal from '@components/Reveal.astro';
 import Section from '@components/Section.astro';
 import SectionTitle from '@components/SectionTitle.astro';
+import astroIcon from '../../assets/icons/astro-icon.svg';
+import drizzleIcon from '../../assets/icons/drizzle-icon.svg';
+import nextjsIcon from '../../assets/icons/nextjs-icon.svg';
+import nodejsIcon from '../../assets/icons/nodejs-icon.svg';
+import payloadIcon from '../../assets/icons/payload-icon.svg';
+import postgresqlIcon from '../../assets/icons/postgresql-icon.svg';
+import prismaIcon from '../../assets/icons/prisma-icon.svg';
+import reactIcon from '../../assets/icons/react-icon.svg';
+import reactNativeIcon from '../../assets/icons/reactnative-icon.svg';
+import remixIcon from '../../assets/icons/remix-icon.svg';
+import strapiIcon from '../../assets/icons/strapi-icon.svg';
+import typescriptIcon from '../../assets/icons/typescript-icon.svg';
 
 const technologies = [
-  'React',
-  'Next.js',
-  'React Native',
-  'TypeScript',
-  'Astro',
-  'Remix',
-  'Strapi',
-  'Payload',
-  'Prisma',
-  'Drizzle',
-  'Node.js',
-  'PostgreSQL',
+  { name: 'React', icon: reactIcon },
+  { name: 'Next.js', icon: nextjsIcon },
+  { name: 'React Native', icon: reactNativeIcon },
+  { name: 'TypeScript', icon: typescriptIcon },
+  { name: 'Astro', icon: astroIcon },
+  { name: 'Remix', icon: remixIcon },
+  { name: 'Strapi', icon: strapiIcon },
+  { name: 'Payload', icon: payloadIcon },
+  { name: 'Prisma', icon: prismaIcon },
+  { name: 'Drizzle', icon: drizzleIcon },
+  { name: 'Node.js', icon: nodejsIcon },
+  { name: 'PostgreSQL', icon: postgresqlIcon },
 ];
 
 const marqueeItems = [...technologies, ...technologies];
@@ -121,10 +133,26 @@ const marqueeItems = [...technologies, ...technologies];
             {
               marqueeItems.map((tech) => (
                 <div class="flex flex-col items-center gap-2 shrink-0">
-                  <div class="size-16 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant text-xs text-center px-1">
-                    SVG
-                  </div>
-                  <span class="text-sm text-on-surface-variant">{tech}</span>
+                  {tech.icon ? (
+                    <div class="size-16 bg-surface-container rounded-xl flex items-center justify-center p-3">
+                      <img
+                        src={tech.icon.src}
+                        alt=""
+                        class="size-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      role="img"
+                      aria-label={`${tech.name} icon coming soon`}
+                      class="size-16 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant text-xs text-center px-1"
+                    >
+                      SVG
+                    </div>
+                  )}
+                  <span class="text-sm text-on-surface-variant">
+                    {tech.name}
+                  </span>
                 </div>
               ))
             }
