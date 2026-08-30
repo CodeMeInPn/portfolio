@@ -16,7 +16,7 @@ import Button from '@components/Button.astro';
     <img id="modal-img" src="" alt="" class="modal-img" hidden />
 
     <div class="modal-content">
-      <h2 id="modal-title" class="text-3xl font-bold text-primary mb-3"></h2>
+      <h2 id="modal-title" class="font-display text-3xl font-bold text-on-background mb-3"></h2>
       <p id="modal-desc" class="text-on-surface-variant mb-5"></p>
       <ul id="modal-tech" class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"></ul>
       <Button
@@ -84,7 +84,7 @@ import Button from '@components/Button.astro';
 <style>
   #project-modal {
     background-color: var(--color-surface-container);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     padding: 0;
     width: min(90vw, 36rem);
     max-height: 85vh;
@@ -129,8 +129,13 @@ import Button from '@components/Button.astro';
     left: 0;
     top: 0;
     bottom: 0;
-    width: 3px;
-    background-color: #fe5c1e;
+    width: 5px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-section-snake-outer),
+      var(--color-section-snake-middle),
+      var(--color-section-snake-inner)
+    );
     border-radius: 9999px;
   }
 

@@ -2,6 +2,8 @@
 import Reveal from '@components/Reveal.astro';
 import Section from '@components/Section.astro';
 import SectionTitle from '@components/SectionTitle.astro';
+import StatCard from '@components/StatCard.astro';
+import { commercialProjects, sideProjects } from '../../data/projects';
 import astroIcon from '../../assets/icons/astro-icon.svg';
 import drizzleIcon from '../../assets/icons/drizzle-icon.svg';
 import nextjsIcon from '../../assets/icons/nextjs-icon.svg';
@@ -20,17 +22,26 @@ const technologies = [
   { name: 'Next.js', icon: nextjsIcon },
   { name: 'React Native', icon: reactNativeIcon },
   { name: 'TypeScript', icon: typescriptIcon },
-  { name: 'Astro', icon: astroIcon },
+  { name: 'Astro', icon: astroIcon, darkTile: true },
   { name: 'Remix', icon: remixIcon },
   { name: 'Strapi', icon: strapiIcon },
   { name: 'Payload', icon: payloadIcon },
   { name: 'Prisma', icon: prismaIcon },
-  { name: 'Drizzle', icon: drizzleIcon },
+  { name: 'Drizzle', icon: drizzleIcon, darkTile: true },
   { name: 'Node.js', icon: nodejsIcon },
   { name: 'PostgreSQL', icon: postgresqlIcon },
 ];
 
 const marqueeItems = [...technologies, ...technologies];
+
+const projectCount = commercialProjects.length + sideProjects.length;
+
+const capabilities = [
+  'Designing APIs & data models',
+  'Advanced filtering & segmentation systems',
+  'Role-based access control',
+  'Responsive, user-focused interfaces',
+];
 ---
 
 <Section
@@ -41,9 +52,15 @@ const marqueeItems = [...technologies, ...technologies];
   }}
   activeConnectors={{ position: ['top-right'] }}
 >
-  <article aria-labelledby="about-heading" class="py-12 px-6 md:px-12">
+  <article aria-labelledby="about-heading" class="py-8 px-6 md:px-12">
     <Reveal>
       <SectionTitle title="About Me" id="about-heading" />
+    </Reveal>
+
+    <Reveal class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      <StatCard value="4+" label="Years Experience" />
+      <StatCard value={`${projectCount}+`} label="Projects Delivered" />
+      <StatCard value="1" label="npm Package Published" />
     </Reveal>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -51,27 +68,36 @@ const marqueeItems = [...technologies, ...technologies];
         <p>
           I'm a Fullstack Developer with 4 years of commercial experience,
           building web and mobile applications with a focus on real-world
-          usability and solid architecture.
+          usability and solid architecture. I work across the entire stack,
+          taking ownership of key areas along the way:
         </p>
+
+        <ul class="flex flex-col gap-3 text-lg">
+          {capabilities.map((point, index) => (
+            <li class="flex items-start gap-3">
+              <span class="font-display flex size-6 shrink-0 items-center justify-center rounded bg-primary text-xs font-bold text-on-primary mt-0.5">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+
         <p>
-          I work across the entire stack — from designing APIs and data models
-          to delivering responsive, user-focused interfaces. My core stack
-          includes React, Next.js, React Native, and TypeScript, supported by
-          Strapi, Payload, Prisma, and Drizzle. I've worked with multiple
-          frameworks and choose tools based on fit rather than trends.
-        </p>
-        <p>
-          I've contributed to several <a href="#projects" class="projects-link"
-            >projects</a
-          > of varying complexity, often taking ownership of key areas — advanced
-          filtering systems, segmentation logic, and role-based access control.
+          My core stack includes React, Next.js, React Native, and
+          TypeScript, supported by Strapi, Payload, Prisma, and Drizzle —
+          I've worked with multiple frameworks across several <a
+            href="#projects"
+            class="projects-link">projects</a
+          > of varying complexity and choose tools based on fit rather than trends.
         </p>
 
         <a
           href="https://www.npmjs.com/package/@bitnoi.se/react-scheduler"
           target="_blank"
           rel="noopener noreferrer"
-          class="npm-card block"
+          class="npm-card hard-shadow-hover block"
+          style="--hard-shadow-offset: 5px"
           aria-label="@bitnoi.se/react-scheduler on npm"
         >
           <div class="flex items-start justify-between gap-4">
@@ -113,28 +139,42 @@ const marqueeItems = [...technologies, ...technologies];
       </Reveal>
 
       <Reveal delay={150} class="md:col-span-1 flex items-start justify-center">
-        <div
-          role="img"
-          aria-label="Profile photo coming soon"
-          class="w-full aspect-[3/4] bg-surface-container-high rounded-2xl flex items-center justify-center"
-        >
-          <span class="text-xl text-primary text-center px-4">
-            Photo coming soon
-          </span>
+        <div class="relative w-full">
+          <div
+            aria-hidden="true"
+            class="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-gradient-to-br from-section-snake-outer via-section-snake-middle to-section-snake-inner"
+          >
+          </div>
+          <div
+            role="img"
+            aria-label="Profile photo coming soon"
+            class="relative w-full aspect-[3/4] bg-surface-container-high rounded-2xl border-2 border-outline-variant flex items-center justify-center"
+          >
+            <span class="font-display text-xl text-on-background text-center px-4">
+              Photo coming soon
+            </span>
+          </div>
         </div>
       </Reveal>
     </div>
 
     <Reveal delay={200} class="mt-12">
       <section aria-label="Technologies">
-        <h3 class="text-3xl text-primary font-bold mb-6">Technologies</h3>
-        <div class="overflow-hidden">
+        <h3 class="font-display text-3xl text-on-background font-bold mb-6">Technologies</h3>
+        <div class="overflow-hidden marquee-fade">
           <div class="flex animate-marquee gap-12 w-max" aria-hidden="true">
             {
               marqueeItems.map((tech) => (
                 <div class="flex flex-col items-center gap-2 shrink-0">
                   {tech.icon ? (
-                    <div class="size-16 bg-surface-container rounded-xl flex items-center justify-center p-3">
+                    <div
+                      class:list={[
+                        'size-20 rounded-xl flex items-center justify-center p-2.5',
+                        tech.darkTile
+                          ? 'bg-inverse-surface'
+                          : 'bg-surface-container',
+                      ]}
+                    >
                       <img
                         src={tech.icon.src}
                         alt=""
@@ -145,7 +185,7 @@ const marqueeItems = [...technologies, ...technologies];
                     <div
                       role="img"
                       aria-label={`${tech.name} icon coming soon`}
-                      class="size-16 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant text-xs text-center px-1"
+                      class="size-20 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant text-xs text-center px-1"
                     >
                       SVG
                     </div>
@@ -182,15 +222,38 @@ const marqueeItems = [...technologies, ...technologies];
   }
 
   .npm-card {
-    border: 1px solid var(--color-outline-variant);
+    border: 2px solid var(--color-outline-variant);
     background-color: var(--color-surface-container);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     padding: 1rem 1.25rem;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
 
-  .npm-card:hover {
-    border-color: var(--color-primary);
-    background-color: var(--color-surface-container-high);
+  @media (hover: hover) {
+    .npm-card:hover {
+      background-color: var(--color-surface-container-high);
+    }
+  }
+
+  .marquee-fade {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
   }
 </style>
+
+<script>
+  import { observeCountUp } from 'utils/count';
+
+  observeCountUp('.stat-card__value');
+</script>

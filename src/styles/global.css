@@ -4,20 +4,27 @@
   --color-section-snake-inner: #fec830;
   --color-section-snake-middle: #fe5c1e;
   --color-section-snake-outer: #ea171d;
-  --color-primary: #7b5900;
+
+  --font-display: 'Fraunces', serif;
+  --font-sans: 'Poppins', sans-serif;
+
+  /* burnt sienna / rust — was muted brown, then too-bright stripe-red */
+  --color-primary: #b23c1a;
   --color-on-primary: #ffffff;
-  --color-primary-container: #d9ab4c;
-  --color-on-primary-container: #5a4000;
+  --color-primary-container: #ffdccb;
+  --color-on-primary-container: #6b2409;
 
-  --color-secondary: #6f5c36;
-  --color-on-secondary: #ffffff;
-  --color-secondary-container: #fbdfaf;
-  --color-on-secondary-container: #76623b;
+  /* tangerine — was muted tan */
+  --color-secondary: #fe5c1e;
+  --color-on-secondary: #3a2415;
+  --color-secondary-container: #ffe0cc;
+  --color-on-secondary-container: #7a2e00;
 
-  --color-tertiary: #536518;
-  --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #a6bb64;
-  --color-on-tertiary-container: #3b4a00;
+  /* harvest gold — was olive */
+  --color-tertiary: #d9a300;
+  --color-on-tertiary: #3a2415;
+  --color-tertiary-container: #fff1c2;
+  --color-on-tertiary-container: #5c4300;
 
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
@@ -25,20 +32,20 @@
   --color-on-error-container: #93000a;
 
   --color-background: #fff8f2;
-  --color-on-background: #1f1b14;
+  --color-on-background: #3a2415;
   --color-surface: var(--color-background);
   --color-on-surface: var(--color-on-background);
 
   --color-surface-variant: #efe1cc;
-  --color-on-surface-variant: #4e4637;
-  --color-outline: #807665;
+  --color-on-surface-variant: #6b4a30;
+  --color-outline: #8a6a52;
   --color-outline-variant: #d2c5b1;
   --color-shadow: #000000;
   --color-scrim: #000000;
 
-  --color-inverse-surface: #343028;
-  --color-inverse-on-surface: #f9efe4;
-  --color-inverse-primary: #f0bf5e;
+  --color-inverse-surface: #2b1810;
+  --color-inverse-on-surface: #fdf3e7;
+  --color-inverse-primary: #ff8a65;
 
   --color-primary-fixed: #ffdea4;
   --color-on-primary-fixed: #261900;
@@ -94,5 +101,44 @@ html {
 }
 
 * {
-  font-family: 'Markazi Text', serif;
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-variation-settings:
+    'SOFT' 60,
+    'opsz' 30;
+}
+
+/*
+ * Shared "hard shadow" hover treatment used across cards, pills, and tags:
+ * a flat, non-blurred offset shadow that appears + the element nudges
+ * up-left on hover. Override --hard-shadow-offset per usage to resize it.
+ */
+.hard-shadow-hover {
+  --hard-shadow-offset: 4px;
+  box-shadow: var(--hard-shadow-offset) var(--hard-shadow-offset) 0 transparent;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+@media (hover: hover) {
+  .hard-shadow-hover:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--hard-shadow-offset) var(--hard-shadow-offset) 0 var(--color-primary);
+    transform: translate(
+      calc(var(--hard-shadow-offset) * -0.5),
+      calc(var(--hard-shadow-offset) * -0.5)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hard-shadow-hover {
+    transition: none;
+  }
 }
