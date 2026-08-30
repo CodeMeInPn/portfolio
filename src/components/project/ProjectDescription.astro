@@ -12,7 +12,7 @@ const { fullDescription, architecture, keyFeatures, highlights } = project;
 ---
 
 <Section id="overview">
-  <div class="py-12 flex flex-col gap-10">
+  <div class="py-8 flex flex-col gap-10">
     <div>
       <SectionTitle title="Overview" id="overview-heading" />
       <p class="text-lg text-on-background max-w-3xl">{fullDescription}</p>
@@ -21,10 +21,15 @@ const { fullDescription, architecture, keyFeatures, highlights } = project;
     {
       architecture && architecture.length > 0 && (
         <div>
-          <h3 class="text-2xl font-bold text-primary mb-4">Architecture</h3>
-          <ul class="flex flex-col gap-2 list-disc list-inside text-on-surface-variant max-w-3xl">
-            {architecture.map((point) => (
-              <li>{point}</li>
+          <h3 class="font-display text-2xl font-bold text-on-background mb-4">Architecture</h3>
+          <ul class="flex flex-col gap-3 max-w-3xl">
+            {architecture.map((point, index) => (
+              <li class="flex items-start gap-3">
+                <span class="font-display flex size-6 shrink-0 items-center justify-center rounded bg-primary text-xs font-bold text-on-primary mt-0.5">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span class="text-on-surface-variant">{point}</span>
+              </li>
             ))}
           </ul>
         </div>
@@ -34,7 +39,7 @@ const { fullDescription, architecture, keyFeatures, highlights } = project;
     {
       keyFeatures && keyFeatures.length > 0 && (
         <div>
-          <h3 class="text-2xl font-bold text-primary mb-4">Key Features</h3>
+          <h3 class="font-display text-2xl font-bold text-on-background mb-4">Key Features</h3>
 
           <swiper-container
             class="features-swiper block md:hidden"
@@ -44,19 +49,25 @@ const { fullDescription, architecture, keyFeatures, highlights } = project;
             pagination="true"
             grab-cursor="true"
           >
-            {keyFeatures.map((feature) => (
+            {keyFeatures.map((feature, index) => (
               <swiper-slide>
-                <div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant h-full">
-                  <p class="text-on-surface-variant">{feature}</p>
+                <div class="feature-card hard-shadow-hover relative p-4 rounded-xl bg-surface-container-high border-2 border-outline-variant h-full">
+                  <span class="feature-card__index" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <p class="relative z-10 text-on-surface-variant">{feature}</p>
                 </div>
               </swiper-slide>
             ))}
           </swiper-container>
 
           <div class="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {keyFeatures.map((feature) => (
-              <div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant">
-                <p class="text-on-surface-variant">{feature}</p>
+            {keyFeatures.map((feature, index) => (
+              <div class="feature-card hard-shadow-hover relative p-4 rounded-xl bg-surface-container-high border-2 border-outline-variant">
+                <span class="feature-card__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p class="relative text-on-surface-variant">{feature}</p>
               </div>
             ))}
           </div>
@@ -67,12 +78,22 @@ const { fullDescription, architecture, keyFeatures, highlights } = project;
     {
       highlights && highlights.length > 0 && (
         <div>
-          <h3 class="text-2xl font-bold text-primary mb-4">
+          <h3 class="font-display text-2xl font-bold text-on-background mb-4">
             Notable Highlights
           </h3>
-          <ul class="flex flex-col gap-2 list-disc list-inside text-on-surface-variant max-w-3xl">
+          <ul class="flex flex-col gap-4 max-w-3xl">
             {highlights.map((point) => (
-              <li>{point}</li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="font-display shrink-0 text-xl leading-none text-primary mt-0.5"
+                  aria-hidden="true"
+                >
+                  ★
+                </span>
+                <span class="highlight-mark font-medium text-on-background">
+                  {point}
+                </span>
+              </li>
             ))}
           </ul>
         </div>
@@ -80,6 +101,34 @@ const { fullDescription, architecture, keyFeatures, highlights } = project;
     }
   </div>
 </Section>
+
+<style>
+  .feature-card__index {
+    position: absolute;
+    z-index: 0;
+    top: 0.75rem;
+    right: 1rem;
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .highlight-mark {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 60%,
+      var(--color-section-snake-inner) 60%
+    );
+    padding: 0 0.2em;
+    margin: 0 -0.2em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+</style>
 
 <script>
   import { register } from 'swiper/element/bundle';

@@ -13,7 +13,7 @@ const { techStack, technologies } = project;
 ---
 
 <Section id="tech-stack">
-  <div class="py-12">
+  <div class="py-8">
     <SectionTitle title="Technologies" id="tech-stack-heading" />
 
     {
@@ -21,7 +21,7 @@ const { techStack, technologies } = project;
         <div class="flex flex-col gap-8">
           {techStack.map((group) => (
             <div>
-              <h3 class="text-lg font-bold text-primary mb-3">
+              <h3 class="font-display text-lg font-bold text-on-background mb-3">
                 {group.category}
               </h3>
 
@@ -51,8 +51,8 @@ const { techStack, technologies } = project;
       ) : (
         <ul class="flex flex-wrap gap-2" aria-label="Technologies">
           {technologies.map((tech) => (
-            <li class="px-3 py-1 text-sm rounded-md bg-surface-container-high text-on-surface-variant border border-outline-variant">
-              {tech}
+            <li>
+              <TechItem name={tech} />
             </li>
           ))}
         </ul>

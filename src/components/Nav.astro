@@ -7,18 +7,19 @@ const links = [
 ];
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-background border-b border-outline-variant h-16 flex items-center px-4">
+<nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-4">
   <div class="max-w-content-hero mx-auto w-full flex items-center justify-between">
-    <span class="text-on-background font-semibold text-xl">CodeMeIn</span>
+    <span class="font-display text-on-background font-semibold text-xl">CodeMeIn</span>
 
-    <ul class="hidden md:flex gap-8">
+    <ul class="hidden md:flex gap-2">
       {
         links.map(({ href, label }) => (
           <li>
             <a
               href={href}
               data-nav-link
-              class="nav-link relative text-on-background hover:text-primary transition-colors duration-300 ease-in-out text-lg after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-[width] after:duration-300 after:ease-in-out hover:after:w-full"
+              class="nav-link hard-shadow-hover inline-flex items-center rounded-full border-2 border-transparent px-4 py-1.5 text-lg text-on-background hover:text-primary"
+              style="--hard-shadow-offset: 3px"
             >
               {label}
             </a>
@@ -30,15 +31,19 @@ const links = [
     <button
       id="hamburger-btn"
       aria-label="Toggle navigation menu"
-      class="md:hidden flex flex-col gap-[6px] p-2 cursor-pointer"
+      aria-expanded="false"
+      aria-controls="nav-drawer"
+      class="menu-trigger hard-shadow-hover md:hidden font-display inline-flex items-center rounded-full border-2 border-primary px-4 py-1.5 text-sm font-bold uppercase tracking-wide text-primary"
+      style="--hard-shadow-offset: 3px"
     >
-      <span class="block w-6 h-[2px] bg-on-background"></span>
-      <span
-        id="hamburger-middle"
-        class="block w-6 h-[2px] bg-on-background transition-transform duration-300 ease-in-out"
-      ></span>
-      <span class="block w-6 h-[2px] bg-on-background"></span>
+      <span id="menu-trigger-label">Menu</span>
     </button>
+  </div>
+
+  <div
+    class="nav-hairline absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-section-snake-outer via-section-snake-middle to-section-snake-inner"
+    aria-hidden="true"
+  >
   </div>
 </nav>
 
@@ -49,17 +54,27 @@ const links = [
 
 <aside
   id="nav-drawer"
-  class="fixed top-16 right-0 bottom-0 z-50 w-64 bg-background border-l border-outline-variant translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+  class="fixed top-16 right-0 bottom-0 z-50 w-72 max-w-[85vw] overflow-y-auto bg-background translate-x-full transition-transform duration-300 ease-in-out md:hidden"
 >
-  <ul class="flex flex-col p-6 gap-6">
+  <div
+    class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-section-snake-outer via-section-snake-middle to-section-snake-inner"
+    aria-hidden="true"
+  >
+  </div>
+
+  <ul class="flex flex-col gap-3 p-6">
     {
-      links.map(({ href, label }) => (
+      links.map(({ href, label }, index) => (
         <li>
           <a
             href={href}
-            class="nav-drawer-link relative text-on-background hover:text-primary transition-colors duration-300 ease-in-out text-2xl after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-[width] after:duration-300 after:ease-in-out hover:after:w-full"
+            class="nav-drawer-link hard-shadow-hover flex items-center gap-3 rounded-xl border-2 border-outline-variant bg-surface-container px-4 py-3 text-on-background"
+            style="--hard-shadow-offset: 3px"
           >
-            {label}
+            <span class="font-display flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-on-primary">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span class="font-display text-lg font-bold">{label}</span>
           </a>
         </li>
       ))
@@ -67,25 +82,103 @@ const links = [
   </ul>
 </aside>
 
+<style>
+  #site-nav {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+
+  #site-nav[data-scrolled] {
+    background-color: var(--color-background);
+  }
+
+  .nav-hairline {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  #site-nav[data-scrolled] .nav-hairline {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #site-nav,
+    .nav-hairline {
+      transition: none;
+    }
+  }
+
+  /*
+   * The active nav item is already visually distinct (filled pill), so it
+   * skips the hard-shadow-hover lift entirely rather than layering both.
+   */
+  .nav-link.text-primary:hover,
+  .nav-drawer-link.text-primary:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  /*
+   * setActiveLink() (below) toggles Tailwind's .text-primary / .text-on-background
+   * utility classes to mark the current section — originally just a text-color
+   * swap. Here it also drives the filled/pill "active" look, so this rule has to
+   * win over Tailwind's own .text-primary { color: var(--color-primary) } utility
+   * for the same element; !important guarantees that regardless of layer/source order.
+   */
+  .nav-link.text-primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary) !important;
+    border-color: var(--color-primary);
+  }
+
+  .menu-trigger[aria-expanded='true'] {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .nav-drawer-link:active {
+    background-color: var(--color-surface-container-high);
+  }
+
+  .nav-drawer-link.text-primary {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-container);
+  }
+</style>
+
 <script>
+  const siteNav = document.getElementById('site-nav');
   const btn = document.getElementById('hamburger-btn');
+  const btnLabel = document.getElementById('menu-trigger-label');
   const drawer = document.getElementById('nav-drawer');
   const backdrop = document.getElementById('drawer-backdrop');
-  const middle = document.getElementById('hamburger-middle');
   const drawerLinks = document.querySelectorAll('.nav-drawer-link');
+
+  function updateNavScrolled() {
+    if (window.scrollY > 8) {
+      siteNav?.setAttribute('data-scrolled', '');
+    } else {
+      siteNav?.removeAttribute('data-scrolled');
+    }
+  }
+
+  updateNavScrolled();
+  window.addEventListener('scroll', updateNavScrolled, { passive: true });
 
   function openDrawer() {
     drawer?.setAttribute('data-open', '');
     drawer?.classList.remove('translate-x-full');
     backdrop?.classList.remove('opacity-0', 'pointer-events-none');
-    middle?.classList.add('-translate-x-1/2');
+    btn?.setAttribute('aria-expanded', 'true');
+    if (btnLabel) btnLabel.textContent = 'Close';
   }
 
   function closeDrawer() {
     drawer?.removeAttribute('data-open');
     drawer?.classList.add('translate-x-full');
     backdrop?.classList.add('opacity-0', 'pointer-events-none');
-    middle?.classList.remove('-translate-x-1/2');
+    btn?.setAttribute('aria-expanded', 'false');
+    if (btnLabel) btnLabel.textContent = 'Menu';
   }
 
   btn?.addEventListener('click', () => {

@@ -9,7 +9,7 @@ const { title, id, tag = 'h2' } = Astro.props;
 const Tag = tag;
 ---
 
-<Tag id={id} class="text-5xl md:text-7xl text-primary font-bold mb-3">
+<Tag id={id} class="font-display text-5xl md:text-7xl text-on-background font-bold mb-3">
   {title}
 </Tag>
 <div class="flex h-1 w-20 mb-10">
