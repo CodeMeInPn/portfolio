@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from '@components/ThemeToggle.astro';
+
 const links = [
   { href: '/#home', label: 'Home' },
   { href: '/#about', label: 'About' },
@@ -9,7 +11,7 @@ const links = [
 
 <nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-4">
   <div class="max-w-content-hero mx-auto w-full flex items-center justify-between">
-    <span class="font-display text-on-background font-semibold text-xl">CodeMeIn</span>
+    <span class="font-display text-on-background text-xl">CodeMeIn</span>
 
     <ul class="hidden md:flex gap-2">
       {
@@ -28,16 +30,20 @@ const links = [
       }
     </ul>
 
-    <button
-      id="hamburger-btn"
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-      aria-controls="nav-drawer"
-      class="menu-trigger hard-shadow-hover md:hidden font-display inline-flex items-center rounded-full border-2 border-primary px-4 py-1.5 text-sm font-bold uppercase tracking-wide text-primary"
-      style="--hard-shadow-offset: 3px"
-    >
-      <span id="menu-trigger-label">Menu</span>
-    </button>
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+
+      <button
+        id="hamburger-btn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-drawer"
+        class="menu-trigger hard-shadow-hover md:hidden font-display inline-flex items-center rounded-full border-2 border-primary px-4 py-1.5 text-sm uppercase tracking-wide text-primary"
+        style="--hard-shadow-offset: 3px"
+      >
+        <span id="menu-trigger-label">Menu</span>
+      </button>
+    </div>
   </div>
 
   <div
@@ -71,10 +77,10 @@ const links = [
             class="nav-drawer-link hard-shadow-hover flex items-center gap-3 rounded-xl border-2 border-outline-variant bg-surface-container px-4 py-3 text-on-background"
             style="--hard-shadow-offset: 3px"
           >
-            <span class="font-display flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-on-primary">
+            <span class="font-display flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs text-on-primary">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <span class="font-display text-lg font-bold">{label}</span>
+            <span class="font-display text-lg">{label}</span>
           </a>
         </li>
       ))

@@ -75,7 +75,7 @@ const capabilities = [
         <ul class="flex flex-col gap-3 text-lg">
           {capabilities.map((point, index) => (
             <li class="flex items-start gap-3">
-              <span class="font-display flex size-6 shrink-0 items-center justify-center rounded bg-primary text-xs font-bold text-on-primary mt-0.5">
+              <span class="font-display flex size-6 shrink-0 items-center justify-center rounded bg-primary text-xs text-on-primary mt-0.5">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <span>{point}</span>
@@ -160,7 +160,7 @@ const capabilities = [
 
     <Reveal delay={200} class="mt-12">
       <section aria-label="Technologies">
-        <h3 class="font-display text-3xl text-on-background font-bold mb-6">Technologies</h3>
+        <h3 class="font-display text-3xl text-on-background mb-6">Technologies</h3>
         <div class="overflow-hidden marquee-fade">
           <div class="flex animate-marquee gap-12 w-max" aria-hidden="true">
             {
