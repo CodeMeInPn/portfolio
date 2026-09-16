@@ -1,0 +1,108 @@
+---
+import type { PropsWithClassName } from 'src/types';
+import { cn } from 'utils/cn';
+
+type Props = PropsWithClassName<{
+  hardShadowOffset?: number;
+}>;
+
+const { className, hardShadowOffset = 3 } = Astro.props;
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Switch to dark theme"
+  aria-pressed="false"
+  class={cn(
+    'theme-toggle hard-shadow-hover inline-flex items-center justify-center rounded-full border-2 border-transparent p-2 text-on-background hover:text-primary',
+    className,
+  )}
+  style={`--hard-shadow-offset: ${hardShadowOffset}px`}
+>
+  <svg
+    class="theme-toggle__icon theme-toggle__icon--sun"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75" />
+    <path
+      d="M12 2.5V5M12 19V21.5M4.75 4.75L6.5 6.5M17.5 17.5L19.25 19.25M2.5 12H5M19 12H21.5M4.75 19.25L6.5 17.5M17.5 6.5L19.25 4.75"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+  <svg
+    class="theme-toggle__icon theme-toggle__icon--moon"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M20.5 14.5C19.24 15.13 17.8 15.5 16.28 15.5C11.03 15.5 6.78 11.25 6.78 6C6.78 4.48 7.15 3.04 7.78 1.78C4.02 3.13 1.28 6.76 1.28 11C1.28 16.25 5.53 20.5 10.78 20.5C15.02 20.5 18.65 17.76 20.5 14.5Z"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linejoin="round"
+    />
+  </svg>
+</button>
+
+<style>
+  .theme-toggle__icon {
+    display: none;
+  }
+
+  :root[data-theme='light'] .theme-toggle__icon--sun {
+    display: block;
+  }
+
+  :root[data-theme='dark'] .theme-toggle__icon--moon {
+    display: block;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('#theme-toggle');
+
+  function syncButtons() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    buttons.forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(isDark));
+      btn.setAttribute(
+        'aria-label',
+        isDark ? 'Switch to light theme' : 'Switch to dark theme',
+      );
+    });
+  }
+
+  syncButtons();
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next =
+        document.documentElement.getAttribute('data-theme') === 'dark'
+          ? 'light'
+          : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      syncButtons();
+    });
+  });
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (event) => {
+      if (localStorage.getItem('theme')) return;
+      document.documentElement.setAttribute(
+        'data-theme',
+        event.matches ? 'dark' : 'light',
+      );
+      syncButtons();
+    });
+</script>

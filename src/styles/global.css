@@ -1,74 +1,96 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-section-snake-inner: #fec830;
-  --color-section-snake-middle: #fe5c1e;
-  --color-section-snake-outer: #ea171d;
+  /* 70s poster gradient, sampled directly from the reference image.
+     Theme-invariant: the reference uses the identical ribbon on both
+     the cream and navy poster variants. */
+  --color-section-snake-deepest: #452125;
+  --color-section-snake-outer: #e16026;
+  --color-section-snake-middle: #ea8d2d;
+  --color-section-snake-inner: #e4b53f;
 
-  --font-display: 'Fraunces', serif;
+  /* grainy background noise-filter intensity (Background.astro) */
+  --grain-before-opacity: 1;
+  --grain-after-contrast: 170%;
+  --grain-after-brightness: 1000%;
+  --grain-after-opacity: 0.3;
+
+  --font-display: 'Paytone One', sans-serif;
   --font-sans: 'Poppins', sans-serif;
 
-  /* burnt sienna / rust — was muted brown, then too-bright stripe-red */
-  --color-primary: #b23c1a;
-  --color-on-primary: #ffffff;
-  --color-primary-container: #ffdccb;
-  --color-on-primary-container: #6b2409;
+  /* --- Light theme (default): cream/tan poster ---
+     primary/secondary/tertiary reuse the sampled ribbon colors directly
+     (outer/middle/inner) so buttons and links stay pixel-consistent with
+     the decorative gradient; on-* uses the darkest sampled swatch as ink
+     instead of white, since white text on these mid-bright oranges falls
+     short of AA contrast. */
+  --color-primary: #e16026;
+  --color-on-primary: #452125;
+  --color-primary-container: #f5d3ae;
+  --color-on-primary-container: #452125;
 
-  /* tangerine — was muted tan */
-  --color-secondary: #fe5c1e;
-  --color-on-secondary: #3a2415;
-  --color-secondary-container: #ffe0cc;
-  --color-on-secondary-container: #7a2e00;
+  --color-secondary: #ea8d2d;
+  --color-on-secondary: #452125;
+  --color-secondary-container: #f7ddb0;
+  --color-on-secondary-container: #452125;
 
-  /* harvest gold — was olive */
-  --color-tertiary: #d9a300;
-  --color-on-tertiary: #3a2415;
-  --color-tertiary-container: #fff1c2;
-  --color-on-tertiary-container: #5c4300;
+  --color-tertiary: #e4b53f;
+  --color-on-tertiary: #452125;
+  --color-tertiary-container: #faedc4;
+  --color-on-tertiary-container: #452125;
 
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
 
-  --color-background: #fff8f2;
-  --color-on-background: #3a2415;
+  --color-background: #e6bf94;
+  --color-on-background: #452125;
   --color-surface: var(--color-background);
   --color-on-surface: var(--color-on-background);
 
-  --color-surface-variant: #efe1cc;
-  --color-on-surface-variant: #6b4a30;
-  --color-outline: #8a6a52;
-  --color-outline-variant: #d2c5b1;
+  --color-surface-variant: #d9ac7c;
+  --color-on-surface-variant: #5c3a2c;
+  --color-outline: #8a6248;
+  --color-outline-variant: #d8bd95;
   --color-shadow: #000000;
   --color-scrim: #000000;
 
-  --color-inverse-surface: #2b1810;
-  --color-inverse-on-surface: #fdf3e7;
-  --color-inverse-primary: #ff8a65;
+  /* inverse-* mirrors the OTHER theme's surface, so components that use it
+     (Footer.astro's bg-inverse-surface) read as a navy band in light mode
+     and a tan band in dark mode. */
+  --color-inverse-surface: #1b1c2b;
+  --color-inverse-on-surface: #f3ead9;
+  --color-inverse-primary: #e16026;
 
-  --color-primary-fixed: #ffdea4;
-  --color-on-primary-fixed: #261900;
-  --color-primary-fixed-dim: var(--color-inverse-primary);
-  --color-on-primary-fixed-variant: #5d4200;
+  --color-primary-fixed: #f8d4b8;
+  --color-on-primary-fixed: #452125;
+  --color-primary-fixed-dim: #ff9a5c;
+  --color-on-primary-fixed-variant: #6b2f12;
 
   --color-secondary-fixed: var(--color-secondary-container);
-  --color-on-secondary-fixed: #261900;
-  --color-secondary-fixed-dim: #ddc395;
-  --color-on-secondary-fixed-variant: #564421;
+  --color-on-secondary-fixed: #452125;
+  --color-secondary-fixed-dim: #d99a4a;
+  --color-on-secondary-fixed-variant: #6b4a1a;
 
-  --color-tertiary-fixed: #d6ec8f;
-  --color-on-tertiary-fixed: #171e00;
-  --color-tertiary-fixed-dim: #bad076;
-  --color-on-tertiary-fixed-variant: #3c4d00;
+  --color-tertiary-fixed: #faedc4;
+  --color-on-tertiary-fixed: #452125;
+  --color-tertiary-fixed-dim: #d4a83a;
+  --color-on-tertiary-fixed-variant: #6b5218;
 
-  --color-surface-dim: #e2d9ce;
+  --color-surface-dim: #d4a374;
   --color-surface-bright: var(--color-background);
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #fcf2e7;
-  --color-surface-container: #f6ece1;
-  --color-surface-container-high: #f0e7db;
-  --color-surface-container-highest: #eae1d6;
+  --color-surface-container-lowest: #f7ecd9;
+  --color-surface-container-low: #eeddc0;
+  --color-surface-container: #e2b98a;
+  --color-surface-container-high: #d9ac7c;
+  --color-surface-container-highest: #cd9c6a;
+
+  /* grainy background gradient stops (Background.astro) */
+  --color-grain-1: #f2e2c8;
+  --color-grain-2: #e6bf94;
+  --color-grain-3: #d9a873;
+  --color-grain-4: #c8935c;
 
   --spacing-content-xxl: 75rem;
   --spacing-content-hero: 90rem;
@@ -96,18 +118,130 @@
   }
 }
 
+/*
+ * Dark theme (navy poster): applied when the OS prefers dark and the user
+ * hasn't explicitly chosen light, or whenever data-theme="dark" is set
+ * (explicit user choice always wins). Redefining the same --color-* custom
+ * properties here works because every Tailwind utility above references
+ * var(--color-*) rather than an inlined value.
+ *
+ * primary/secondary/tertiary reuse the same sampled swatches as light mode
+ * (they already read clearly against navy) rather than inventing separate
+ * brightened variants, so the palette stays anchored to the 5 reference
+ * colors in both themes.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --color-primary: #e16026;
+    --color-on-primary: #452125;
+    --color-primary-container: #7a2e0f;
+    --color-on-primary-container: #f8d4b8;
+
+    --color-secondary: #ea8d2d;
+    --color-on-secondary: #452125;
+    --color-secondary-container: #8a3d00;
+    --color-on-secondary-container: #f7ddb0;
+
+    --color-tertiary: #e4b53f;
+    --color-on-tertiary: #452125;
+    --color-tertiary-container: #5c4300;
+    --color-on-tertiary-container: #faedc4;
+
+    --color-background: #1b1c2b;
+    --color-on-background: #f3ead9;
+
+    --color-surface-variant: #2a2b3d;
+    --color-on-surface-variant: #cabfa8;
+    --color-outline: #8f8a78;
+    --color-outline-variant: #3f4055;
+
+    --color-inverse-surface: #e6bf94;
+    --color-inverse-on-surface: #452125;
+    --color-inverse-primary: #e16026;
+
+    --color-surface-dim: #15161f;
+    --color-surface-bright: #33344a;
+    --color-surface-container-lowest: #101018;
+    --color-surface-container-low: #1f2030;
+    --color-surface-container: #242536;
+    --color-surface-container-high: #2e2f42;
+    --color-surface-container-highest: #383a4f;
+
+    --color-grain-1: #23243a;
+    --color-grain-2: #1c1d2e;
+    --color-grain-3: #161724;
+    --color-grain-4: #101018;
+
+    /* dark navy shows noise speckles far more starkly than the light
+       cream base did, so the noise-filter chain gets toned down here. */
+    --grain-before-opacity: 0.35;
+    --grain-after-contrast: 115%;
+    --grain-after-brightness: 140%;
+    --grain-after-opacity: 0.12;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-primary: #e16026;
+  --color-on-primary: #452125;
+  --color-primary-container: #7a2e0f;
+  --color-on-primary-container: #f8d4b8;
+
+  --color-secondary: #ea8d2d;
+  --color-on-secondary: #452125;
+  --color-secondary-container: #8a3d00;
+  --color-on-secondary-container: #f7ddb0;
+
+  --color-tertiary: #e4b53f;
+  --color-on-tertiary: #452125;
+  --color-tertiary-container: #5c4300;
+  --color-on-tertiary-container: #faedc4;
+
+  --color-background: #1b1c2b;
+  --color-on-background: #f3ead9;
+
+  --color-surface-variant: #2a2b3d;
+  --color-on-surface-variant: #cabfa8;
+  --color-outline: #8f8a78;
+  --color-outline-variant: #3f4055;
+
+  --color-inverse-surface: #e6bf94;
+  --color-inverse-on-surface: #452125;
+  --color-inverse-primary: #e16026;
+
+  --color-surface-dim: #15161f;
+  --color-surface-bright: #33344a;
+  --color-surface-container-lowest: #101018;
+  --color-surface-container-low: #1f2030;
+  --color-surface-container: #242536;
+  --color-surface-container-high: #2e2f42;
+  --color-surface-container-highest: #383a4f;
+
+  --color-grain-1: #23243a;
+  --color-grain-2: #1c1d2e;
+  --color-grain-3: #161724;
+  --color-grain-4: #101018;
+
+  --grain-before-opacity: 0.35;
+  --grain-after-contrast: 115%;
+  --grain-after-brightness: 140%;
+  --grain-after-opacity: 0.12;
+}
+
+:root:not([data-theme='dark']) {
+  color-scheme: light;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 * {
   font-family: var(--font-sans);
-}
-
-.font-display {
-  font-variation-settings:
-    'SOFT' 60,
-    'opsz' 30;
 }
 
 /*
@@ -129,7 +263,8 @@ html {
 @media (hover: hover) {
   .hard-shadow-hover:hover {
     border-color: var(--color-primary);
-    box-shadow: var(--hard-shadow-offset) var(--hard-shadow-offset) 0 var(--color-primary);
+    box-shadow: var(--hard-shadow-offset) var(--hard-shadow-offset) 0
+      var(--color-primary);
     transform: translate(
       calc(var(--hard-shadow-offset) * -0.5),
       calc(var(--hard-shadow-offset) * -0.5)

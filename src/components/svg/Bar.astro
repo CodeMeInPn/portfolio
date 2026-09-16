@@ -38,6 +38,7 @@ const mergedClassnames = cn(barVariants({ position }), className);
   position === 'vertical' ? (
     <div class={mergedClassnames}>
       {offset === 'left' && <div class="bg-transparent size-full" />}
+      <div class="bg-section-snake-deepest size-full" />
       <div
         class={cn('bg-section-snake-outer size-full', {
           'bg-section-snake-inner': inverted,
@@ -54,6 +55,7 @@ const mergedClassnames = cn(barVariants({ position }), className);
   ) : (
     <div class={mergedClassnames}>
       {offset === 'top' && <div class="bg-transparent size-full" />}
+      <div class="bg-section-snake-deepest size-full" />
       <div
         class={cn('bg-section-snake-outer size-full', {
           'bg-section-snake-inner': inverted,
