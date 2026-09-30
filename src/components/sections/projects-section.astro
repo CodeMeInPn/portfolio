@@ -7,17 +7,7 @@ import SectionTitle from '@components/SectionTitle.astro';
 import { commercialProjects, sideProjects } from '../../data/projects';
 ---
 
-<Section
-  id="projects"
-  activeBars={{
-    position: ['horizontal', 'left'],
-    options: { offset: ['top', 'right'], invertColor: ['top', 'left'] },
-  }}
-  activeConnectors={{
-    position: ['bottom-left', 'bottom-right'],
-    offset: ['bottom-left'],
-  }}
->
+<Section id="projects">
   <article aria-labelledby="projects-heading" class="py-8 px-6 md:px-12">
     <Reveal>
       <SectionTitle title="Projects" id="projects-heading" />
