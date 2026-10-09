@@ -3,7 +3,18 @@ import Button from '@components/Button.astro';
 import Reveal from '@components/Reveal.astro';
 
 const flapWords = ['React', 'Next.js', 'React Native', 'TypeScript'];
-const heroNameLetters = 'Piotr Nowak'.split('');
+// Letters are grouped per word: each letter is its own inline-block (for the
+// drop-in), and a run of inline-blocks may wrap between any two of them, so
+// the nowrap word box is what keeps a narrow screen from splitting "Nowak".
+let heroNameLetterIndex = 0;
+const heroNameWords = 'Piotr Nowak'.split(' ').map((word) => {
+  const letters = word.split('').map((char) => ({
+    char,
+    delay: 0.25 + heroNameLetterIndex++ * 0.045,
+  }));
+  heroNameLetterIndex++; // the space keeps its slot in the stagger
+  return letters;
+});
 const heroNameShadowPlates = ['outer', 'middle', 'inner'] as const;
 ---
 
@@ -27,23 +38,35 @@ const heroNameShadowPlates = ['outer', 'middle', 'inner'] as const;
               class={`hero-name-shadow hero-name-shadow--${plate} font-display text-6xl md:text-8xl`}
               aria-hidden="true"
             >
-              {heroNameLetters.map((letter) => (
-                <span class="hero-name-shadow__letter">
-                  {letter === ' ' ? ' ' : letter}
-                </span>
+              {heroNameWords.map((letters, w) => (
+                <>
+                  {w > 0 && ' '}
+                  <span class="hero-name__word">
+                    {letters.map(({ char }) => (
+                      <span class="hero-name-shadow__letter">{char}</span>
+                    ))}
+                  </span>
+                </>
               ))}
             </span>
           ))
         }
         <h1 class="hero-name font-display text-6xl md:text-8xl text-on-background">
           {
-            heroNameLetters.map((letter, i) => (
-              <span
-                class="hero-name__letter"
-                style={`animation-delay: ${0.25 + i * 0.045}s`}
-              >
-                {letter === ' ' ? ' ' : letter}
-              </span>
+            heroNameWords.map((letters, w) => (
+              <>
+                {w > 0 && ' '}
+                <span class="hero-name__word">
+                  {letters.map(({ char, delay }) => (
+                    <span
+                      class="hero-name__letter"
+                      style={`animation-delay: ${delay}s`}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </span>
+              </>
             ))
           }
         </h1>
@@ -51,9 +74,9 @@ const heroNameShadowPlates = ['outer', 'middle', 'inner'] as const;
 
       <Reveal delay={350}>
         <p
-          class="text-lg md:text-xl text-on-background max-w-xl flex flex-wrap items-center justify-center gap-x-2 gap-y-1"
+          class="text-lg md:text-xl text-on-background max-w-xl flex flex-col sm:flex-row items-center justify-center gap-x-2 gap-y-1"
         >
-          <span>Fullstack Developer —</span>
+          <span>Fullstack Developer<span class="hidden sm:inline"> —</span></span>
           <span class="hero-flap">
             {
               flapWords.map((word, i) => (
@@ -139,6 +162,11 @@ const heroNameShadowPlates = ['outer', 'middle', 'inner'] as const;
     animation: hero-name-shadow-in 0.35s ease-out both;
   }
 
+  .hero-name__word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
   .hero-name-shadow__letter {
     display: inline-block;
   }
@@ -201,17 +229,26 @@ const heroNameShadowPlates = ['outer', 'middle', 'inner'] as const;
     text-align: left;
   }
 
+  /* Stacked under the title on phones, so the word is centered there; from
+     sm up it sits right after the dash and hugs it from the left. */
   .hero-flap__word {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-weight: 600;
     color: var(--color-primary);
     white-space: nowrap;
     opacity: 0;
     transform: translateY(-160%);
     animation: hero-flap-cycle 8s linear infinite both;
+  }
+
+  @media (min-width: 40rem) {
+    .hero-flap__word {
+      justify-content: flex-start;
+    }
   }
 
   /*
