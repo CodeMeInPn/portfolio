@@ -1,0 +1,73 @@
+---
+import BandHeading from '@components/BandHeading.astro';
+import FeatureCard from './FeatureCard.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { keyFeatures } = project;
+---
+
+{
+  keyFeatures && keyFeatures.length > 0 && (
+    <section id="features" aria-labelledby="features-heading">
+      <BandHeading title="Key Features" id="features-heading" level="h2" />
+
+      <swiper-container
+        class="features-swiper block md:hidden"
+        init="false"
+        slides-per-view="1.15"
+        space-between="16"
+        pagination="true"
+        grab-cursor="true"
+      >
+        {keyFeatures.map((feature, index) => (
+          <swiper-slide>
+            <FeatureCard index={index} feature={feature} class="h-full" />
+          </swiper-slide>
+        ))}
+      </swiper-container>
+
+      <div class="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {keyFeatures.map((feature, index) => (
+          <FeatureCard index={index} feature={feature} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Swiper element renders its pagination in shadow DOM; these custom
+     properties are its documented theming hooks (default is #007aff). */
+  .features-swiper {
+    --swiper-pagination-color: var(--color-primary);
+    --swiper-pagination-bullet-inactive-color: var(--color-on-surface-variant);
+    --swiper-pagination-bullet-inactive-opacity: 0.35;
+  }
+</style>
+
+<script>
+  import { register } from 'swiper/element/bundle';
+
+  type SwiperContainerElement = HTMLElement & {
+    speed: number;
+    initialize: () => void;
+  };
+
+  register();
+
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+
+  document
+    .querySelectorAll<SwiperContainerElement>('.features-swiper')
+    .forEach((swiperEl) => {
+      swiperEl.speed = prefersReducedMotion ? 0 : 300;
+      swiperEl.initialize();
+    });
+</script>

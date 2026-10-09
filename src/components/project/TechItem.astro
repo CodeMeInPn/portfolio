@@ -7,8 +7,11 @@ interface Props {
 const { name, icon } = Astro.props;
 ---
 
+{/* A one-line pill is 40px tall (py-2 + 20px line + 2px borders), so a
+    1.25rem radius is identical to rounded-full on one line, and becomes a
+    soft rounded box when a long name wraps instead of overflowing. */}
 <div
-  class="hard-shadow-hover flex items-center gap-2 px-3 py-2 rounded-full bg-surface-container-high border-2 border-outline-variant"
+  class="hard-shadow-hover flex max-w-full items-center gap-2 px-3 py-2 rounded-[1.25rem] bg-surface-container-high border-2 border-outline-variant"
 >
   {
     icon ? (
@@ -21,5 +24,9 @@ const { name, icon } = Astro.props;
       />
     )
   }
-  <span class="text-sm text-on-surface-variant whitespace-nowrap">{name}</span>
+  {/* overflow-wrap: anywhere — some names hold long slash-joined tokens
+      ("(title/description/canonical/OG/hreflang)") with no break point. */}
+  <span class="min-w-0 text-sm text-on-surface-variant [overflow-wrap:anywhere]">
+    {name}
+  </span>
 </div>

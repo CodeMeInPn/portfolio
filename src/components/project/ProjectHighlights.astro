@@ -1,0 +1,38 @@
+---
+import BandHeading from '@components/BandHeading.astro';
+import TriStripe from '@components/TriStripe.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { highlights } = project;
+---
+
+{
+  highlights && highlights.length > 0 && (
+    <section id="highlights" aria-labelledby="highlights-heading">
+      <BandHeading
+        title="Notable Highlights"
+        id="highlights-heading"
+        level="h2"
+      />
+      {/* Solid callout panel: three parallel ribbon stripes run down the
+          left edge (clipped by the rounded corners), items split by hairlines. */}
+      <div class="flex max-w-4xl overflow-hidden rounded-2xl border-2 border-outline-variant bg-surface-container">
+        <TriStripe class="w-3 shrink-0 self-stretch" />
+        {/* divide-outline (not outline-variant): in light mode outline-variant
+            is nearly the same tone as surface-container and disappears. */}
+        <ul class="flex-1 divide-y divide-outline/30">
+          {highlights.map((point) => (
+            <li class="px-5 py-4 md:px-8 md:py-5 text-base md:text-lg font-medium text-on-background">
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

@@ -1,9 +1,13 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Footer from '@components/Footer.astro';
-import ProjectDescription from '@components/project/ProjectDescription.astro';
+import Section from '@components/Section.astro';
+import ProjectArchitecture from '@components/project/ProjectArchitecture.astro';
 import ProjectFacts from '@components/project/ProjectFacts.astro';
+import ProjectFeatures from '@components/project/ProjectFeatures.astro';
 import ProjectHero from '@components/project/ProjectHero.astro';
+import ProjectHighlights from '@components/project/ProjectHighlights.astro';
+import ProjectOverview from '@components/project/ProjectOverview.astro';
 import ProjectTechStack from '@components/project/ProjectTechStack.astro';
 import { commercialProjects, sideProjects } from '../../data/projects';
 import type { Project } from '../../types/project';
@@ -28,9 +32,18 @@ const { project } = Astro.props;
 >
   <main>
     <ProjectHero project={project} />
-    <ProjectFacts project={project} />
-    <ProjectTechStack project={project} />
-    <ProjectDescription project={project} />
+    {/* One compact Section holding every band — this page has no
+        PageRibbon, so it doesn't need the ribbon gap between sections. */}
+    <Section spacing="compact">
+      <div class="flex flex-col gap-16 md:gap-24 pb-16 md:pb-24">
+        <ProjectFacts project={project} />
+        <ProjectOverview project={project} />
+        <ProjectHighlights project={project} />
+        <ProjectFeatures project={project} />
+        <ProjectArchitecture project={project} />
+        <ProjectTechStack project={project} />
+      </div>
+    </Section>
   </main>
   <Footer />
 </Layout>

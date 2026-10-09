@@ -240,8 +240,15 @@ html {
   scroll-behavior: smooth;
 }
 
-* {
-  font-family: var(--font-sans);
+/* Set once on <html> and let it inherit, inside the base layer.
+   The old unlayered `* { font-family }` beat every Tailwind utility
+   regardless of specificity, and because `*` matches each element
+   directly it also stopped children (e.g. the hero's letter spans)
+   from inheriting a parent's `font-display`. */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
 }
 
 /*

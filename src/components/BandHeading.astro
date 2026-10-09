@@ -2,11 +2,14 @@
 interface Props {
   title: string;
   id: string;
+  /** `h3` (default) under a section's h2; `h2` when bands sit directly under the page's h1. */
+  level?: 'h2' | 'h3';
 }
 
-const { title, id } = Astro.props;
+const { title, id, level = 'h3' } = Astro.props;
+const Tag = level;
 ---
 
-<h3 id={id} class="font-display text-3xl text-on-background mb-6">
+<Tag id={id} class="font-display text-3xl text-on-background mb-6">
   {title}
-</h3>
+</Tag>

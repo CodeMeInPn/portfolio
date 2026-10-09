@@ -1,0 +1,16 @@
+---
+import BandHeading from '@components/BandHeading.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { fullDescription } = project;
+---
+
+<section id="overview" aria-labelledby="overview-heading">
+  <BandHeading title="Overview" id="overview-heading" level="h2" />
+  <p class="text-lg text-on-background max-w-3xl">{fullDescription}</p>
+</section>

@@ -1,7 +1,6 @@
 ---
-import Section from '@components/Section.astro';
-import SectionTitle from '@components/SectionTitle.astro';
-import StatCard from '@components/StatCard.astro';
+import BandHeading from '@components/BandHeading.astro';
+import ProjectStatStrip from './ProjectStatStrip.astro';
 import type { Project } from '../../types/project';
 
 interface Props {
@@ -14,62 +13,15 @@ const { stats } = project;
 
 {
   stats && stats.length > 0 && (
-    <Section id="facts">
-      <div class="py-8">
-        <SectionTitle title="Featured Facts" id="facts-heading" />
-
-        <swiper-container
-          class="facts-swiper block md:hidden"
-          init="false"
-          slides-per-view="1.5"
-          space-between="16"
-          pagination="true"
-          grab-cursor="true"
-        >
-          {stats.map((stat) => (
-            <swiper-slide>
-              <StatCard value={stat.value} label={stat.label} />
-            </swiper-slide>
-          ))}
-        </swiper-container>
-
-        <div class="hidden md:grid facts-grid gap-4">
-          {stats.map((stat) => (
-            <StatCard value={stat.value} label={stat.label} />
-          ))}
-        </div>
-      </div>
-    </Section>
+    <section id="facts" aria-labelledby="facts-heading">
+      <BandHeading title="Featured Facts" id="facts-heading" level="h2" />
+      <ProjectStatStrip stats={stats} />
+    </section>
   )
 }
 
-<style>
-  .facts-grid {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  }
-</style>
-
 <script>
-  import { register } from 'swiper/element/bundle';
   import { observeCountUp } from 'utils/count';
 
-  type SwiperContainerElement = HTMLElement & {
-    speed: number;
-    initialize: () => void;
-  };
-
-  register();
-
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
-  ).matches;
-
-  document
-    .querySelectorAll<SwiperContainerElement>('.facts-swiper')
-    .forEach((swiperEl) => {
-      swiperEl.speed = prefersReducedMotion ? 0 : 300;
-      swiperEl.initialize();
-    });
-
-  observeCountUp('.stat-card__value');
+  observeCountUp('.stat-strip__value');
 </script>

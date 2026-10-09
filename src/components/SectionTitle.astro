@@ -11,7 +11,13 @@ const { title, id, tag = 'h2' } = Astro.props;
 const Tag = tag;
 ---
 
-<Tag id={id} class="font-display text-5xl md:text-7xl text-on-background mb-3">
+{/* Paytone One is wide: single long words ("Configurator") and
+    unbreakable titles ("@bitnoi.se/react-scheduler") overflow a phone
+    at text-5xl, hence the smaller base size and overflow-wrap fallback. */}
+<Tag
+  id={id}
+  class="font-display text-4xl sm:text-5xl md:text-7xl text-on-background mb-3 [overflow-wrap:anywhere]"
+>
   {title}
 </Tag>
 <TriStripe class="h-1 w-20 mb-10" />

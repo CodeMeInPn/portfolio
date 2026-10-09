@@ -1,0 +1,29 @@
+---
+import BandHeading from '@components/BandHeading.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { architecture } = project;
+---
+
+{
+  architecture && architecture.length > 0 && (
+    <section id="architecture" aria-labelledby="architecture-heading">
+      <BandHeading title="Architecture" id="architecture-heading" level="h2" />
+      <ul class="flex flex-col gap-3 max-w-3xl">
+        {architecture.map((point, index) => (
+          <li class="flex items-start gap-3">
+            <span class="font-display flex size-6 shrink-0 items-center justify-center rounded bg-primary text-xs text-on-primary mt-0.5">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span class="text-on-surface-variant">{point}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

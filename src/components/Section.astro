@@ -5,13 +5,30 @@ interface Props {
   contentContainerClassName?: string;
   sectionClassName?: string;
   id?: string;
+  /**
+   * `ribbon` (default) leaves room for PageRibbon to cross between
+   * sections on the home page. `compact` is for pages without the ribbon.
+   */
+  spacing?: 'ribbon' | 'compact';
 }
 
-const { contentContainerClassName, sectionClassName, id } = Astro.props;
+const {
+  contentContainerClassName,
+  sectionClassName,
+  id,
+  spacing = 'ribbon',
+} = Astro.props;
 ---
 
 <section id={id} class={cn('relative bg-transparent px-4 w-full', sectionClassName)}>
-  <div class="section-ribbon-gap h-8 md:h-44" aria-hidden="true"></div>
+  <div
+    class={cn(
+      'section-ribbon-gap h-8',
+      spacing === 'ribbon' ? 'md:h-44' : 'md:h-12'
+    )}
+    aria-hidden="true"
+  >
+  </div>
   <div
     class={cn(
       'section-ribbon-content mx-auto w-full md:w-3/4 max-w-content-xxl',

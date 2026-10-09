@@ -1,0 +1,30 @@
+---
+import TriStripe from '@components/TriStripe.astro';
+import { cn } from 'utils/cn';
+
+interface Props {
+  index: number;
+  feature: string;
+  class?: string;
+}
+
+const { index, feature, class: className } = Astro.props;
+---
+
+{/* The number sits above the text in normal flow, so long feature text can
+    never run under it. It stays in on-background (orange primary on the
+    light-mode card is ~1.7:1); the ribbon colour comes from the stripe. */}
+<div
+  class={cn(
+    'flex flex-col gap-3 p-4 rounded-xl bg-surface-container-high border-2 border-outline-variant',
+    className
+  )}
+>
+  <div class="flex items-center gap-3" aria-hidden="true">
+    <span class="font-display text-xl leading-none text-on-background">
+      {String(index + 1).padStart(2, '0')}
+    </span>
+    <TriStripe class="h-1 w-8" />
+  </div>
+  <p class="text-on-surface-variant">{feature}</p>
+</div>
