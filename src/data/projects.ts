@@ -49,8 +49,6 @@ export const commercialProjects: Project[] = [
       'PostgreSQL',
       'Tailwind CSS',
     ],
-    imageUrl: '',
-    imageAlt: 'Internal AI Platform project placeholder',
     category: 'commercial',
     eyebrow: 'AI Product / Internal Tooling',
     meta: [
@@ -120,8 +118,6 @@ export const commercialProjects: Project[] = [
       { value: '8+', label: 'LLM Providers Unified' },
       { value: '6', label: 'Months in Development' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Internal AI Platform hero placeholder',
   },
   {
     id: 'proj-2',
@@ -140,9 +136,6 @@ export const commercialProjects: Project[] = [
       'three.js',
       'Docker',
     ],
-    imageUrl: '',
-    imageAlt:
-      'Software Consultancy Marketing Site & Headless CMS project placeholder',
     category: 'commercial',
     eyebrow: 'Corporate Marketing Site + Headless CMS',
     meta: [
@@ -214,9 +207,6 @@ export const commercialProjects: Project[] = [
       { value: '38', label: 'CMS Content Types' },
       { value: '69', label: 'Reusable Components' },
     ],
-    heroImage: '',
-    heroImageAlt:
-      'Software Consultancy Marketing Site & Headless CMS hero placeholder',
   },
   {
     id: 'proj-3',
@@ -234,8 +224,6 @@ export const commercialProjects: Project[] = [
       'PostgreSQL',
       'Tailwind CSS',
     ],
-    imageUrl: '',
-    imageAlt: 'Property Services Marketplace Platform project placeholder',
     category: 'commercial',
     eyebrow: 'PropTech Marketplace + Admin Platform',
     meta: [
@@ -307,8 +295,6 @@ export const commercialProjects: Project[] = [
       { value: '10+', label: 'Tenant Organizations' },
       { value: '31+', label: 'Database Migrations' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Property Services Marketplace Platform hero placeholder',
   },
   {
     id: 'proj-4',
@@ -328,9 +314,6 @@ export const commercialProjects: Project[] = [
       'React Query',
       'Vitest',
     ],
-    imageUrl: '',
-    imageAlt:
-      'Deepfake Detection & Video Analysis Platform project placeholder',
     category: 'commercial',
     eyebrow: 'AI / Video Analysis',
     meta: [
@@ -393,9 +376,6 @@ export const commercialProjects: Project[] = [
       { value: '45', label: 'Commits' },
       { value: '3', label: 'Smoothing Algorithms Built' },
     ],
-    heroImage: '',
-    heroImageAlt:
-      'Deepfake Detection & Video Analysis Platform hero placeholder',
   },
   {
     id: 'proj-5',
@@ -414,9 +394,6 @@ export const commercialProjects: Project[] = [
       'GSAP',
       'Tailwind CSS',
     ],
-    imageUrl: '',
-    imageAlt:
-      'Venture Studio Marketing Site & Headless CMS project placeholder',
     category: 'commercial',
     eyebrow: 'Corporate Site / Headless CMS',
     meta: [
@@ -488,9 +465,6 @@ export const commercialProjects: Project[] = [
       { value: '25+', label: 'Reusable CMS Blocks' },
       { value: '6', label: 'Custom CMS Field Types' },
     ],
-    heroImage: '',
-    heroImageAlt:
-      'Venture Studio Marketing Site & Headless CMS hero placeholder',
   },
   {
     id: 'proj-6',
@@ -509,8 +483,6 @@ export const commercialProjects: Project[] = [
       'Tailwind CSS',
       'Leaflet',
     ],
-    imageUrl: '',
-    imageAlt: 'Multi-Tenant HRIS & Field-Service SaaS project placeholder',
     category: 'commercial',
     eyebrow: 'Multi-Tenant B2B SaaS',
     meta: [
@@ -584,8 +556,6 @@ export const commercialProjects: Project[] = [
       { value: '5', label: 'PII Fields Encrypted' },
       { value: '6', label: 'Months in Development' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Multi-Tenant HRIS & Field-Service SaaS hero placeholder',
   },
   {
     id: 'proj-7',
@@ -603,8 +573,6 @@ export const commercialProjects: Project[] = [
       'Vercel AI SDK',
       'Stripe',
     ],
-    imageUrl: '',
-    imageAlt: 'AI-Powered Coaching Subscription Platform project placeholder',
     category: 'commercial',
     eyebrow: 'AI-Powered Coaching Platform',
     meta: [
@@ -675,8 +643,6 @@ export const commercialProjects: Project[] = [
       "Matched infrastructure choices pragmatically to a small team's existing tools rather than defaulting to a heavier stack.",
     ],
     stats: [{ value: '3-Step', label: 'Onboarding Funnel' }],
-    heroImage: '',
-    heroImageAlt: 'AI-Powered Coaching Subscription Platform hero placeholder',
   },
   {
     id: 'proj-8',
@@ -694,8 +660,6 @@ export const commercialProjects: Project[] = [
       'TanStack Query',
       'TanStack Table',
     ],
-    imageUrl: '',
-    imageAlt: 'Coaching Platform Admin Console project placeholder',
     category: 'commercial',
     eyebrow: 'Admin / Back-Office Web App',
     meta: [
@@ -767,8 +731,6 @@ export const commercialProjects: Project[] = [
       { value: '6', label: 'User Roles Supported' },
       { value: '8', label: 'Months in Development' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Coaching Platform Admin Console hero placeholder',
   },
   {
     id: 'proj-9',
@@ -787,8 +749,6 @@ export const commercialProjects: Project[] = [
       'Google Cloud',
       'TanStack Query',
     ],
-    imageUrl: '',
-    imageAlt: "Children's Media Platform project placeholder",
     category: 'commercial',
     eyebrow: "EdTech / Children's Media",
     meta: [
@@ -867,8 +827,6 @@ export const commercialProjects: Project[] = [
       { value: '8', label: 'Domain-Scoring Pipeline Stages' },
       { value: '3', label: 'Months in Development' },
     ],
-    heroImage: '',
-    heroImageAlt: "Children's Media Platform hero placeholder",
   },
   {
     id: 'proj-10',
@@ -886,8 +844,6 @@ export const commercialProjects: Project[] = [
       'MongoDB',
       'AWS S3',
     ],
-    imageUrl: '',
-    imageAlt: 'Creator & Developer Tooling Product Site project placeholder',
     category: 'commercial',
     eyebrow: 'Technology / Product Marketing',
     meta: [
@@ -968,8 +924,6 @@ export const commercialProjects: Project[] = [
       { value: '3', label: 'Custom CMS Plugins Built' },
       { value: '2', label: 'Months in Development' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Creator & Developer Tooling Product Site hero placeholder',
   },
   {
     id: 'proj-11',
@@ -986,8 +940,6 @@ export const commercialProjects: Project[] = [
       'Vite',
       'styled-components',
     ],
-    imageUrl: '',
-    imageAlt: '@bitnoi.se/react-scheduler project placeholder',
     category: 'commercial',
     eyebrow: 'Open Source npm Package',
     meta: [
@@ -1047,8 +999,6 @@ export const commercialProjects: Project[] = [
       { value: '86', label: 'Commits' },
       { value: '16', label: 'Months as Core Contributor' },
     ],
-    heroImage: '',
-    heroImageAlt: '@bitnoi.se/react-scheduler hero placeholder',
   },
   {
     id: 'proj-12',
@@ -1066,8 +1016,6 @@ export const commercialProjects: Project[] = [
       'Tailwind CSS',
       'Hono',
     ],
-    imageUrl: '',
-    imageAlt: 'Field Service Management — Marketing Site project placeholder',
     category: 'commercial',
     eyebrow: 'Field Service Management — Marketing Site',
     meta: [
@@ -1133,8 +1081,6 @@ export const commercialProjects: Project[] = [
       { value: '46', label: 'Commits' },
       { value: '5', label: 'Weeks (Solo Build)' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Field Service Management — Marketing Site hero placeholder',
   },
   {
     id: 'proj-13',
@@ -1151,8 +1097,6 @@ export const commercialProjects: Project[] = [
       'TanStack Query',
       'Jotai',
     ],
-    imageUrl: '',
-    imageAlt: 'Field Service Management — Mobile App project placeholder',
     category: 'commercial',
     eyebrow: 'Field Service Management — Mobile App',
     meta: [
@@ -1211,8 +1155,6 @@ export const commercialProjects: Project[] = [
       { value: '116', label: 'Commits' },
       { value: '3', label: 'Months (Sole Developer)' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Field Service Management — Mobile App hero placeholder',
   },
   {
     id: 'proj-14',
@@ -1231,8 +1173,6 @@ export const commercialProjects: Project[] = [
       'Redis',
       'Socket.IO',
     ],
-    imageUrl: '',
-    imageAlt: 'Multi-Tenant Field Service Management SaaS project placeholder',
     category: 'commercial',
     eyebrow: 'Multi-Tenant B2B SaaS',
     meta: [
@@ -1308,8 +1248,6 @@ export const commercialProjects: Project[] = [
       { value: '4', label: 'Tenant Organizations' },
       { value: '10', label: 'Months in Development' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Multi-Tenant Field Service Management SaaS hero placeholder',
   },
   {
     id: 'proj-15',
@@ -1327,8 +1265,6 @@ export const commercialProjects: Project[] = [
       'AWS',
       'Redis',
     ],
-    imageUrl: '',
-    imageAlt: 'Financial SaaS Backend project placeholder',
     category: 'commercial',
     eyebrow: 'Multi-Tenant B2B SaaS',
     meta: [
@@ -1386,8 +1322,6 @@ export const commercialProjects: Project[] = [
       { value: '14', label: 'Streaming Export Endpoints' },
       { value: '5-7', label: 'Tenant Organizations' },
     ],
-    heroImage: '',
-    heroImageAlt: 'Financial SaaS Backend hero placeholder',
   },
   {
     id: 'proj-16',
@@ -1405,9 +1339,6 @@ export const commercialProjects: Project[] = [
       'Three.js',
       'JSCAD',
     ],
-    imageUrl: '',
-    imageAlt:
-      'Orion — B2B Linear Rail Configurator & Technical Calculator project placeholder',
     category: 'commercial',
     eyebrow: 'B2B Configurator / Technical Calculator',
     meta: [
@@ -1478,9 +1409,6 @@ export const commercialProjects: Project[] = [
       { value: '64', label: 'Tickets Closed' },
       { value: '9', label: 'Months Active' },
     ],
-    heroImage: '',
-    heroImageAlt:
-      'Orion — B2B Linear Rail Configurator & Technical Calculator hero placeholder',
   },
 ];
 

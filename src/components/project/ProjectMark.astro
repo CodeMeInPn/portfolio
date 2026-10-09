@@ -1,0 +1,96 @@
+---
+import { getProjectMarkVariant, type ColorKey } from '../../lib/projectMark';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Pick<Project, 'category' | 'technologies'>;
+  size?: 'sm' | 'lg';
+}
+
+const { project, size = 'sm' } = Astro.props;
+const { shapeIndex, colorOrder } = getProjectMarkVariant(project);
+const px = size === 'lg' ? 64 : 40;
+
+// Literal class strings so Tailwind's scanner can see them — a template
+// literal built from `colorOrder` at runtime would not be picked up.
+const STROKE_CLASS: Record<ColorKey, string> = {
+  outer: 'stroke-section-snake-outer',
+  middle: 'stroke-section-snake-middle',
+  inner: 'stroke-section-snake-inner',
+};
+const FILL_TEXT_CLASS: Record<ColorKey, string> = {
+  outer: 'text-section-snake-outer',
+  middle: 'text-section-snake-middle',
+  inner: 'text-section-snake-inner',
+};
+
+const [c0, c1, c2] = colorOrder;
+const strokeClass0 = STROKE_CLASS[c0];
+const strokeClass1 = STROKE_CLASS[c1];
+const strokeClass2 = STROKE_CLASS[c2];
+const dotClass = FILL_TEXT_CLASS[c2];
+---
+
+<svg
+  class="project-mark shrink-0"
+  width={px}
+  height={px}
+  viewBox="0 0 48 48"
+  fill="none"
+  stroke-width="3"
+  stroke-linecap="round"
+  aria-hidden="true"
+>
+  {
+    shapeIndex === 0 && (
+      <>
+        <path class={strokeClass0} d="M8 32 C8 16 24 16 24 24 C24 32 40 32 40 16" />
+        <path class={strokeClass1} d="M16 10 L20 38" />
+        <circle class={dotClass} cx="34" cy="12" r="3" fill="currentColor" stroke="none" />
+      </>
+    )
+  }
+  {
+    shapeIndex === 1 && (
+      <>
+        <path class={strokeClass0} d="M8 8 L20 14 L8 20" />
+        <path class={strokeClass1} d="M8 20 L20 26 L8 32" />
+        <path class={strokeClass2} d="M8 32 L20 38 L8 44" />
+      </>
+    )
+  }
+  {
+    shapeIndex === 2 && (
+      <>
+        <path class={strokeClass0} d="M6 36 A20 20 0 0 1 42 20" />
+        <line class={strokeClass1} x1="10" y1="10" x2="38" y2="38" />
+        <circle class={dotClass} cx="36" cy="14" r="3" fill="currentColor" stroke="none" />
+      </>
+    )
+  }
+  {
+    shapeIndex === 3 && (
+      <>
+        <path class={strokeClass0} d="M24 6 A18 18 0 1 1 6 24" />
+        <path class={strokeClass1} d="M24 12 A12 12 0 1 1 12 24" />
+        <path class={strokeClass2} d="M24 18 A6 6 0 1 1 18 24" />
+      </>
+    )
+  }
+  {
+    shapeIndex === 4 && (
+      <>
+        <ellipse
+          class={strokeClass0}
+          cx="20"
+          cy="24"
+          rx="14"
+          ry="10"
+          transform="rotate(-20 20 24)"
+        />
+        <line class={strokeClass1} x1="10" y1="8" x2="40" y2="40" />
+        <circle class={dotClass} cx="30" cy="10" r="3" fill="currentColor" stroke="none" />
+      </>
+    )
+  }
+</svg>

@@ -18,6 +18,7 @@ Lefthook runs on pre-commit (eslint --fix, prettier --write, tsc --noEmit in par
 Astro 5 static site with Tailwind CSS v4 (configured via `@tailwindcss/vite` plugin, not `astro/integrations/tailwind`). Theme tokens are defined in `src/styles/global.css` under `@theme` — this is where colors and spacing live, not in a `tailwind.config.*` file.
 
 ### Path aliases (tsconfig.json)
+
 - `@components/*` → `src/components/*`
 - `@layouts/*` → `src/layouts/*`
 - `@pages/*` → `src/pages/*`
@@ -33,6 +34,7 @@ The core visual system is `Section.astro`, which wraps page content in a decorat
 The `offset` and `invertColor` options within `activeBars` accept position strings (`'top'`, `'bottom'`, `'left'`, `'right'`) to control visual alignment and color swap between inner/outer stripes.
 
 ### Key color tokens
+
 - `section-snake-outer`: `#ea171d` (red)
 - `section-snake-middle`: `#fe5c1e` (orange)
 - `section-snake-inner`: `#fec830` (yellow)

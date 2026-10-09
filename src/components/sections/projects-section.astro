@@ -1,6 +1,5 @@
 ---
-import ProjectCard from '@components/ProjectCard.astro';
-import ProjectModal from '@components/ProjectModal.astro';
+import ProjectListRow from '@components/project/ProjectListRow.astro';
 import Reveal from '@components/Reveal.astro';
 import Section from '@components/Section.astro';
 import SectionTitle from '@components/SectionTitle.astro';
@@ -22,11 +21,11 @@ import { commercialProjects, sideProjects } from '../../data/projects';
           Commercial
         </h3>
       </Reveal>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="flex flex-col gap-4 -mx-6 md:mx-0">
         {
           commercialProjects.map((project, index) => (
-            <Reveal delay={(index + 1) * 75} class="h-full">
-              <ProjectCard project={project} />
+            <Reveal delay={(index + 1) * 75}>
+              <ProjectListRow project={project} />
             </Reveal>
           ))
         }
@@ -41,17 +40,15 @@ import { commercialProjects, sideProjects } from '../../data/projects';
               Side Projects
             </h3>
           </Reveal>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="flex flex-col gap-4 -mx-6 md:mx-0">
             {sideProjects.map((project, index) => (
-              <Reveal delay={(commercialProjects.length + index + 2) * 75} class="h-full">
-                <ProjectCard project={project} />
+              <Reveal delay={(commercialProjects.length + index + 2) * 75}>
+                <ProjectListRow project={project} />
               </Reveal>
             ))}
           </div>
         </section>
       )
     }
-
-    <ProjectModal />
   </article>
 </Section>

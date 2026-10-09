@@ -3,6 +3,7 @@ import Button from '@components/Button.astro';
 import Reveal from '@components/Reveal.astro';
 
 const flapWords = ['React', 'Next.js', 'React Native', 'TypeScript'];
+const heroNameLetters = 'Piotr Nowak'.split('');
 ---
 
 <section id="hero" class="relative">
@@ -12,24 +13,41 @@ const flapWords = ['React', 'Next.js', 'React Native', 'TypeScript'];
     <div
       class="max-w-content-hero mx-auto px-4 md:px-8 relative z-10 mt-28 flex flex-col items-center text-center gap-6"
     >
-      {/* Kept independent of the page ribbon's own (much longer) reveal —
-          the text shouldn't wait for the ribbon to finish drawing itself
-          in, just stagger in shortly after the page loads. */}
-      <Reveal delay={200}>
-        <div class="hero-name-wrap">
-          <span
-            class="hero-name-shadow font-display text-6xl md:text-8xl"
-            aria-hidden="true"
-          >
-            Piotr Nowak
-          </span>
-          <h1
-            class="hero-name font-display text-6xl md:text-8xl text-on-background"
-          >
-            Piotr Nowak
-          </h1>
-        </div>
-      </Reveal>
+      {/* Not wrapped in <Reveal> — its IntersectionObserver fade would
+          overlap and muddy the letters' own drop-in animation below, so
+          this block handles its own entrance timing directly in CSS. */}
+      <div class="hero-name-wrap">
+        <span
+          class="hero-name-shadow hero-name-shadow--outer font-display text-6xl md:text-8xl"
+          aria-hidden="true"
+        >
+          Piotr Nowak
+        </span>
+        <span
+          class="hero-name-shadow hero-name-shadow--middle font-display text-6xl md:text-8xl"
+          aria-hidden="true"
+        >
+          Piotr Nowak
+        </span>
+        <span
+          class="hero-name-shadow hero-name-shadow--inner font-display text-6xl md:text-8xl"
+          aria-hidden="true"
+        >
+          Piotr Nowak
+        </span>
+        <h1 class="hero-name font-display text-6xl md:text-8xl text-on-background">
+          {
+            heroNameLetters.map((letter, i) => (
+              <span
+                class="hero-name__letter"
+                style={`animation-delay: ${0.25 + i * 0.045}s`}
+              >
+                {letter === ' ' ? ' ' : letter}
+              </span>
+            ))
+          }
+        </h1>
+      </div>
 
       <Reveal delay={350}>
         <p
@@ -100,35 +118,72 @@ const flapWords = ['React', 'Next.js', 'React Native', 'TypeScript'];
 </section>
 
 <style>
-  /* Poster-print misregistration effect on the name */
+  /* Poster-print misregistration effect on the name: three solid-color
+     plates (the same outer/middle/inner ribbon sequence used everywhere
+     else on the site) stacked at increasing offsets behind the real text,
+     instead of one gradient — a gradient spanning the whole word meant
+     each letter's "shadow" hue depended on its position, so it read as
+     near-invisible on one end and a jarring bright smear on the other. */
   .hero-name-wrap {
     position: relative;
     display: inline-block;
+    letter-spacing: -0.02em;
   }
 
   .hero-name-shadow {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    transform: translate(0.4rem, 0.4rem);
-    background-image: linear-gradient(
-      90deg,
-      var(--color-section-snake-deepest),
-      var(--color-section-snake-outer),
-      var(--color-section-snake-middle),
-      var(--color-section-snake-inner)
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
     pointer-events: none;
     user-select: none;
+    opacity: 0;
+    animation: hero-name-shadow-in 0.35s ease-out both;
+  }
+
+  @keyframes hero-name-shadow-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .hero-name-shadow--outer {
+    z-index: 0;
+    color: var(--color-section-snake-outer);
+    transform: translate(0.1em, 0.1em);
+    animation-delay: 0s;
+  }
+
+  .hero-name-shadow--middle {
+    z-index: 1;
+    color: var(--color-section-snake-middle);
+    transform: translate(0.07em, 0.07em);
+    animation-delay: 0.1s;
+  }
+
+  .hero-name-shadow--inner {
+    z-index: 2;
+    color: var(--color-section-snake-inner);
+    transform: translate(0.04em, 0.04em);
+    animation-delay: 0.2s;
   }
 
   .hero-name {
     position: relative;
-    z-index: 1;
+    z-index: 3;
+    -webkit-text-stroke: 0.02em var(--color-on-background);
+  }
+
+  .hero-name__letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-140%) rotate(-8deg);
+    animation: hero-name-letter-drop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  @keyframes hero-name-letter-drop {
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
   }
 
   /* Drop-and-bounce word cycle */
@@ -212,13 +267,24 @@ const flapWords = ['React', 'Next.js', 'React Native', 'TypeScript'];
 
   @media (prefers-reduced-motion: reduce) {
     .hero-flap__word,
-    .hero-scroll-cue {
+    .hero-scroll-cue,
+    .hero-name-shadow,
+    .hero-name__letter {
       animation: none;
     }
 
     .hero-flap__word:first-child {
       opacity: 1;
       transform: translateY(0%);
+    }
+
+    .hero-name-shadow {
+      opacity: 1;
+    }
+
+    .hero-name__letter {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>

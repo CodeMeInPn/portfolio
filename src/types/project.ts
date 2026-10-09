@@ -5,8 +5,6 @@ export interface Project {
   shortDescription: string;
   fullDescription: string;
   technologies: string[];
-  imageUrl: string;
-  imageAlt: string;
   category: 'commercial' | 'side';
   eyebrow?: string;
   meta?: { label: string; value: string }[];
@@ -15,6 +13,4 @@ export interface Project {
   keyFeatures?: string[];
   highlights?: string[];
   stats?: { value: string; label: string }[];
-  heroImage?: string;
-  heroImageAlt?: string;
 }

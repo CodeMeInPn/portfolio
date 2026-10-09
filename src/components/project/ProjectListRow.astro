@@ -1,0 +1,112 @@
+---
+import ProjectMark from './ProjectMark.astro';
+import type { Project } from '../../types/project';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { slug, title, shortDescription, technologies } = project;
+
+const MAX_VISIBLE_TECH = 3;
+const visibleTech = technologies.slice(0, MAX_VISIBLE_TECH);
+const remainingCount = technologies.length - visibleTech.length;
+---
+
+<a
+  href={`/projects/${slug}`}
+  class="project-row grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_16rem] items-center gap-x-4 gap-y-3 md:gap-x-5"
+>
+  <ProjectMark project={project} size="sm" />
+
+  <span class="flex min-w-0 flex-col gap-1">
+    <span class="font-display text-xl text-on-background">{title}</span>
+    <span class="text-sm text-on-surface-variant line-clamp-1">
+      {shortDescription}
+    </span>
+  </span>
+
+  <div
+    class="project-row__tech hidden md:flex md:flex-col gap-2"
+    role="list"
+    aria-label="Technologies"
+  >
+    <div class="flex flex-nowrap justify-start gap-2">
+      {
+        visibleTech.map((tech) => (
+          <span
+            role="listitem"
+            class="max-w-28 truncate px-2 py-1 text-xs rounded-md bg-surface-container-high text-on-surface-variant"
+            title={tech}
+          >
+            {tech}
+          </span>
+        ))
+      }
+    </div>
+    {
+      remainingCount > 0 && (
+        <div class="flex flex-nowrap justify-start gap-2">
+          <span
+            role="listitem"
+            class="px-2 py-1 text-xs rounded-md bg-surface-container-high text-on-surface-variant"
+          >
+            +{remainingCount} more
+          </span>
+        </div>
+      )
+    }
+  </div>
+</a>
+
+<style>
+  /* Each row is its own bordered box at rest (parent uses gaps, not
+     divide-y, see projects-section.astro) — a hairline divider alone read
+     as too little separation and left the list looking like a solid block
+     of text at a glance. */
+  .project-row {
+    position: relative;
+    border-radius: 1rem;
+    border: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface-container);
+    padding: 1.25rem 1rem;
+    text-decoration: none;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  @media (min-width: 48rem) {
+    .project-row {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+
+  .project-row:focus-visible {
+    z-index: 1;
+    background-color: var(--color-surface-container-high);
+    box-shadow: 0 6px 0 0 var(--color-primary);
+    transform: scale(1.02);
+  }
+
+  /* `hover: hover` excludes touch devices, where `:hover` can otherwise
+     stick after a tap until the user taps elsewhere. */
+  @media (hover: hover) {
+    .project-row:hover {
+      z-index: 1;
+      background-color: var(--color-surface-container-high);
+      box-shadow: 0 6px 0 0 var(--color-primary);
+      transform: scale(1.02);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-row {
+      transition: none;
+    }
+  }
+</style>
