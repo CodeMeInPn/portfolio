@@ -4,6 +4,7 @@ import Reveal from '@components/Reveal.astro';
 
 const flapWords = ['React', 'Next.js', 'React Native', 'TypeScript'];
 const heroNameLetters = 'Piotr Nowak'.split('');
+const heroNameShadowPlates = ['outer', 'middle', 'inner'] as const;
 ---
 
 <section id="hero" class="relative">
@@ -17,24 +18,23 @@ const heroNameLetters = 'Piotr Nowak'.split('');
           overlap and muddy the letters' own drop-in animation below, so
           this block handles its own entrance timing directly in CSS. */}
       <div class="hero-name-wrap">
-        <span
-          class="hero-name-shadow hero-name-shadow--outer font-display text-6xl md:text-8xl"
-          aria-hidden="true"
-        >
-          Piotr Nowak
-        </span>
-        <span
-          class="hero-name-shadow hero-name-shadow--middle font-display text-6xl md:text-8xl"
-          aria-hidden="true"
-        >
-          Piotr Nowak
-        </span>
-        <span
-          class="hero-name-shadow hero-name-shadow--inner font-display text-6xl md:text-8xl"
-          aria-hidden="true"
-        >
-          Piotr Nowak
-        </span>
+        {/* Plates are split into inline-block letters exactly like the h1:
+            per-letter boxes drop kerning, so plain-text plates would be
+            kerned differently and drift out of line with the white name. */}
+        {
+          heroNameShadowPlates.map((plate) => (
+            <span
+              class={`hero-name-shadow hero-name-shadow--${plate} font-display text-6xl md:text-8xl`}
+              aria-hidden="true"
+            >
+              {heroNameLetters.map((letter) => (
+                <span class="hero-name-shadow__letter">
+                  {letter === ' ' ? ' ' : letter}
+                </span>
+              ))}
+            </span>
+          ))
+        }
         <h1 class="hero-name font-display text-6xl md:text-8xl text-on-background">
           {
             heroNameLetters.map((letter, i) => (
@@ -137,6 +137,10 @@ const heroNameLetters = 'Piotr Nowak'.split('');
     user-select: none;
     opacity: 0;
     animation: hero-name-shadow-in 0.35s ease-out both;
+  }
+
+  .hero-name-shadow__letter {
+    display: inline-block;
   }
 
   @keyframes hero-name-shadow-in {
