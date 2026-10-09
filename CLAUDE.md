@@ -24,19 +24,19 @@ Astro 5 static site with Tailwind CSS v4 (configured via `@tailwindcss/vite` plu
 - `@pages/*` → `src/pages/*`
 - `utils/cn` (no alias) → `utils/cn.tsx` — the `cn()` helper combining `cva` + `tailwind-merge`
 
-### Section system
+### Section system and page ribbon
 
-The core visual system is `Section.astro`, which wraps page content in a decorative frame. Each section accepts:
+`Section.astro` wraps each page section: a `.section-ribbon-gap` spacer followed by a centered `.section-ribbon-content` column. Its `spacing` prop is `'ribbon'` (default; tall gap so the home-page ribbon can cross between sections) or `'compact'` (pages without the ribbon, e.g. `projects/[slug].astro`).
 
-- `activeBars` — renders colored stripe bars (`Bar.astro`) at horizontal (top strip) and/or vertical-left/right positions. Bars consist of three colored divs (`section-snake-outer`, `section-snake-middle`, `section-snake-inner`) that can be inverted and offset.
-- `activeConnectors` — renders quarter-circle SVG connectors (`Connector.astro`) at corners (top-left, top-right, bottom-left, bottom-right, bottom-left-inverted). Connector color changes based on position variant.
-
-The `offset` and `invertColor` options within `activeBars` accept position strings (`'top'`, `'bottom'`, `'left'`, `'right'`) to control visual alignment and color swap between inner/outer stripes.
+`PageRibbon.astro` (home page only, `lg` and up; scales down to fit the right gutter) draws the decorative ribbon as one absolutely positioned SVG built client-side. It measures `#hero` and the `#about`, `#projects` and `#contact` sections, builds a spine (hero loop, then S-shaped crossings inside each section's ribbon gap), and offsets it into four stripes. Geometry helpers live in `src/lib/ribbon.ts`. Renaming those section ids or the `section-ribbon-*` classes breaks the ribbon silently — `buildSpine()` just returns `null`.
 
 ### Key color tokens
 
-- `section-snake-outer`: `#ea171d` (red)
-- `section-snake-middle`: `#fe5c1e` (orange)
-- `section-snake-inner`: `#fec830` (yellow)
+Defined in `src/styles/global.css` under `@theme`:
 
-These are used exclusively by `Bar.astro` and `Connector.astro` to produce the brand stripe pattern.
+- `section-snake-deepest`: `#452125`
+- `section-snake-outer`: `#e16026`
+- `section-snake-middle`: `#ea8d2d`
+- `section-snake-inner`: `#e4b53f`
+
+Used by the ribbon (`src/lib/ribbon.ts`) and the smaller stripe accents (`TriStripe`, `ProjectMark`, `ProjectStatStrip`, `Nav`, hero section).

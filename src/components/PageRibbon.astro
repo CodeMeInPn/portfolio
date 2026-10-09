@@ -1,7 +1,7 @@
 ---
 ---
 
-<svg id="page-ribbon" class="page-ribbon hidden md:block" aria-hidden="true"></svg>
+<svg id="page-ribbon" class="page-ribbon hidden lg:block" aria-hidden="true"></svg>
 
 <style>
   .page-ribbon {
@@ -58,9 +58,8 @@
     buildCrossing,
     buildLoop,
     buildStripes,
+    BUNDLE_HALF_WIDTH,
     distributeWords,
-    STRIPE_SPACING,
-    STRIPE_WIDTH,
     type Pt,
     type Stripe,
   } from '../lib/ribbon';
@@ -79,15 +78,26 @@
   // innermost stripe's stroke overlaps itself through the curve instead of
   // tracing a clean arc — that self-overlap is what rendered as a blocky
   // rectangle at the old, too-tight radius.
-  const MIN_CLEAN_RADIUS = 1.5 * STRIPE_SPACING + STRIPE_WIDTH / 2 + 16;
+  const MIN_CLEAN_RADIUS = BUNDLE_HALF_WIDTH + 16;
   const TURN_RADIUS = MIN_CLEAN_RADIUS;
-  // The hero loop's ideal radius — used when there's room for it. Its exit
-  // lands exactly on the content-hugging line (xRight), so unlike the
-  // section-to-section crossings there's no separate lateral shift after
-  // it; the loop's own radius is what has to fit in whatever gutter sits
-  // between that line and the viewport edge, so it's clamped down instead
-  // of forcing MIN_CLEAN_RADIUS and overflowing on narrower desktop widths.
+  // The hero loop's ideal radius at full scale, used when there's room for
+  // it. Its exit lands exactly on the content-hugging line (xRight), so the
+  // whole loop has to fit in the gutter between that line and the viewport
+  // edge.
   const DESIRED_LOOP_RADIUS = 90;
+  // Gutter (content edge -> viewport edge, minus EDGE_MARGIN) a full-size
+  // ribbon needs on the right: content gap + a clean loop's diameter + the
+  // bundle's reach past the loop's outer edge. Narrower gutters scale the
+  // whole ribbon down by gutter / this, so the loop stays clean and on-screen
+  // instead of pinching or getting clipped by the viewport.
+  const FULL_SCALE_GUTTER = CONTENT_GAP + 2 * MIN_CLEAN_RADIUS + BUNDLE_HALF_WIDTH;
+  // Below this the stripes are too thin to read as a ribbon; skip drawing.
+  const MIN_SCALE = 0.25;
+  // Words sit inside a stripe, so they shrink with it, up to this size;
+  // below WORD_MIN_FONT_PX they're illegible and left out.
+  const WORD_FONT_PX = 14;
+  const WORD_FONT_TO_STRIPE = 0.7;
+  const WORD_MIN_FONT_PX = 9;
   const LOOP_Y_FROM_HERO_TOP = 150;
   const ARC_STEPS = 28;
   const LOOP_STEPS = 120;
@@ -104,7 +114,7 @@
     if (!svg) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const mq = window.matchMedia('(min-width: 768px)');
+    const mq = window.matchMedia('(min-width: 1024px)');
 
     let hasRevealed = false;
     let rafId: number | null = null;
@@ -116,7 +126,7 @@
       return rectTop + window.scrollY;
     }
 
-    function buildSpine(): Pt[] | null {
+    function buildSpine(): { spine: Pt[]; scale: number } | null {
       const heroEl = document.getElementById('hero');
       const content = document.querySelector<HTMLElement>('#about .section-ribbon-content');
       const aboutGap = document.querySelector<HTMLElement>('#about .section-ribbon-gap');
@@ -145,31 +155,33 @@
       // clientWidth (not innerWidth) excludes the scrollbar gutter, which
       // matters here since the svg is sized to this value directly.
       const vw = document.documentElement.clientWidth;
-      // Hug the actual content column instead of the viewport edge.
-      const xRight = contentRect.right + CONTENT_GAP;
-      const xLeft = contentRect.left - CONTENT_GAP;
 
-      // The loop's exit sits directly on xRight, so its own radius has to
-      // fit within whatever gutter is actually available out to the
-      // viewport edge at this width — content maxes out at 75rem, so on
-      // common desktop widths that gutter is nowhere near 2x a full-size
-      // loop's diameter. A fixed radius either overflowed the viewport or
-      // (when a follow-up crossing tried to shift it back in afterward)
-      // produced a shift smaller than the crossing's own radius, which
-      // made the S-curve fold back on itself — the "rectangle" artifact.
-      const loopGutter = vw - EDGE_MARGIN - xRight;
-      // Never exceeds loopGutter / 2 — that would overflow the viewport —
-      // even though that can mean settling for less than MIN_CLEAN_RADIUS
-      // on a narrower desktop width. A slightly tight loop reads fine; an
-      // overflowing one or a folded-back crossing doesn't.
-      const loopRadius = Math.max(20, Math.min(DESIRED_LOOP_RADIUS, loopGutter / 2));
+      // Content maxes out at 75rem but is 3/4 of the viewport below that,
+      // so on common desktop widths the right gutter can't hold a
+      // full-size ribbon. Shrinking every dimension by the same factor
+      // keeps the loop clean (radius never under the scaled
+      // MIN_CLEAN_RADIUS) and its outer stripe inside the viewport.
+      const rightGutter = vw - EDGE_MARGIN - contentRect.right;
+      const scale = Math.min(1, rightGutter / FULL_SCALE_GUTTER);
+      if (scale < MIN_SCALE) return null;
+
+      // Hug the actual content column instead of the viewport edge.
+      const xRight = contentRect.right + CONTENT_GAP * scale;
+      const xLeft = contentRect.left - CONTENT_GAP * scale;
+      const turnRadius = TURN_RADIUS * scale;
+
+      // The loop's exit sits on xRight, so the loop plus the bundle's
+      // reach past its outer edge must fit between xRight and the edge.
+      // Below full scale this works out to exactly MIN_CLEAN_RADIUS * scale.
+      const loopGutter = vw - EDGE_MARGIN - xRight - BUNDLE_HALF_WIDTH * scale;
+      const loopRadius = Math.min(DESIRED_LOOP_RADIUS, loopGutter / 2);
       const loopCenter: Pt = {
         x: xRight + loopRadius,
         y: heroTop + LOOP_Y_FROM_HERO_TOP,
       };
       const entryY = loopCenter.y + loopRadius;
 
-      return [
+      const spine = [
         { x: 0, y: entryY },
         { x: loopCenter.x, y: entryY },
         ...buildLoop(loopCenter, loopRadius, LOOP_STEPS),
@@ -178,13 +190,14 @@
         // boundary — crossing the entry line once on the way, like any
         // ribbon crossing itself, but with no further lateral shift needed.
         { x: xRight, y: aboutGapTop },
-        ...buildCrossing(xRight, xRight, aboutGapTop, aboutGapBottom, TURN_RADIUS, ARC_STEPS),
+        ...buildCrossing(xRight, xRight, aboutGapTop, aboutGapBottom, turnRadius, ARC_STEPS),
         { x: xRight, y: projectsGapTop },
-        ...buildCrossing(xRight, xLeft, projectsGapTop, projectsGapBottom, TURN_RADIUS, ARC_STEPS),
+        ...buildCrossing(xRight, xLeft, projectsGapTop, projectsGapBottom, turnRadius, ARC_STEPS),
         { x: xLeft, y: contactGapTop },
-        ...buildCrossing(xLeft, xRight, contactGapTop, contactGapBottom, TURN_RADIUS, ARC_STEPS),
+        ...buildCrossing(xLeft, xRight, contactGapTop, contactGapBottom, turnRadius, ARC_STEPS),
         { x: xRight, y: contactBottom },
       ];
+      return { spine, scale };
     }
 
     function stopRunners() {
@@ -222,7 +235,7 @@
       path.setAttribute('d', stripe.d);
       path.setAttribute('fill', 'none');
       path.setAttribute('stroke', stripe.color);
-      path.setAttribute('stroke-width', String(STRIPE_WIDTH));
+      path.setAttribute('stroke-width', String(stripe.width));
       path.setAttribute('stroke-linecap', 'round');
       path.setAttribute('pathLength', String(stripe.length));
       path.classList.add('page-ribbon__band');
@@ -296,8 +309,14 @@
         return;
       }
 
-      const spine = buildSpine();
-      if (!spine) return;
+      const built = buildSpine();
+      if (!built) {
+        // Too narrow to draw now — clear any ribbon left from a wider build.
+        stopRunners();
+        svg.replaceChildren();
+        return;
+      }
+      const { spine, scale } = built;
 
       const isFirstBuild = !hasRevealed;
       // clientWidth (not innerWidth) excludes the scrollbar gutter, which
@@ -307,7 +326,7 @@
       svg.setAttribute('width', String(vw));
       svg.setAttribute('height', String(docHeight));
 
-      const stripes = buildStripes(spine);
+      const stripes = buildStripes(spine, scale);
       const contactBottom = spine[spine.length - 1].y;
 
       stopRunners();
@@ -326,7 +345,8 @@
       }
 
       const totalWords = Math.max(4, Math.round((nativeLengths.get('middle') ?? 0) / WORD_PX_PER_WORD));
-      const words = distributeWords(stripes, totalWords);
+      const fontPx = Math.min(WORD_FONT_PX, stripes[0].width * WORD_FONT_TO_STRIPE);
+      const words = fontPx >= WORD_MIN_FONT_PX ? distributeWords(stripes, totalWords) : [];
 
       runners = [];
       for (const w of words) {
@@ -335,6 +355,7 @@
 
         const text = document.createElementNS(SVG_NS, 'text');
         text.classList.add('page-ribbon__word');
+        text.style.fontSize = `${fontPx}px`;
         const textPath = document.createElementNS(SVG_NS, 'textPath');
         textPath.classList.add('page-ribbon__wordpath');
         textPath.setAttribute('href', `#page-ribbon-band-${w.stripeName}`);

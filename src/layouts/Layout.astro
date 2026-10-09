@@ -1,5 +1,5 @@
 ---
-import Background from '@components/background.astro';
+import Background from '@components/Background.astro';
 import Nav from '@components/Nav.astro';
 import '../styles/global.css';
 
@@ -34,6 +34,15 @@ const { title, description } = Astro.props;
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+    {/* Reveal.astro hides content until its observer runs; without JS it never would. */}
+    <noscript>
+      <style is:inline>
+        :root [data-reveal] {
+          opacity: 1;
+          transform: none;
+        }
+      </style>
+    </noscript>
     <meta name="generator" content={Astro.generator} />
     <title>{title ?? 'CodeMeIn Piotr Nowak'}</title>
     {description && <meta name="description" content={description} />}

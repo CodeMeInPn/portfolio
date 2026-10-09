@@ -130,6 +130,8 @@ export type StripeName = 'deepest' | 'outer' | 'middle' | 'inner';
 
 export const STRIPE_WIDTH = 32;
 export const STRIPE_SPACING = 32;
+/** How far the outermost stripe's edge reaches from the spine, at scale 1. */
+export const BUNDLE_HALF_WIDTH = 1.5 * STRIPE_SPACING + STRIPE_WIDTH / 2;
 
 // Centered symmetrically around the spine (rather than spine-as-left-edge)
 // so the bundle's max offset magnitude is minimized for a given width —
@@ -170,22 +172,25 @@ export type Stripe = {
   name: StripeName;
   color: string;
   delay: number;
+  width: number;
   d: string;
   length: number;
 };
 
-export function buildStripes(spine: Pt[]): Stripe[] {
+/** `scale` shrinks stripe width and spacing together so the bundle keeps its proportions. */
+export function buildStripes(spine: Pt[], scale = 1): Stripe[] {
   const normals = computeNormals(spine);
   return STRIPE_DEFS.map((def) => {
     const pts = offsetPoints(
       spine,
       normals,
-      def.offsetMultiplier * STRIPE_SPACING
+      def.offsetMultiplier * STRIPE_SPACING * scale
     );
     return {
       name: def.name,
       color: def.color,
       delay: def.delay,
+      width: STRIPE_WIDTH * scale,
       d: toPathD(pts),
       length: pathLength(pts),
     };
