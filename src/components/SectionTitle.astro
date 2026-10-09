@@ -1,4 +1,6 @@
 ---
+import TriStripe from '@components/TriStripe.astro';
+
 interface Props {
   title: string;
   id?: string;
@@ -12,8 +14,4 @@ const Tag = tag;
 <Tag id={id} class="font-display text-5xl md:text-7xl text-on-background mb-3">
   {title}
 </Tag>
-<div class="flex h-1 w-20 mb-10">
-  <div class="flex-1 bg-section-snake-outer"></div>
-  <div class="flex-1 bg-section-snake-middle"></div>
-  <div class="flex-1 bg-section-snake-inner"></div>
-</div>
+<TriStripe class="h-1 w-20 mb-10" />

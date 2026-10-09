@@ -1,8 +1,11 @@
 ---
+import BandHeading from '@components/BandHeading.astro';
+import Button from '@components/Button.astro';
 import Reveal from '@components/Reveal.astro';
 import Section from '@components/Section.astro';
 import SectionTitle from '@components/SectionTitle.astro';
 import StatCard from '@components/StatCard.astro';
+import TriStripe from '@components/TriStripe.astro';
 import { commercialProjects, sideProjects } from '../../data/projects';
 import astroIcon from '../../assets/icons/astro-icon.svg';
 import drizzleIcon from '../../assets/icons/drizzle-icon.svg';
@@ -34,13 +37,52 @@ const technologies = [
 
 const marqueeItems = [...technologies, ...technologies];
 
+const yearsOfExperience = 4;
 const projectCount = commercialProjects.length + sideProjects.length;
 
-const capabilities = [
-  'Designing APIs & data models',
-  'Advanced filtering & segmentation systems',
-  'Role-based access control',
-  'Responsive, user-focused interfaces',
+interface AboutItem {
+  title: string;
+  description: string;
+}
+
+const capabilities: AboutItem[] = [
+  {
+    title: 'APIs & data models',
+    description:
+      'Schemas and endpoints that stay fast and maintainable as the product grows.',
+  },
+  {
+    title: 'Advanced filtering & segmentation',
+    description:
+      'Complex query and segmentation logic that goes well beyond standard CRUD.',
+  },
+  {
+    title: 'Role-based access control',
+    description:
+      'Permission systems that put the right data in front of the right people.',
+  },
+  {
+    title: 'Responsive, user-focused interfaces',
+    description:
+      'Web and mobile UIs built with React and React Native that feel natural on any screen.',
+  },
+];
+
+const principles: AboutItem[] = [
+  {
+    title: 'Fit over trends',
+    description: 'I pick tools for the problem, not the hype.',
+  },
+  {
+    title: 'Root cause over quick fix',
+    description:
+      'Understanding problems fully leads to stable systems and clearer code.',
+  },
+  {
+    title: 'AI-driven, pragmatic',
+    description:
+      'I use tools like Claude Code to iterate faster, and keep only what works.',
+  },
 ];
 ---
 
@@ -50,180 +92,197 @@ const capabilities = [
       <SectionTitle title="About Me" id="about-heading" />
     </Reveal>
 
-    <Reveal class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-      <StatCard value="4+" label="Years Experience" />
-      <StatCard value={`${projectCount}+`} label="Projects Delivered" />
-      <StatCard value="1" label="npm Package Published" />
-    </Reveal>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <Reveal class="md:col-span-2 space-y-4 text-xl text-on-background">
-        <p>
-          I'm a Fullstack Developer with 4 years of commercial experience,
-          building web and mobile applications with a focus on real-world
-          usability and solid architecture. I work across the entire stack,
-          taking ownership of key areas along the way:
-        </p>
-
-        <ul class="flex flex-col gap-3 text-lg">
-          {capabilities.map((point, index) => (
-            <li class="flex items-start gap-3">
-              <span class="font-display flex size-6 shrink-0 items-center justify-center rounded bg-primary text-xs text-on-primary mt-0.5">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span>{point}</span>
-            </li>
-          ))}
-        </ul>
-
-        <p>
-          My core stack includes React, Next.js, React Native, and
-          TypeScript, supported by Strapi, Payload, Prisma, and Drizzle —
-          I've worked with multiple frameworks across several <a
-            href="#projects"
-            class="projects-link">projects</a
-          > of varying complexity and choose tools based on fit rather than trends.
-        </p>
-
-        <a
-          href="https://www.npmjs.com/package/@bitnoi.se/react-scheduler"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="npm-card hard-shadow-hover block"
-          style="--hard-shadow-offset: 5px"
-          aria-label="@bitnoi.se/react-scheduler on npm"
+    <div class="flex flex-col gap-16 md:gap-28">
+      {/* Band 1 — intro. Full width until the profile photo exists (Phase 5). */}
+      <Reveal class="max-w-4xl">
+        <p
+          class="font-display text-2xl sm:text-4xl md:text-5xl leading-tight text-on-background mb-6"
         >
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-base text-on-surface-variant mb-1">
-                Lead programmer
-              </p>
-              <code class="text-primary font-mono text-lg"
-                >@bitnoi.se/react-scheduler</code
-              >
-            </div>
-            <span class="text-on-surface-variant text-sm shrink-0 mt-1"
-              >↗ npm</span
-            >
-          </div>
-          <div class="flex gap-3 mt-3">
-            <a
-              href="https://github.com/Bitnoise/react-scheduler"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-sm text-on-surface-variant hover:text-primary transition-colors"
-              onclick="event.stopPropagation()"
-            >
-              GitHub ↗
-            </a>
-            <span class="text-outline-variant">·</span>
-            <span class="text-sm text-on-surface-variant">
-              Open-source React scheduling component
-            </span>
-          </div>
-        </a>
-
-        <p>
-          I'm AI-driven in my workflow and stay pragmatic about new
-          technologies — I adopt what works and discard what doesn't. I focus
-          on understanding problems at their root, which leads to more stable
-          systems and clearer code.
+          I build web and mobile apps that hold up in the real world, from data
+          model to interface.
+        </p>
+        <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl">
+          Fullstack Developer with {yearsOfExperience} years of commercial
+          experience. I work across the entire stack, often taking ownership of
+          key areas, and choose tools based on fit rather than trends.
         </p>
       </Reveal>
 
-      <Reveal delay={150} class="md:col-span-1 flex items-start justify-center">
-        <div class="relative w-full">
-          <div
-            aria-hidden="true"
-            class="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-gradient-to-br from-section-snake-outer via-section-snake-middle to-section-snake-inner"
-          >
-          </div>
-          <div
-            role="img"
-            aria-label="Profile photo coming soon"
-            class="relative w-full aspect-[3/4] bg-surface-container-high rounded-2xl border-2 border-outline-variant flex items-center justify-center"
-          >
-            <span class="font-display text-xl text-on-background text-center px-4">
-              Photo coming soon
-            </span>
-          </div>
-        </div>
+      {/* Band 2 — stats. */}
+      <Reveal class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <StatCard value={`${yearsOfExperience}+`} label="Years Experience" />
+        <StatCard value={`${projectCount}+`} label="Projects Delivered" />
+        <StatCard value="1" label="npm Package Published" />
       </Reveal>
-    </div>
 
-    <Reveal delay={200} class="mt-12">
-      <section aria-label="Technologies">
-        <h3 class="font-display text-3xl text-on-background mb-6">Technologies</h3>
-        <div class="overflow-hidden marquee-fade">
-          <div class="flex animate-marquee gap-12 w-max" aria-hidden="true">
-            {
-              marqueeItems.map((tech) => (
-                <div class="flex flex-col items-center gap-2 shrink-0">
-                  {tech.icon ? (
-                    <div
-                      class:list={[
-                        'size-20 rounded-xl flex items-center justify-center p-2.5',
-                        tech.darkTile
-                          ? 'bg-inverse-surface'
-                          : 'bg-surface-container',
-                      ]}
-                    >
-                      <img
-                        src={tech.icon.src}
-                        alt=""
-                        class="size-full object-contain"
-                      />
-                    </div>
-                  ) : (
-                    <div
-                      role="img"
-                      aria-label={`${tech.name} icon coming soon`}
-                      class="size-20 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant text-xs text-center px-1"
-                    >
-                      SVG
-                    </div>
-                  )}
-                  <span class="text-sm text-on-surface-variant">
-                    {tech.name}
-                  </span>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+      {/* Band 3 — what I do. Tiles bleed to the article edge on mobile,
+          matching the project rows in projects-section.astro. */}
+      <section aria-labelledby="about-capabilities-heading">
+        <Reveal>
+          <BandHeading id="about-capabilities-heading" title="What I do" />
+        </Reveal>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 -mx-6 md:mx-0">
+          {
+            capabilities.map((capability, index) => (
+              <li>
+                <Reveal delay={(index + 1) * 75} class="h-full">
+                  <div class="about-tile h-full">
+                    <h4 class="font-display text-xl text-on-background mb-2">
+                      {capability.title}
+                    </h4>
+                    <p class="text-base text-on-surface-variant">
+                      {capability.description}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))
+          }
+        </ul>
       </section>
-    </Reveal>
+
+      {/* Band 4 — open source. The card itself isn't a link, so npm and
+          GitHub can be two sibling links instead of one nested in another. */}
+      <section aria-labelledby="about-oss-heading">
+        <Reveal>
+          <BandHeading id="about-oss-heading" title="Open source" />
+        </Reveal>
+        <Reveal delay={75} class="-mx-6 md:mx-0">
+          <div class="oss-card">
+            <p class="text-base text-on-surface-variant mb-1">
+              Lead programmer
+            </p>
+            <code
+              class="block text-on-background font-mono text-lg sm:text-xl md:text-2xl mb-2 break-all"
+              >@bitnoi.se/react-scheduler</code
+            >
+            <p class="text-base md:text-lg text-on-background mb-6">
+              Open-source React scheduling component, built to be reused well
+              beyond a single project.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <Button
+                href="https://www.npmjs.com/package/@bitnoi.se/react-scheduler"
+                target="_blank"
+                variant="primary"
+                icon="↗"
+                iconPosition="right"
+                ariaLabel="@bitnoi.se/react-scheduler on npm"
+              >
+                npm
+              </Button>
+              <Button
+                href="https://github.com/Bitnoise/react-scheduler"
+                target="_blank"
+                variant="secondary"
+                icon="↗"
+                iconPosition="right"
+                ariaLabel="@bitnoi.se/react-scheduler on GitHub"
+              >
+                GitHub
+              </Button>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Band 5 — how I work. */}
+      <section aria-labelledby="about-principles-heading">
+        <Reveal>
+          <BandHeading id="about-principles-heading" title="How I work" />
+        </Reveal>
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            principles.map((principle, index) => (
+              <li>
+                <Reveal delay={(index + 1) * 75}>
+                  <TriStripe class="h-1 w-10 mb-4" />
+                  <h4 class="font-display text-2xl text-on-background mb-2">
+                    {principle.title}
+                  </h4>
+                  <p class="text-base text-on-surface-variant">
+                    {principle.description}
+                  </p>
+                </Reveal>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      {/* Band 6 — technologies. */}
+      <section aria-labelledby="about-tech-heading">
+        <Reveal>
+          <BandHeading id="about-tech-heading" title="Technologies" />
+        </Reveal>
+        <Reveal delay={75}>
+          <div class="overflow-hidden marquee-fade">
+            <div class="flex animate-marquee gap-12 w-max" aria-hidden="true">
+              {
+                marqueeItems.map((tech) => (
+                  <div class="flex flex-col items-center gap-2 shrink-0">
+                    {tech.icon ? (
+                      <div
+                        class:list={[
+                          'size-20 rounded-xl flex items-center justify-center p-2.5',
+                          tech.darkTile
+                            ? 'bg-inverse-surface'
+                            : 'bg-surface-container',
+                        ]}
+                      >
+                        <img
+                          src={tech.icon.src}
+                          alt=""
+                          class="size-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        role="img"
+                        aria-label={`${tech.name} icon coming soon`}
+                        class="size-20 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant text-xs text-center px-1"
+                      >
+                        SVG
+                      </div>
+                    )}
+                    <span class="text-sm text-on-surface-variant">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    </div>
   </article>
 </Section>
 
 <style>
-  .projects-link {
-    background-image: linear-gradient(
-      var(--color-section-snake-inner),
-      var(--color-section-snake-inner)
-    );
-    font-weight: 600;
-    background-size: 0% 100%;
-    background-position: left center;
-    background-repeat: no-repeat;
-    transition: background-size 0.35s ease;
-  }
-
-  .projects-link:hover {
-    background-size: 100% 100%;
-    color: var(--color-on-background);
-  }
-
-  .npm-card {
+  .about-tile {
     border: 2px solid var(--color-outline-variant);
     background-color: var(--color-surface-container);
     border-radius: 1rem;
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 1rem;
   }
 
-  @media (hover: hover) {
-    .npm-card:hover {
-      background-color: var(--color-surface-container-high);
+  .oss-card {
+    border: 2px solid var(--color-outline-variant);
+    background-color: var(--color-surface-container);
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Mobile padding matches .project-row (ProjectListRow.astro), since both
+     bleed to the article edge below md. */
+  @media (min-width: 48rem) {
+    .about-tile {
+      padding: 1.5rem;
+    }
+
+    .oss-card {
+      padding: 2rem 2.5rem;
     }
   }
 

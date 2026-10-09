@@ -1,0 +1,20 @@
+---
+import { cn } from 'utils/cn';
+
+interface Props {
+  orientation?: 'horizontal' | 'vertical';
+  /** Sizing/spacing utilities, e.g. `h-1 w-20 mb-10`. */
+  class?: string;
+}
+
+const { orientation = 'horizontal', class: className } = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class={cn('flex', orientation === 'vertical' && 'flex-col', className)}
+>
+  <div class="flex-1 bg-section-snake-outer"></div>
+  <div class="flex-1 bg-section-snake-middle"></div>
+  <div class="flex-1 bg-section-snake-inner"></div>
+</div>
