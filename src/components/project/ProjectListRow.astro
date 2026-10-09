@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import ProjectMark from './ProjectMark.astro';
 import type { Project } from '../../types/project';
 
@@ -15,7 +16,7 @@ const remainingCount = technologies.length - visibleTech.length;
 ---
 
 <a
-  href={`/projects/${slug}`}
+  href={withBase(`/projects/${slug}`)}
   class="project-row grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_16rem] items-center gap-x-4 gap-y-3 md:gap-x-5"
 >
   <ProjectMark project={project} size="sm" />

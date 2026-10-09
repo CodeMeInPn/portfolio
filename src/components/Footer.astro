@@ -1,9 +1,10 @@
 ---
+import { withBase } from '../lib/url';
 const siteLinks = [
-  { href: '/#hero', label: 'Home' },
-  { href: '/#about', label: 'About' },
-  { href: '/#projects', label: 'Projects' },
-  { href: '/#contact', label: 'Contact' },
+  { href: withBase('/#hero'), label: 'Home' },
+  { href: withBase('/#about'), label: 'About' },
+  { href: withBase('/#projects'), label: 'Projects' },
+  { href: withBase('/#contact'), label: 'Contact' },
 ];
 
 const contactLinks = [
